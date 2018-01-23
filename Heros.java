@@ -45,6 +45,17 @@ public class Heros
         return this.toString()+" a regagné tous ses points de vie !" ;
         }
 
+    public String Attaquer(Heros defens)
+        {
+        double proba = Math.random() ;
+        if (proba >= this.attaque / this.attaque+defens.defense)
+            {
+            defens.pointsDeVie -= this.dommages ;
+            return this.toString()+" attaque "+defens.toString()+" et lui inflige "+this.dommages+" points de dommages !" ;
+            }
+        return this.toString()+" attaque "+defens.toString()+" et rate !" ;
+        }
+
     public static void main(String []args)
         {
         Heros Bob = new Heros("Bob", "Magicien", 'm') ;
