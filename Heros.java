@@ -53,9 +53,5 @@ public class Heros
 
         Heros Zoe = new Heros("Zoe", "Barbare", 'f') ;
         System.out.println(Zoe);
-
-        System.out.println(Zoe.estVivant());
-        System.out.println(Zoe.Soigner());
-
         }
     }
