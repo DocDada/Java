@@ -38,6 +38,18 @@ public class Heros
         return pointsDeVie>0 ;
         }
 
+    public void Attaquer(Heros defen)
+        {
+        double proba = Math.random() ;
+        if (proba >= this.attaque/(this.attaque+defen.defense))
+            {
+            System.out.println(this.toString()+" attaque "+defen.toString()+ " et inflige "+this.dommages+" points de dommages") ;
+            defen.pointsDeVie -= this.dommages ;
+            }
+        else
+            System.out.println(this.toString()+" attaque "+defen.toString()+ " et rate !") ;
+        }
+
     public static void main(String []args)
         {
         Heros Bob = new Heros("Bob", "Magicien", 'm') ;
@@ -48,6 +60,6 @@ public class Heros
         System.out.println(Zoe);
 
         System.out.println(Zoe.estVivant());
-
+        Zoe.Attaquer(Bob) ;
         }
     }
