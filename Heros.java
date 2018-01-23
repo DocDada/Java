@@ -6,6 +6,7 @@ public class Heros
     private String classe ;
     private char genre ;
     private int pointsDeVie = 100 ;
+    private int pointsDeVieMax = 100 ;
     private int attaque = 10 ;
     private int defense = 10 ;
     private int dommages = 10 ;
@@ -37,6 +38,12 @@ public class Heros
         {
         return pointsDeVie>0 ;
         }
+    
+    public String Soigner()
+        {
+        this.pointsDeVie = pointsDeVieMax ;
+        return this.toString()+" a regagné tous ses points de vie !" ;
+        }
 
     public static void main(String []args)
         {
@@ -48,6 +55,7 @@ public class Heros
         System.out.println(Zoe);
 
         System.out.println(Zoe.estVivant());
+        System.out.println(Zoe.Soigner());
 
         }
     }
