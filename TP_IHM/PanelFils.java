@@ -9,17 +9,17 @@ public class PanelFils extends JPanel implements ActionListener {
     JTextField zoneDeMessage = new JTextField(10) ;
     // zone d'affichage (10 : longueur de la zone)
     JLabel label = new JLabel("essai étiquette") ;
-    //JTextArea zoneDeTexte = new JtexteArea(10, 30) ;
-    //JRadioButton radioBouton = new JRadioButton("bouton radio") ;
+    JTextArea zoneDeTexte = new JTextArea(10, 30) ;
+    JRadioButton radioBouton = new JRadioButton("bouton radio") ;
 
     public PanelFils() {
         add(zoneDeSaisie) ;
         add(bouton) ;
         bouton.addActionListener(this) ;
         add(zoneDeMessage) ;
-        //add(label) ;
-        //add(zoneDeTexte) ;
-        //add(radioBouton) ;
+        add(label) ;
+        add(zoneDeTexte) ;
+        add(radioBouton) ;
     }
 
     public void actionPerformed(ActionEvent parEvt) {
