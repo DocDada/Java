@@ -49,15 +49,14 @@ public class Heros
 
     public void Attaquer(Heros defens)
         {
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);// on entre son choix au clavier
         int choix ;
-        switch (this.classe)
+        switch (this.classe)// en fonction de la classe du personnage ...
             {
-            case "Barbare":
+            case "Barbare":// ... differentes attaques il y a
                 System.out.println("--> Attaque normale\n--> Frappe éclair\n--> Frappe de l'ours") ;
-                //Scanner sc = new Scanner(System.in);
-                choix = sc.nextInt() ;
-                switch (choix)
+                choix = sc.nextInt() ;// on recupere un entier ...
+                switch (choix)// ... pour choisir l'attaque
                     {
                     case 1:
                         this.AttaqueSpe(defens, 0, 0, "un coup d'épée") ;
@@ -94,7 +93,7 @@ public class Heros
         {
         double proba = Math.random() ;
         float prob=((float)(attaque)/(float)(defens.attaque+defens.defense));
-        if (proba < prob+factProba)
+        if (proba < prob+factProba)// condition pour que l'attaque reussisse
             {
             this.dommages = this.DommagesAleatoire() ;
             defens.pointsDeVie -= this.dommages + factAttaq ;
@@ -112,24 +111,27 @@ public class Heros
     public void AffichePV(Heros defens)
         {
         int i = 0 ;
-        for ( ; i<55 ; i++)
+        for ( ; i < 55 ; i++)// esthetique
             System.out.print("_") ;
         System.out.println("") ;
         System.out.println("\n>>> "+this.toString()+" ||  POINTS DE VIE : "+this.pointsDeVie+"/"+this.pointsDeVieMax+"\t<<<") ;
+        // le personnage attaquant est designe par des fleches >>> ...
         System.out.println("\n--- "+defens.toString()+" || POINTS DE VIE : "+defens.pointsDeVie+"/"+defens.pointsDeVieMax+"\t---") ;
-        for (i = 0 ; i<55 ; i++)
+        // ... et le peronnage se defendant par ---
+        for (i = 0 ; i < 55 ; i++)// esthetique
             System.out.print("_") ;
         System.out.println("\n") ;
         }// Affiche PV
 
     public void Combat(Heros defens)
         {
-        for (int compteur = 0 ; this.pointsDeVie>0 && defens.pointsDeVie>0 ; compteur++)
+        for (int compteur=0;this.pointsDeVie>0 && defens.pointsDeVie>0;compteur++)
             {
+            // tant qu'aucun joueur n'est mort :
             if (compteur%2 == 0)
                 {
-                this.AffichePV(defens) ;
-                this.Attaquer(defens) ;
+                this.AffichePV(defens) ;// on affiche les pv ...
+                this.Attaquer(defens) ;// ... et on attaque
                 }
             else
                 {

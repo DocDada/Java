@@ -6,9 +6,9 @@ public class Date
 
     public Date (int parJ, int parM, int parA)
         {
-        chJour = parJ ;
-        chMois = parM ;
-        chAnnee = parA ;
+        chJour = parJ ;// jour
+        chMois = parM ;// mois
+        chAnnee = parA ;// annee
         }// Date
 
     // Question 1
@@ -26,13 +26,13 @@ public class Date
         {
         switch (parMois)
             {
-            case 2:
+            case 2:// si c'est le fevrier
                 if (estBissextile(parAnnee))
                     return 29 ;
                 return 28 ;
             case 1: case 3: case 5: case 7: case 8: case 10: case 12:
                 return 31 ;
-            default:
+            default:// avril, juin, septembre, novembre
                 return 30 ;
             }
         }// dernierJourDuMois
@@ -51,9 +51,9 @@ public class Date
     public static Date lireDate(Date parEntree)
         {
         System.out.println("Entrez le jour, le mois puis l'annee") ;
-        parEntree.chJour = Clavier.lireInt();
-        parEntree.chMois = Clavier.lireInt();
-        parEntree.chAnnee = Clavier.lireInt();
+        parEntree.chJour = Clavier.lireInt();// on entre le jour
+        parEntree.chMois = Clavier.lireInt();// ... le mois
+        parEntree.chAnnee = Clavier.lireInt();// ... l'annee
         return parEntree ;
         }// lireDate
 
