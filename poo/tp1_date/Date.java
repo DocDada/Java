@@ -61,13 +61,13 @@ public class Date
     public int compareTo(Date parDate)
         {
         if (this.chAnnee==parDate.chAnnee && this.chMois==parDate.chMois && this.chJour==parDate.chJour)
-            return 0 ;
+            return 0 ;// si dates equivalentes
         else if (this.chAnnee<=parDate.chAnnee)
             {
             if (this.chMois<=parDate.chMois)
                 {
                 if (this.chJour<=parDate.chJour)
-                    return 1 ;
+                    return 1 ;// ici, parDate posterieure en tous points
                 else
                     return -1 ;
                 }
@@ -82,38 +82,38 @@ public class Date
     // Question 10
     public Date dateDuLendemain()
         {
-        int mois = dernierJourDuMois(this.chMois, this.chAnnee) ;
-        if (this.chMois == mois)
+        int jour = dernierJourDuMois(this.chMois, this.chAnnee) ;
+        if (this.chJour == jour)// si jour egal dernier jour du mois
             {
-            if (this.chMois != 12)
-                this.chMois += 1 ;
+            if (this.chMois != 12)// si ce n'est pas decembre
+                this.chMois++ ;// on passe au mois suivant
             else
                 {
-                this.chMois = 1 ;
-                this.chAnnee += 1 ;
+                this.chMois = 1 ;// cas particulier : on passe de decembre
+                this.chAnnee++ ;// ... a janvier
                 }
-            this.chJour = 1 ;
+            this.chJour = 1 ;// premier jour du mois
             }
         else
-            this.chJour += 1 ;
+            this.chJour++ ;// on passe au jour suivant
         return this ;
         }// dateDuLendemain
 
     // Question 11
     public Date dateDeLaVeille()
         {
-        if (this.chJour == 1)
+        if (this.chJour == 1)// si premier jour du mois
             {
-            if (this.chMois == 1)
+            if (this.chMois == 1)// si janvier
                 {
-                this.chMois = 13 ;
-                this.chAnnee -= 1 ;
+                this.chMois = 13 ;// va etre decrementé
+                this.chAnnee-- ;// on passe a l'annee precedente
                 }
-            this.chMois -= 1 ;
+            this.chMois-- ;
             this.chJour = dernierJourDuMois(chMois, chAnnee) ;
             }
         else
-            this.chJour -= 1 ;
+            this.chJour-- ;
         return this ;
         }// dateDeLaVeille
 

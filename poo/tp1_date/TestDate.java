@@ -23,11 +23,11 @@ public class TestDate
                 ancienne = date ;
             }
         */
-        System.out.println(ancienne.toString()) ;
+        // System.out.println(ancienne.toString()) ;
 
-        entree = entree.dateDuLendemain() ;
-        System.out.println(entree.toString()) ;
-        //entree = entree.dateDeLaVeille() ;
+        //entree = entree.dateDuLendemain() ;
         //System.out.println(entree.toString()) ;
+        entree = entree.dateDeLaVeille() ;
+        System.out.println(entree.toString()) ;
         }// main
     }// TestDate
