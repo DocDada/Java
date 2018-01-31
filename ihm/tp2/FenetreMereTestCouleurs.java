@@ -14,7 +14,7 @@ public class FenetreMereTestCouleurs extends JFrame {
     }
 
     public Insets getInsets() {
-        return new Insets(60, 0, 0, 0) ;
+        return new Insets(100, 0, 0, 0) ;
     }
 
     public static void main(String []args) {
