@@ -3,9 +3,9 @@ import java.awt.* ;
 import java.awt.event.* ;
 
 public class FenetreMereTestCouleurs extends JFrame {
-    public FenetreMereTestCouleurs(String parTitre) {
+    public FenetreMereTestCouleurs(String parTitre, String parEtiquette, Color etk) {
         super(parTitre) ;
-        PanelFilsTestCouleurs contentPane = new PanelFilsTestCouleurs();
+        PanelFilsTestCouleurs contentPane = new PanelFilsTestCouleurs(parEtiquette, etk);
         setContentPane(contentPane) ;
         setDefaultCloseOperation(EXIT_ON_CLOSE) ;
         setSize(500, 500);
@@ -18,7 +18,11 @@ public class FenetreMereTestCouleurs extends JFrame {
     }
 
     public static void main(String []args) {
-        new FenetreMereTestCouleurs("truc") ;
+        int r = Integer.parseInt(args[1]) ;
+        int g = Integer.parseInt(args[2]) ;
+        int b = Integer.parseInt(args[3]) ;
+        Color etk = new Color(r, g, b) ;
+        new FenetreMereTestCouleurs("A", args[0], etk);
     }
 
 }
