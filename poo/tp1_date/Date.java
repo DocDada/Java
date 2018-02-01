@@ -48,13 +48,10 @@ public class Date
         }// estValide
 
     // Question 6
-    public static Date lireDate(Date parEntree)
+    public static Date lireDate()
         {
         System.out.println("Entrez le jour, le mois puis l'annee") ;
-        parEntree.chJour = Clavier.lireInt();// on entre le jour
-        parEntree.chMois = Clavier.lireInt();// ... le mois
-        parEntree.chAnnee = Clavier.lireInt();// ... l'annee
-        return parEntree ;
+        return new Date(Clavier.lireInt(), Clavier.lireInt(), Clavier.lireInt()) ;
         }// lireDate
 
     // Question 8
