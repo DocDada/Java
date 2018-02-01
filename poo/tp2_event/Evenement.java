@@ -2,12 +2,13 @@ public class Evenement {
     private Date chDate ;
     private String chTitre ;
     private String chLieu ;
-    private static int chNbParametre = 3 ;
+    private static int chNbParametre ;
 
     public Evenement(Date parDate, String parTitre, String parLieu) {
         chDate = parDate ;
         chTitre = parTitre ;
         chLieu = parLieu ;
+        chNbParametre++ ;
     }
 
     public String toString() {
@@ -40,7 +41,9 @@ public class Evenement {
             }
         }
     }
+    
 
+    // accesseurs
     public Date getChDate() {
         return this.chDate ;
     }
@@ -57,6 +60,7 @@ public class Evenement {
         return this.chNbParametre ;
     }
 
+    // modifieurs
     public void setChDate(Date parDate) {
         this.chDate = parDate ;
     }

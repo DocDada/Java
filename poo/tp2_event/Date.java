@@ -59,20 +59,17 @@ public class Date
         {
         if (this.chAnnee==parDate.chAnnee && this.chMois==parDate.chMois && this.chJour==parDate.chJour)
             return 0 ;// si dates equivalentes
-        else if (this.chAnnee<=parDate.chAnnee)
+        if (this.chAnnee<=parDate.chAnnee)
             {
             if (this.chMois<=parDate.chMois)
                 {
                 if (this.chJour<=parDate.chJour)
                     return 1 ;// ici, parDate posterieure en tous points
-                else
-                    return -1 ;
-                }
-            else
                 return -1 ;
-            }
-        else
+                }
             return -1 ;
+            }
+        return -1 ;
         }// compareTo
 
 
