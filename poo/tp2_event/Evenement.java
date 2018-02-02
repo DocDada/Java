@@ -2,7 +2,7 @@ public class Evenement {
     private Date chDate ;
     private String chTitre ;
     private String chLieu ;
-    private static int chNbParametre ;
+    private static int chNbParametre = 0 ;
 
     public Evenement(Date parDate, String parTitre, String parLieu) {
         chDate = parDate ;
@@ -41,7 +41,7 @@ public class Evenement {
             }
         }
     }
-    
+
 
     // accesseurs
     public Date getChDate() {
