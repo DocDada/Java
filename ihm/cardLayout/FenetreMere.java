@@ -5,7 +5,7 @@ import java.awt.event.* ;
 public class FenetreMere extends JFrame {
     public FenetreMere(String parTitre) {
         super(parTitre) ;
-        PanelFilsTreizeLabels contentPane = new PanelFilsTreizeLabels();
+        PanelFilsDiaporama contentPane = new PanelFilsDiaporama();
         setContentPane(contentPane) ;
         setDefaultCloseOperation(EXIT_ON_CLOSE) ;
         //setBackground(new Color(200, 99, 63)) ;
@@ -19,7 +19,7 @@ public class FenetreMere extends JFrame {
     }
 
     public static void main(String []args) {
-        new FenetreMere("truc") ;
+        new FenetreMere("IHM - TP3") ;
     }
 
 }
