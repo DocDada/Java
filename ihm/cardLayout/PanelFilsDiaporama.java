@@ -1,6 +1,8 @@
+import java.io.File ;
 import javax.swing.JLabel ;
 import javax.swing.JPanel ;
 import javax.swing.JButton ;
+import javax.swing.ImageIcon ;
 import java.awt.CardLayout ;
 import java.awt.BorderLayout ;
 import java.awt.event.ActionListener ;
@@ -13,7 +15,9 @@ public class PanelFilsDiaporama extends JPanel implements ActionListener {
     JButton boutons[] = new JButton[NB_BOUTONS_PSUD] ;
     String intitulesBoutons[] = {"premier", "precedent", "suivant", "dernier"} ;
     // Intitules des etiquettes
-    String intitulesEtiquettes[] = {"Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"} ;
+    File repertoire = new File("images") ;// Ex 2
+    String intitulesImages[] = repertoire.list() ;// Ex 2
+    // Exerice 1 // String intitulesEtiquettes[] = {"Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"} ;
     // Etiquettes
     JLabel etiquettes[] = new JLabel[NB_BOUTONS_PCENTRE] ;
     CardLayout gestionnaire = new CardLayout(5, 5) ;
@@ -24,9 +28,6 @@ public class PanelFilsDiaporama extends JPanel implements ActionListener {
     public PanelFilsDiaporama() {
         this.setLayout(new BorderLayout(5, 5)) ;
 
-        // PANEL SUD //
-
-        // PANEL CENTRE //
         panelCentre.setLayout(gestionnaire) ;// a modifier
 
 
@@ -39,13 +40,18 @@ public class PanelFilsDiaporama extends JPanel implements ActionListener {
         }
         panelSud.add(pSudEtiquette) ;
 
-        // Tableaux PANEL CENTRE //
+        // PANEL CENTRE //
         // Boucle d'instantiation et d'addition a panelSud
+        /* EXERICE 1
         for (int etiquette = 0 ; etiquette < etiquettes.length ; etiquette++) {
             etiquettes[etiquette] = new JLabel(intitulesEtiquettes[etiquette]);
             panelCentre.add(etiquettes[etiquette], intitulesEtiquettes[etiquette]) ;
         }
-
+        */
+        for (int etiquette = 0 ; etiquette < intitulesImages.length ; etiquette++) {
+            etiquettes[etiquette] = new JLabel(new ImageIcon("images"+File.separator+intitulesImages[etiquette]));
+            panelCentre.add(etiquettes[etiquette], intitulesImages[etiquette]) ;
+        }
         this.add(panelCentre, BorderLayout.CENTER) ;
         this.add(panelSud, BorderLayout.SOUTH) ;
     }
