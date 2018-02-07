@@ -11,7 +11,7 @@ public class FenetreMere extends JFrame {
         //setBackground(new Color(200, 99, 63)) ;
         setSize(500, 500);
         setVisible(true);
-        setLocation(300, 300);
+        setLocation(10, 10);
     }
 
     public Insets getInsets() {

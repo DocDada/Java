@@ -12,6 +12,9 @@ import java.awt.event.ActionEvent ;
 public class PanelFilsDiaporama extends JPanel implements ActionListener {
     final int NB_BOUTONS_PSUD = 4 ;
     final int NB_BOUTONS_PCENTRE = 7 ;
+
+    private int chIndice = 0 ;
+
     JButton boutons[] = new JButton[NB_BOUTONS_PSUD] ;
     String intitulesBoutons[] = {"premier", "precedent", "suivant", "dernier"} ;
     // Intitules des etiquettes
@@ -38,7 +41,6 @@ public class PanelFilsDiaporama extends JPanel implements ActionListener {
             boutons[bouton].addActionListener(this) ;
             panelSud.add(boutons[bouton], intitulesBoutons[bouton]) ;
         }
-        panelSud.add(pSudEtiquette) ;
 
         // PANEL CENTRE //
         // Boucle d'instantiation et d'addition a panelSud
@@ -52,18 +54,47 @@ public class PanelFilsDiaporama extends JPanel implements ActionListener {
             etiquettes[etiquette] = new JLabel(new ImageIcon("images"+File.separator+intitulesImages[etiquette]));
             panelCentre.add(etiquettes[etiquette], intitulesImages[etiquette]) ;
         }
+        pSudEtiquette.setText(intitulesImages[0]) ;
+        panelSud.add(pSudEtiquette) ;
         this.add(panelCentre, BorderLayout.CENTER) ;
         this.add(panelSud, BorderLayout.SOUTH) ;
     }
 
-    public void actionPerformed(ActionEvent parEvt) {
-        if (parEvt.getSource() == boutons[0])// premier
-            gestionnaire.first(this.panelCentre) ;
-        else if (parEvt.getSource() == boutons[1])// precedent
-            gestionnaire.previous(this.panelCentre) ;
-        else if (parEvt.getSource() == boutons[2])// suivant
-            gestionnaire.next(this.panelCentre) ;
+
+
+    public void setTextParRapportALImage(char indice) {
+        if (indice == 's')
+            chIndice++ ;
+        else if (indice == 'p')
+            chIndice-- ;
+        else if (indice == 'd')
+            chIndice = intitulesImages.length - 1 ;
         else
+            chIndice = 0 ;
+        pSudEtiquette.setText(intitulesImages[chIndice]) ;
+    }
+
+
+
+    public void actionPerformed(ActionEvent parEvt) {
+        if (parEvt.getSource() == boutons[0]) {
+            // premier
+            this.setTextParRapportALImage('d') ;
+            gestionnaire.first(this.panelCentre) ;
+        }
+        else if (parEvt.getSource() == boutons[1]) {
+            // precedent
+            this.setTextParRapportALImage('p') ;
+            gestionnaire.previous(this.panelCentre) ;
+        }
+        else if (parEvt.getSource() == boutons[2]) {
+            // suivant
+            this.setTextParRapportALImage('s') ;
+            gestionnaire.next(this.panelCentre) ;
+        }
+        else {
+            this.setTextParRapportALImage('f') ;
             gestionnaire.last(this.panelCentre) ;// dernier
+        }
     }
 }
