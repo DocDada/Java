@@ -8,10 +8,10 @@ import java.awt.event.ActionEvent ;
 
 
 public class PanelFilsDiaporama extends JPanel implements ActionListener {
-    final int NB_BOUTONS_PSUD = 2 ;
+    final int NB_BOUTONS_PSUD = 4 ;
     final int NB_BOUTONS_PCENTRE = 7 ;
     JButton boutons[] = new JButton[NB_BOUTONS_PSUD] ;
-    String intitulesBoutons[] = {"precedent", "suivant"} ;
+    String intitulesBoutons[] = {"premier", "precedent", "suivant", "dernier"} ;
     // Intitules des etiquettes
     String intitulesEtiquettes[] = {"Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"} ;
     // Etiquettes
@@ -51,9 +51,13 @@ public class PanelFilsDiaporama extends JPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent parEvt) {
-        if (parEvt.getSource() == boutons[1])// suivant
+        if (parEvt.getSource() == boutons[0])// premier
+            gestionnaire.first(this.panelCentre) ;
+        else if (parEvt.getSource() == boutons[1])// precedent
+            gestionnaire.previous(this.panelCentre) ;
+        else if (parEvt.getSource() == boutons[2])// suivant
             gestionnaire.next(this.panelCentre) ;
         else
-            gestionnaire.previous(this.panelCentre) ;// precedent
+            gestionnaire.last(this.panelCentre) ;// dernier
     }
 }
