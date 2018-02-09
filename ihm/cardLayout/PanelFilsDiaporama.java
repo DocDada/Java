@@ -20,10 +20,11 @@ public class PanelFilsDiaporama extends JPanel implements ActionListener {
     // Intitules des etiquettes
     File repertoire = new File("images") ;// Ex 2
     String intitulesImages[] = repertoire.list() ;// Ex 2
-    // Exerice 1 // String intitulesEtiquettes[] = {"Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"} ;
+    // String intitulesEtiquettes[] = {"Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"} ;// Ex1
+
     // Etiquettes
     JLabel etiquettes[] = new JLabel[NB_BOUTONS_PCENTRE] ;
-    CardLayout gestionnaire = new CardLayout(5, 5) ;
+    CardLayout gestionnaire = new CardLayout(5, 5) ;// necessaire pour la gestion des evenements
     JPanel panelSud = new JPanel() ;
     JLabel pSudEtiquette = new JLabel() ;
     JPanel panelCentre = new JPanel() ;
@@ -31,7 +32,7 @@ public class PanelFilsDiaporama extends JPanel implements ActionListener {
     public PanelFilsDiaporama() {
         this.setLayout(new BorderLayout(5, 5)) ;
 
-        panelCentre.setLayout(gestionnaire) ;// a modifier
+        panelCentre.setLayout(gestionnaire) ;
 
 
         // PANEL SUD //
@@ -43,19 +44,23 @@ public class PanelFilsDiaporama extends JPanel implements ActionListener {
         }
 
         // PANEL CENTRE //
-        // Boucle d'instantiation et d'addition a panelSud
-        /* EXERICE 1
+        // Boucle d'instantiation et d'addition a paneCentre
+        /* EXERCICE 1
         for (int etiquette = 0 ; etiquette < etiquettes.length ; etiquette++) {
             etiquettes[etiquette] = new JLabel(intitulesEtiquettes[etiquette]);
             panelCentre.add(etiquettes[etiquette], intitulesEtiquettes[etiquette]) ;
         }
         */
         for (int etiquette = 0 ; etiquette < intitulesImages.length ; etiquette++) {
+            // instantiation des images
             etiquettes[etiquette] = new JLabel(new ImageIcon("images"+File.separator+intitulesImages[etiquette]));
             panelCentre.add(etiquettes[etiquette], intitulesImages[etiquette]) ;
+            // addition des images au PanelCentre
         }
+        // initialisation et addition de l'etiquette affichant le nom des fichiers
         pSudEtiquette.setText(intitulesImages[0]) ;
         panelSud.add(pSudEtiquette) ;
+        // additions des panels panelSud et panelCentre
         this.add(panelCentre, BorderLayout.CENTER) ;
         this.add(panelSud, BorderLayout.SOUTH) ;
     }
@@ -63,10 +68,18 @@ public class PanelFilsDiaporama extends JPanel implements ActionListener {
 
 
     public void setTextParRapportALImage(char indice) {
-        if (indice == 's')
-            chIndice++ ;
-        else if (indice == 'p')
-            chIndice-- ;
+        if (indice == 's') {
+            if (chIndice == intitulesImages.length - 1)
+                chIndice = 0 ;
+            else
+                chIndice++ ;
+        }
+        else if (indice == 'p') {
+            if (chIndice == 0)
+                chIndice = intitulesImages.length - 1 ;
+            else
+                chIndice-- ;
+        }
         else if (indice == 'd')
             chIndice = intitulesImages.length - 1 ;
         else
@@ -78,23 +91,24 @@ public class PanelFilsDiaporama extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent parEvt) {
         if (parEvt.getSource() == boutons[0]) {
-            // premier
+            // premiere image
             this.setTextParRapportALImage('d') ;
             gestionnaire.first(this.panelCentre) ;
         }
         else if (parEvt.getSource() == boutons[1]) {
-            // precedent
+            // image precedente
             this.setTextParRapportALImage('p') ;
             gestionnaire.previous(this.panelCentre) ;
         }
         else if (parEvt.getSource() == boutons[2]) {
-            // suivant
+            // image suivante
             this.setTextParRapportALImage('s') ;
             gestionnaire.next(this.panelCentre) ;
         }
         else {
+            // derniere image
             this.setTextParRapportALImage('f') ;
-            gestionnaire.last(this.panelCentre) ;// dernier
+            gestionnaire.last(this.panelCentre) ;
         }
     }
 }
