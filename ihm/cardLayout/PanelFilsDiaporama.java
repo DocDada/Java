@@ -1,3 +1,4 @@
+package tp3 ;
 import java.io.File ;
 import javax.swing.JLabel ;
 import javax.swing.JPanel ;
@@ -10,7 +11,8 @@ import java.awt.event.ActionEvent ;
 
 
 public class PanelFilsDiaporama extends JPanel implements ActionListener {
-    final int NB_BOUTONS_PSUD = 4 ;
+	private static final long serialVersionUID = 1L;
+	final int NB_BOUTONS_PSUD = 4 ;
     final int NB_BOUTONS_PCENTRE = 7 ;
 
     private int chIndice = 0 ;
@@ -30,7 +32,7 @@ public class PanelFilsDiaporama extends JPanel implements ActionListener {
     JPanel panelCentre = new JPanel() ;
 
     public PanelFilsDiaporama() {
-        this.setLayout(new BorderLayout(5, 5)) ;
+        this.setLayout(new BorderLayout(0, 0)) ;
 
         panelCentre.setLayout(gestionnaire) ;
 
@@ -80,7 +82,7 @@ public class PanelFilsDiaporama extends JPanel implements ActionListener {
             else
                 chIndice-- ;
         }
-        else if (indice == 'd')
+        else if (indice == 'f')
             chIndice = intitulesImages.length - 1 ;
         else
             chIndice = 0 ;
@@ -92,7 +94,7 @@ public class PanelFilsDiaporama extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent parEvt) {
         if (parEvt.getSource() == boutons[0]) {
             // premiere image
-            this.setTextParRapportALImage('d') ;
+            this.setTextParRapportALImage('r') ;
             gestionnaire.first(this.panelCentre) ;
         }
         else if (parEvt.getSource() == boutons[1]) {

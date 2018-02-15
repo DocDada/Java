@@ -1,7 +1,6 @@
+package tp3 ;
 import javax.swing.JFrame ;
-import java.awt.Frame ;
 import java.awt.Color ;
-import java.awt.Window ;
 import java.awt.Insets ;
 
 public class FenetreMere extends JFrame {
