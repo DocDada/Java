@@ -1,3 +1,7 @@
+package paquet.tp2_event ;
+import paquet.tp1_date.Date;
+
+
 public class TestEvenement {
     public static void main(String args[]) {
         Date date = new Date(6, 12, 1999) ;

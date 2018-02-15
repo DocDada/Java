@@ -1,3 +1,8 @@
+package paquet.tp2_event ;
+
+import paquet.tp1_date.Clavier;
+import paquet.tp1_date.Date;
+
 public class Evenement {
     private Date chDate ;
     private String chTitre ;
@@ -21,6 +26,9 @@ public class Evenement {
     }
 
     // Question 7
+    // si this < parEvt ---> -1
+    // si this = parEvt --->  0
+    // si this > parEvt ---> +1
     public int compareTo(Evenement parEvt) {
         if (parEvt.chDate.compareTo(this.chDate)>0)
             return 1 ;
@@ -56,8 +64,8 @@ public class Evenement {
         return this.chLieu ;
     }
 
-    public int getChNbParametre() {
-        return this.chNbParametre ;
+    public static int getChNbParametre() {
+        return chNbParametre ;
     }
 
     // modifieurs

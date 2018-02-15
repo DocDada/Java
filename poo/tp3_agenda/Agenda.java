@@ -45,9 +45,30 @@ public class Agenda {
 		return parDebut ;
 	}// rechercheMinimum
 	
+	
+	//marche pas
 	public void triParSelection() {
-		for (int i = 0 ; i < nbEvenements ; i++) {
-			
+		Evenement min ;
+		for (int j, i = 0 ; i < nbEvenements ; i++) {
+			min = tabEvenements[i] ;
+			for (j = i+1 ; j < nbEvenements ; j++)
+				if (tabEvenements[j].compareTo(min)<0)
+					min = tabEvenements[j] ;
+			tabEvenements[j] = tabEvenements[i] ;// echange
+			tabEvenements[i] = min ;
 		}
 	}// triParSelection()
+	
+	public void triParInsertion() {
+		Evenement stock, echange ;
+		for (int j, i = 0 ; i < nbEvenements ; i++) {
+			stock = tabEvenements[i] ;
+			for (j = i ; j>0 && stock.compareTo(tabEvenements[j-1])<0; j--) {
+				echange = tabEvenements[j] ;
+				tabEvenements[j] = tabEvenements[j-1] ;
+				tabEvenements[j-1] = echange ;
+			}
+			tabEvenements[j] = stock ;
+		}
+	}// triParInsertion()
 }
