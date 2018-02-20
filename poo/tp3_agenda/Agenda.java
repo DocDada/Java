@@ -1,5 +1,5 @@
-package paquet.tp3_agenda;
-import paquet.tp2_event.Evenement;
+package tp3_agenda;
+import tp2_event.Evenement;
 
 public class Agenda {
 	private final int  LONGUEUR ;

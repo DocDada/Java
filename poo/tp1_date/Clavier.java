@@ -1,4 +1,4 @@
-// auteur : Claude Delannoy - Programmer en Java, �ditions Eyrolles
+package tp1_date ;
 
 import java.io.*;
 

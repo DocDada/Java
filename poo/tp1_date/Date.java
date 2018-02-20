@@ -1,20 +1,53 @@
+package tp1_date ;
+import tp4_except.ExceptionDate ;
+import java.util.GregorianCalendar ;
+import java.util.Calendar ;
+
 public class Date
     {
     private int chJour ;
+    private int chJourSemaine ;
     private int chMois ;
     private int chAnnee ;
 
-    public Date (int parJ, int parM, int parA)
+    // Question 4 tp4
+    public Date()
+    	{
+    	// donne la date courante
+    	GregorianCalendar aujourdhui = new GregorianCalendar() ;
+    	chAnnee = aujourdhui.get(Calendar.YEAR) ;
+    	chMois = aujourdhui.get(Calendar.MONTH)+1;// les mois commencent à 0
+    	chJour = aujourdhui.get(Calendar.DAY_OF_MONTH);
+    	chJourSemaine = aujourdhui.get(Calendar.DAY_OF_WEEK);// dimanche = 1
+    	}// Date()
+    
+    
+    public Date (int parJ, int parM, int parA) throws ExceptionDate
         {
+    	// on gère les exceptions
+    	if (parA<1583)
+    		throw new ExceptionDate("L'année doit être supérieure à 1582.");
+    	if (parM<=0 || parM>12)
+    		throw new ExceptionDate("Le mois doit être compris entre 1 et 12.");
+    	if (parJ<=0 || parJ>Date.dernierJourDuMois(parM, parA))
+    		throw new ExceptionDate("Le jour doit être compris entre 1 et "+Date.dernierJourDuMois(parM, parA));
+    	
+    	GregorianCalendar date = new GregorianCalendar(parJ, parM, parA);
+    	
+
+    	
         chJour = parJ ;// jour
         chMois = parM ;// mois
         chAnnee = parA ;// annee
+        chJourSemaine = date.get(Calendar.DAY_OF_WEEK);
         }// Date
 
     // Question 1
     public String toString()
         {
-        return chJour+"/"+chMois+"/"+chAnnee;
+    	String jours[] = {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"} ;
+    	String mois[] = {"janvier, février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "novmebre", "octobre", "décembre"} ;
+        return jours[chJourSemaine-1]+" "+chJour+" "+mois[chMois]+" "+chAnnee;
         }// toString
 
     public static boolean estBissextile(int parAnnee)
@@ -48,31 +81,31 @@ public class Date
         }// estValide
 
     // Question 6
-    public static Date lireDate()
+    public static Date lireDate() throws ExceptionDate
         {
         System.out.println("Entrez le jour, le mois puis l'annee") ;
         return new Date(Clavier.lireInt(), Clavier.lireInt(), Clavier.lireInt()) ;
         }// lireDate
 
     // Question 8
+    // si this < parDate ---> -1
+    // si this = parDate --->  0
+    // si this > parDate ---> +1
     public int compareTo(Date parDate)
         {
         if (this.chAnnee==parDate.chAnnee && this.chMois==parDate.chMois && this.chJour==parDate.chJour)
             return 0 ;// si dates equivalentes
-        else if (this.chAnnee<=parDate.chAnnee)
+        if (this.chAnnee<=parDate.chAnnee)
             {
             if (this.chMois<=parDate.chMois)
                 {
                 if (this.chJour<=parDate.chJour)
                     return 1 ;// ici, parDate posterieure en tous points
-                else
-                    return -1 ;
-                }
-            else
                 return -1 ;
-            }
-        else
+                }
             return -1 ;
+            }
+        return -1 ;
         }// compareTo
 
 
@@ -113,5 +146,20 @@ public class Date
             this.chJour-- ;
         return this ;
         }// dateDeLaVeille
+    
+    public int getChAnnee() 
+    	{
+    	return chAnnee ;
+    	}
+    
+    public int getChMois()
+    	{
+    	return chMois ;
+    	}
+    
+    public int getChJour()
+    	{
+    	return chJour ;
+    	}
 
     }// Date

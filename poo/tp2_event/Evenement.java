@@ -1,7 +1,8 @@
-package paquet.tp2_event ;
+package tp2_event ;
 
-import paquet.tp1_date.Clavier;
-import paquet.tp1_date.Date;
+import tp1_date.Clavier;
+import tp1_date.Date;
+import tp4_except.ExceptionDate ;
 
 public class Evenement {
     private Date chDate ;
@@ -21,7 +22,7 @@ public class Evenement {
     }
 
     // Question 6
-    public static Evenement lireEvenement() {
+    public static Evenement lireEvenement() throws ExceptionDate {
         return new Evenement(Date.lireDate(), Clavier.lireString(), Clavier.lireString()) ;
     }
 
