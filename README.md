@@ -7,7 +7,10 @@ Conception objet :
 Interface Homme/Machine :
   - TP1 (fini)
   - TP2 (fini)
+  - TP3 (fini)
   
 Programmation orientée objet :
   - TP Date (fini)
   - TP Evenement (fini)
+  - TP Agenda (fini)
+  - TP Exception (fini)
