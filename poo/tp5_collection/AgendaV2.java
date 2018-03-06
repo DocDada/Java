@@ -1,5 +1,4 @@
 package tp5_collection;
-import tp1_date.Date;
 import tp2_event.Evenement;
 import java.util.ArrayList ;
 import java.util.Calendar;
@@ -7,6 +6,8 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.TreeMap;
 import java.util.TreeSet ;
+
+import tp1_date.Date;
 
 public class AgendaV2 implements Comparable<Evenement> {
 	private ArrayList<Evenement> listEvts ;
