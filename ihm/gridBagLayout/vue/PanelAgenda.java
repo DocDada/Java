@@ -17,18 +17,22 @@ import java.awt.event.ActionEvent ;
 
 public class PanelAgenda extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	
-    public PanelAgenda(PanelFormulaire ParPanelF) {
-	    Agenda aged = new Agenda(3);
+	PanelFormulaire panelF ;
+	Agenda aged = new Agenda(3);
+    public PanelAgenda(PanelFormulaire parPanelF) {
+	    
 		boolean truc = aged.ajout(new Evenement(new Date(1,1,1999), "controle", "g26"));
 		boolean toto = aged.ajout(new Evenement(new Date(1,2,1999), "controle", "g26"));
-		PanelFormulaire panelF = parPanelF ;
+		panelF = parPanelF ;
 		this.add(panelF) ;
     }
 
 
 
-    public void actionPerformed(ActionEvent parEvt) {
-
+	public void actionPerformed(ActionEvent parEvt) {
+		if(parEvt.getSource()==panelF.ajoutDate) {
+			aged.ajout(new Evenement(new Date(), panelF.textTitre.getText(), panelF.textLieu.getText()));
+		}
+			
     }
 }

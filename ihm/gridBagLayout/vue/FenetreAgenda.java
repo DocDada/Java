@@ -9,11 +9,12 @@ public class FenetreAgenda extends JFrame {
 
 	public FenetreAgenda(String parTitre) {
         super(parTitre) ;
-        PanelAgenda contentPane = new PanelAgenda();
+        PanelAgenda contentPane = new PanelAgenda(new PanelFormulaire());
         setContentPane(contentPane) ;
+        contentPane.setBackground(new Color(200, 199, 163));
         setDefaultCloseOperation(EXIT_ON_CLOSE) ;
-        setBackground(new Color(200, 99, 63)) ;
-        setSize(1500, 1000);
+        setBackground(new Color(200, 199, 163)) ;
+        setSize(800, 1000);
         setVisible(true);
     }
 
