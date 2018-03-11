@@ -17,7 +17,7 @@ public class Agenda {
 	}// ajout
 	
 	public int getEvenement(Evenement parEvt) {
-		for (int indice = 0 ; indice < nbEvenements ; indice++) 
+		for (int indice = 0 ; indice < nbEvenements ; indice++)
 			if (parEvt.compareTo(tabEvenements[indice])==0)
 				return indice ;
 		return -1 ;

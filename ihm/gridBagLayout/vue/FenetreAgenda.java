@@ -5,11 +5,11 @@ import java.awt.Color ;
 import java.awt.Insets ;
 
 public class FenetreAgenda extends JFrame {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public FenetreAgenda(String parTitre) {
+    public FenetreAgenda(String parTitre) {
         super(parTitre) ;
-        PanelAgenda contentPane = new PanelAgenda(new PanelFormulaire());
+        PanelAgenda contentPane = new PanelAgenda();
         setContentPane(contentPane) ;
         contentPane.setBackground(new Color(200, 199, 163));
         setDefaultCloseOperation(EXIT_ON_CLOSE) ;
