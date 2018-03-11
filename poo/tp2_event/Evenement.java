@@ -4,7 +4,7 @@ import tp1_date.Clavier;
 import tp1_date.Date;
 import tp4_except.ExceptionDate ;
 
-public class Evenement {
+public class Evenement implements Comparable<Evenement> {
     private Date chDate ;
     private String chTitre ;
     private String chLieu ;
@@ -45,8 +45,7 @@ public class Evenement {
                     return 1 ;
                 else if (parEvt.chLieu.compareTo(this.chLieu)<0)
                     return -1 ;
-                else
-                    return 0 ;
+                return 0 ;
             }
         }
     }
