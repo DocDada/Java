@@ -11,14 +11,11 @@ public class TestAgendaV2 {
 	public static void main(String[] args) {
 		try {
 			AgendaV2 agd = new AgendaV2();
-			agd.ajout(new Evenement(new Date(2,1,1999), "Titre", "Lieu"));
+			agd.ajout(new Evenement(new Date(1,1,1999), "c exposé", "g26"));
 			// System.err.println(getMessage()) ;
-			// Question 3
 			System.out.println("Nombre de fois où il y le mot exposé dans le titre : "+agd.nbExpose());
-			// Question 4
 			System.out.println("Nombre de fois où la date correspond : "+agd.nbEvtEnregistre(new Date(2,1,1999)));
-			// Question 7
-			System.out.println(agd.toString());
+
 		}
 		
 		catch(ExceptionDate parExc) {
