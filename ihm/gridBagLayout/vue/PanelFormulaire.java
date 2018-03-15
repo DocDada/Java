@@ -8,9 +8,11 @@ import javax.swing.JTextField;
 
 import java.util.GregorianCalendar ;
 import java.util.Calendar ;
+
 import modele.Date;
-import modele.Agenda ;
+import modele.AgendaV2 ;
 import modele.Evenement;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout ;
 import java.awt.Insets;
@@ -18,6 +20,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelFormulaire extends JPanel implements ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JButton ajoutDate = new JButton("+");
 	JTextField textTitre = new JTextField();
 	JTextField textLieu = new JTextField();
@@ -25,16 +31,21 @@ public class PanelFormulaire extends JPanel implements ActionListener {
     Date dateFormulaire = new Date() ;// la date courante
     GregorianCalendar calendrier = new GregorianCalendar() ;
 	//JTextField textDescription ;
-	Agenda agd ;
+	AgendaV2 agd ;
     JLabel afficheDate ;
+    
+    JComboBox<String> boxHeures ;
+    JComboBox<String> boxMinutes ;
+    JComboBox<String> boxHeuresF ;
+    JComboBox<String> boxMinutesF ;
 
-	public PanelFormulaire(Agenda parAgenda) {
+	public PanelFormulaire(AgendaV2 parAgenda) {
         agd = parAgenda ;
 		GridBagLayout gestionnaire = new GridBagLayout();
 		this.setLayout(gestionnaire);
 		GridBagConstraints contraintes = new GridBagConstraints();
 		contraintes.fill = GridBagConstraints.BOTH ;
-		contraintes.gridwidth = 5 ;
+		contraintes.gridwidth = 1 ;
 		contraintes.insets = new Insets(10, 10, 10, 10) ;
 		
 		//contraintes.anchor = GridBagConstraints.WEST ;
@@ -96,12 +107,9 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 		//contraintes.fill = GridBagConstraints.NONE ;
 		String heures[] = new String[24];
 		for(int i = 0 ; i < 24 ; i++) {
-			if(i < 10)
-				heures[i] = "0"+i ;
-			else
 				heures[i] = ""+i ;
 		}
-        JComboBox boxHeures = new JComboBox(heures) ;
+        boxHeures = new JComboBox<String>(heures) ;
         boxHeures.setSelectedItem(String.valueOf(calendrier.get(Calendar.HOUR_OF_DAY))) ;
         // l'heure actuelle sera affichée/sélectionnée
 		this.add(boxHeures, contraintes);// ajout des heures
@@ -111,14 +119,10 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 		this.add(new JLabel(":"), contraintes);
 
 		contraintes.gridx = 8 ;
-		String minutes[] = new String[60];
-		for(int i = 0 ; i < 60 ; i++) {
-			if(i < 10)
-				minutes[i] = "0"+i ;
-			else
-				minutes[i] = ""+i ;
-		}
-        JComboBox boxMinutes = new JComboBox(minutes) ;
+		String[] minutes = new String[60];
+		for(int i = 0 ; i < 60 ; i++)
+			minutes[i] = ""+i ;
+        boxMinutes = new JComboBox<String>() ;
         boxMinutes.setSelectedItem(String.valueOf(calendrier.get(Calendar.MINUTE))) ;
         // la minute actuelle sera affichée/sélectionnée
 		this.add(boxMinutes, contraintes);// ajout des minutes
@@ -135,7 +139,8 @@ public class PanelFormulaire extends JPanel implements ActionListener {
         // saisie des heures (Fin)
 		contraintes.insets = new Insets(0,10,0,10);
 		contraintes.gridx = 6 ;
-		this.add(new JComboBox(heures), contraintes);
+		boxHeuresF = new JComboBox<String>(heures) ;
+		this.add(boxHeuresF, contraintes);
 
         // ":"
 		contraintes.gridx = 7 ;
@@ -143,7 +148,8 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 
         // saisie des minutes (Fin)
 		contraintes.gridx = 8 ;
-		this.add(new JComboBox(minutes), contraintes);
+		boxMinutesF = new JComboBox<String>(minutes) ;
+		this.add(boxMinutesF, contraintes);
 		// Fin JComboBox
 		
 		
@@ -167,16 +173,26 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent parEvt) {
         if(parEvt.getSource()==this.ajoutDate) {
-            agd.ajout(new Evenement(new Date(), this.textTitre.getText(), this.textLieu.getText()));
-            afficheDate.setText(agd.toString()) ;
+            //agd.ajout(new Evenement(new Date(), this.textTitre.getText(), this.textLieu.getText()));
+        	int un = Integer.parseInt((String) boxHeures.getSelectedItem());
+        	int deux = Integer.parseInt((String) boxMinutes.getSelectedItem());
+        	int trois = Integer.parseInt((String) boxHeuresF.getSelectedItem());
+        	int quatre = Integer.parseInt((String) boxMinutesF.getSelectedItem());
+        	agd.ajout(new Evenement(new Date(), this.textTitre.getText(), this.textLieu.getText(), un, deux, trois, quatre));
+            System.out.println(agd);
+            
             this.textTitre.setText("") ;
             this.textLieu.setText("") ;
             this.textDescription.setText("") ;
             this.textTitre.requestFocus() ;// le champ "Titre" est sélectionné
         }
-        // le nouvel événement date du jour même
-        // on prend le titre et le lieu entrés dans les cases par l'utilisateur
+     // le nouvel événement date du jour même
+     // on prend le titre et le lieu entrés dans les cases par l'utilisateur
     }// actionPerformed
+    
+    public JTextField getTextTitre() {
+    	return this.textTitre ;
+    }
 
 
 }
