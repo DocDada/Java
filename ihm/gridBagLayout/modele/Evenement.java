@@ -1,9 +1,12 @@
 package modele ;
 
-public class Evenement {
+
+public class Evenement implements Comparable<Evenement>{
     private Date chDate ;
     private String chTitre ;
     private String chLieu ;
+    private Heure heureDebut ;
+    private Heure heureFin ;
     private static int chNbParametre = 0 ;
 
     public Evenement(Date parDate, String parTitre, String parLieu) {
@@ -12,6 +15,18 @@ public class Evenement {
         chLieu = parLieu ;
         chNbParametre++ ;
     }
+    
+    public Evenement(Date parDate, String parTitre, String parLieu, int parHD, int parHF, int parMD, int parMF) {
+        chDate = parDate ;
+        chTitre = parTitre ;
+        chLieu = parLieu ;
+        heureDebut.setHeures(parHD);
+        heureDebut.setMinutes(parMD);
+        heureFin.setHeures(parHF);
+        heureFin.setMinutes(parMF);
+        chNbParametre++ ;
+    }
+    
 
     public String toString() {
         return chTitre+":"+chDate+":"+chLieu ;
@@ -77,4 +92,24 @@ public class Evenement {
     public void setChLieu(String parLieu) {
         this.chLieu = parLieu ;
     }
+
+
+	public Heure getHeureDebut() {
+		return heureDebut;
+	}
+
+
+	public void setHeureDebut(Heure heureDebut) {
+		this.heureDebut = heureDebut;
+	}
+
+
+	public Heure getHeureFin() {
+		return heureFin;
+	}
+
+
+	public void setHeureFin(Heure heureFin) {
+		this.heureFin = heureFin;
+	}
 }
