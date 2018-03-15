@@ -16,10 +16,11 @@ public class FenetreAgenda extends JFrame {
         setBackground(new Color(200, 199, 163)) ;
         setSize(800, 1000);
         setVisible(true);
+        contentPane.panelF.getTextTitre().requestFocus();
     }
 
     public Insets getInsets() {
-        return new Insets(100,100, 100, 100) ;
+        return new Insets(100, 100, 100, 100) ;
     }
 
     public static void main(String []args) {
