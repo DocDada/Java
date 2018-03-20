@@ -6,6 +6,8 @@ import javax.swing.JButton ;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import controleur.Controleur;
+
 import java.util.GregorianCalendar ;
 import java.util.Calendar ;
 
@@ -16,10 +18,8 @@ import modele.Evenement;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout ;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class PanelFormulaire extends JPanel implements ActionListener {
+public class PanelFormulaire extends JPanel {
 	/**
 	 * 
 	 */
@@ -39,39 +39,44 @@ public class PanelFormulaire extends JPanel implements ActionListener {
     JComboBox<String> boxHeuresF ;
     JComboBox<String> boxMinutesF ;
 
-	public PanelFormulaire(AgendaV2 parAgenda) {
-        agd = parAgenda ;
+	public PanelFormulaire() {
 		GridBagLayout gestionnaire = new GridBagLayout();
 		this.setLayout(gestionnaire);
 		GridBagConstraints contraintes = new GridBagConstraints();
 		contraintes.fill = GridBagConstraints.BOTH ;
-		contraintes.gridwidth = 1 ;
 		contraintes.insets = new Insets(10, 10, 10, 10) ;
+		
+		// 0 : texte
+		// 6 : objet (JTextField, JComboBox)
+		// 7 : ":" ou JButton "+"
+		// 8 : Autre JComboBox
+		
 		
 		//contraintes.anchor = GridBagConstraints.WEST ;
 		//contraintes.gridheight = 2 ;
-		afficheDate = new JLabel(dateFormulaire+"\n"+agd.toString());// on affiche l'Agenda
+		afficheDate = new JLabel(dateFormulaire.toString());// on affiche l'Agenda
 		this.add(afficheDate, contraintes) ;
 
-        // ajout d'une Date Ã  l'Agenda
+        // ajout d'une Date à l'Agenda
 		//contraintes.anchor = GridBagConstraints.EAST ;
 		//contraintes.gridwidth = 1 ;
-		//contraintes.fill = GridBagConstraints.NONE ;// Ã  modif
-		//contraintes.anchor = GridBagConstraints.EAST ;// Ã  modif
-		contraintes.gridx = 7 ;// on place le boutton plus loin Ã  droite
+		//contraintes.fill = GridBagConstraints.NONE ;// à modif
+		//contraintes.anchor = GridBagConstraints.EAST ;// à modif
+		contraintes.gridx = 7 ;// on place le boutton plus loin à droite
 		this.add(ajoutDate, contraintes) ;
-        ajoutDate.addActionListener(this) ;// le bouton se met Ã  l'Ã©coute
+        //ajoutDate.addActionListener(this) ;// le bouton se met à l'écoute
+        ajoutDate.setActionCommand("+");
 
-
-		// Ã©tiquette "Titre"
-		contraintes.fill = GridBagConstraints.BOTH ;
+		// étiquette "Titre"
+		//contraintes.fill = GridBagConstraints.BOTH ;
 		contraintes.gridx = 0 ;
 		contraintes.gridy = 2 ;
-		contraintes.gridheight = 1 ;
-		contraintes.gridwidth = 1 ;
+		/*contraintes.gridheight = 1 ;
+		contraintes.gridwidth = 1 ;*/
 		contraintes.fill = GridBagConstraints.BOTH ;
 		JLabel labelTitre = new JLabel("Titre", JLabel.LEFT);
 		labelTitre.setDisplayedMnemonic('T');
+		labelTitre.setLabelFor(textTitre);
 		this.add(labelTitre, contraintes);
 
         // saisie du Titre
@@ -80,11 +85,12 @@ public class PanelFormulaire extends JPanel implements ActionListener {
         textTitre.grabFocus() ;
 		
 		
-		// Ã©tiquette "Lieu"
+		// étiquette "Lieu"
 		contraintes.gridx = 0 ;
 		contraintes.gridy = 3 ;
 		JLabel labelLieu = new JLabel("Lieu", JLabel.LEFT);
 		labelLieu.setDisplayedMnemonic('L');
+		labelLieu.setLabelFor(textLieu);
 		this.add(labelLieu, contraintes);
 
         // saisie du Lieu
@@ -92,16 +98,17 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 		this.add(textLieu, contraintes) ;
 		
 		
-		// Ã©tiquette "DÃ©but"
+		// étiquette "Début"
 		contraintes.gridx = 0 ;
 		contraintes.gridy = 4 ;
-		JLabel labelDebut = new JLabel("DÃ©but", JLabel.LEFT);
+		JLabel labelDebut = new JLabel("Début", JLabel.LEFT);
 		labelDebut.setDisplayedMnemonic('D');
+		
 		this.add(labelDebut, contraintes);
 
 		// JComboBox
-		contraintes.insets = new Insets(0,10,0,10);
-		contraintes.fill = GridBagConstraints.NONE ;
+		//contraintes.insets = new Insets(0,10,0,10);
+		//contraintes.fill = GridBagConstraints.NONE ;
 		//contraintes.anchor = GridBagConstraints.WEST ;
 		contraintes.gridx = 6 ;
 		//contraintes.fill = GridBagConstraints.NONE ;
@@ -111,7 +118,7 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 		}
         boxHeures = new JComboBox<String>(heures) ;
         boxHeures.setSelectedItem(String.valueOf(calendrier.get(Calendar.HOUR_OF_DAY))) ;
-        // l'heure actuelle sera affichÃ©e/sÃ©lectionnÃ©e
+        // l'heure actuelle sera affichée/sélectionnée
 		this.add(boxHeures, contraintes);// ajout des heures
 
 		// ":"
@@ -122,14 +129,14 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 		String[] minutes = new String[60];
 		for(int i = 0 ; i < 60 ; i++)
 			minutes[i] = ""+i ;
-        boxMinutes = new JComboBox<String>() ;
+        boxMinutes = new JComboBox<String>(minutes) ;
         boxMinutes.setSelectedItem(String.valueOf(calendrier.get(Calendar.MINUTE))) ;
-        // la minute actuelle sera affichÃ©e/sÃ©lectionnÃ©e
+        // la minute actuelle sera affichée/sélectionnée
 		this.add(boxMinutes, contraintes);// ajout des minutes
 
 
-		// Ã©tiquette "Fin"
-		contraintes.insets = new Insets(10,10,10,10);
+		// étiquette "Fin"
+		//contraintes.insets = new Insets(10,10,10,10);
 		contraintes.gridx = 0 ;
 		contraintes.gridy = 5 ;
 		JLabel labelFin = new JLabel("Fin", JLabel.LEFT);
@@ -137,7 +144,7 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 		this.add(labelFin, contraintes);
 
         // saisie des heures (Fin)
-		contraintes.insets = new Insets(0,10,0,10);
+		//contraintes.insets = new Insets(0,10,0,10);
 		contraintes.gridx = 6 ;
 		boxHeuresF = new JComboBox<String>(heures) ;
 		this.add(boxHeuresF, contraintes);
@@ -153,13 +160,14 @@ public class PanelFormulaire extends JPanel implements ActionListener {
 		// Fin JComboBox
 		
 		
-        // Ã©tiquette "Description"
-		contraintes.insets = new Insets(10,10,10,10);
+        // étiquette "Description"
+		//contraintes.insets = new Insets(10,10,10,10);
 		contraintes.fill = GridBagConstraints.BOTH ;
 		contraintes.gridx = 0 ;
 		contraintes.gridy = 6 ;
 		JLabel labelDescription = new JLabel("Description");
 		labelDescription.setDisplayedMnemonic('e');
+		labelDescription.setLabelFor(labelDescription);
 		this.add(labelDescription, contraintes);
 
         // zone de saisie (Dexcription)
@@ -171,6 +179,7 @@ public class PanelFormulaire extends JPanel implements ActionListener {
         this.dateFormulaire = parDate ;
     }// setDate
 
+    /*
     public void actionPerformed(ActionEvent parEvt) {
         if(parEvt.getSource()==this.ajoutDate) {
             //agd.ajout(new Evenement(new Date(), this.textTitre.getText(), this.textLieu.getText()));
@@ -184,15 +193,44 @@ public class PanelFormulaire extends JPanel implements ActionListener {
             this.textTitre.setText("") ;
             this.textLieu.setText("") ;
             this.textDescription.setText("") ;
-            this.textTitre.requestFocus() ;// le champ "Titre" est sÃ©lectionnÃ©
+            this.textTitre.requestFocus() ;// le champ "Titre" est sélectionné
         }
-     // le nouvel Ã©vÃ©nement date du jour mÃªme
-     // on prend le titre et le lieu entrÃ©s dans les cases par l'utilisateur
+     // le nouvel événement date du jour même
+     // on prend le titre et le lieu entrés dans les cases par l'utilisateur
     }// actionPerformed
+    */
     
     public JTextField getTextTitre() {
     	return this.textTitre ;
     }
 
+
+
+	public Evenement getEvenement() {
+		return new Evenement(this.getDateFormulaire(), textTitre.getText(), textLieu.getText());
+	}
+
+	public Date getDateFormulaire() {
+		return dateFormulaire;
+	}
+
+	public void setAfficheDate(Date parD) {
+		this.afficheDate.setText(parD.toString());
+	}
+
+	public void reset() {
+		// TODO Auto-generated method stub
+		this.textTitre.setText(new String()) ;
+        this.textLieu.setText(new String()) ;
+        this.textDescription.setText(new String()) ;
+        
+        boxMinutes.setSelectedItem(String.valueOf(calendrier.get(Calendar.MINUTE))) ;
+        boxHeures.setSelectedItem(String.valueOf(calendrier.get(Calendar.HOUR_OF_DAY))) ;
+        this.textTitre.requestFocus() ;// le champ "Titre" est sélectionné
+	}
+
+	public void enregistreEcouteur(Controleur parC) {
+		ajoutDate.addActionListener(parC) ;
+	}
 
 }

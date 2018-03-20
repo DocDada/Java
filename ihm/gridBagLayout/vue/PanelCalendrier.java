@@ -1,9 +1,13 @@
 package vue ;
-import java.io.File ;
+import java.util.Iterator;
+
 import javax.swing.JLabel ;
 import javax.swing.JPanel ;
+
+import controleur.Controleur;
+import modele.CalendrierDuMois;
+import modele.Date;
 import javax.swing.JButton ;
-import javax.swing.ImageIcon ;
 import java.awt.CardLayout ;
 import java.awt.BorderLayout ;
 import java.awt.event.ActionListener ;
@@ -13,24 +17,24 @@ import java.awt.event.ActionEvent ;
 public class PanelCalendrier extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	final int NB_BOUTONS_PSUD = 4 ;
-    final int NB_BOUTONS_PCENTRE = 7 ;
+    final int NB_BOUTONS_PCENTRE = 45 ;
 
-    private int chIndice = 0 ;
 
     JButton boutons[] = new JButton[NB_BOUTONS_PSUD] ;
-    String intitulesBoutons[] = {"premier", "precedent", "suivant", "dernier"} ;
+    String intitulesBoutons[] = {"<<", "<", ">", ">>"} ;
     // Intitules des etiquettes
-    File repertoire = new File("vue.images") ;// Ex 2
-    String intitulesImages[] = repertoire.list() ;// Ex 2
-    // String intitulesEtiquettes[] = {"Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche"} ;// Ex1
-
+    String jours[] = {"di", "lu", "ma", "me", "je", "ve", "sa"} ;
+	String mois[] = {"janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "novembre", "octobre", "décembre"} ;
+    int moisAffiche ;
     // Etiquettes
     JLabel etiquettes[] = new JLabel[NB_BOUTONS_PCENTRE] ;
-    CardLayout gestionnaire = new CardLayout(5, 5) ;// necessaire pour la gestion des evenements
-    JPanel panelSud = new JPanel() ;
-    JLabel pSudEtiquette = new JLabel() ;
-    JPanel panelCentre = new JPanel() ;
-
+    CardLayout gestionnaire = new CardLayout(5, 5) ;// jours du mois 1, 2 ...
+    JPanel panelSud = new JPanel() ;// pour les boutons suivant, precedent etc.
+    JLabel pSudEtiquette = new JLabel() ;// pour le mois
+    JPanel panelCentre = new JPanel() ;// le calendrier
+    CalendrierDuMois cal = new CalendrierDuMois(new Date().getChMois(), new Date().getChAnnee());
+	private int anneeAffiche;
+    
     public PanelCalendrier() {
         this.setLayout(new BorderLayout(0, 0)) ;
 
@@ -46,71 +50,68 @@ public class PanelCalendrier extends JPanel implements ActionListener {
         }
 
         // PANEL CENTRE //
-        // Boucle d'instantiation et d'addition a paneCentre
-        /* EXERCICE 1
-        for (int etiquette = 0 ; etiquette < etiquettes.length ; etiquette++) {
-            etiquettes[etiquette] = new JLabel(intitulesEtiquettes[etiquette]);
-            panelCentre.add(etiquettes[etiquette], intitulesEtiquettes[etiquette]) ;
-        }
-        */
-        for (int etiquette = 0 ; etiquette < intitulesImages.length ; etiquette++) {
-            // instantiation des images
-            etiquettes[etiquette] = new JLabel(new ImageIcon("images"+File.separator+intitulesImages[etiquette]));
-            panelCentre.add(etiquettes[etiquette], intitulesImages[etiquette]) ;
-            // addition des images au PanelCentre
-        }
-        // initialisation et addition de l'etiquette affichant le nom des fichiers
-        pSudEtiquette.setText(intitulesImages[0]) ;
+        /*Iterator<Date> iter = cal.getDates().iterator();
+        int jour ;
+        for (int etiquette = 0 ; etiquette < NB_BOUTONS_PCENTRE && iter.hasNext() ; etiquette++) {
+        	jour = iter.next().getChJour() ;
+            etiquettes[etiquette] = new JLabel(Integer.toString(jour));
+            panelCentre.add(etiquettes[etiquette]) ;
+        }*/
+        moisAffiche = new Date().getChMois() ;
+        pSudEtiquette.setText(Date.getChMoisString(moisAffiche)) ;
         panelSud.add(pSudEtiquette) ;
         // additions des panels panelSud et panelCentre
-        this.add(panelCentre, BorderLayout.CENTER) ;
+        //this.add(panelCentre, BorderLayout.CENTER) ;
         this.add(panelSud, BorderLayout.SOUTH) ;
     }
 
 
 
-    public void setTextParRapportALImage(char indice) {
-        if (indice == 's') {
-            if (chIndice == intitulesImages.length - 1)
-                chIndice = 0 ;
-            else
-                chIndice++ ;
-        }
-        else if (indice == 'p') {
-            if (chIndice == 0)
-                chIndice = intitulesImages.length - 1 ;
-            else
-                chIndice-- ;
-        }
-        else if (indice == 'f')
-            chIndice = intitulesImages.length - 1 ;
-        else
-            chIndice = 0 ;
-        pSudEtiquette.setText(intitulesImages[chIndice]) ;
-    }
-
+    
 
 
     public void actionPerformed(ActionEvent parEvt) {
         if (parEvt.getSource() == boutons[0]) {
-            // premiere image
-            this.setTextParRapportALImage('r') ;
             gestionnaire.first(this.panelCentre) ;
+            moisAffiche = 0 ;
+            pSudEtiquette.setText(Date.getChMoisString(moisAffiche)) ;
         }
         else if (parEvt.getSource() == boutons[1]) {
-            // image precedente
-            this.setTextParRapportALImage('p') ;
             gestionnaire.previous(this.panelCentre) ;
+            if (moisAffiche != 0)
+            	moisAffiche-- ;
+            else {
+            	moisAffiche = 12 ;
+            	anneeAffiche-- ;
+            	setCal(new CalendrierDuMois(12, anneeAffiche));
+            }
+            pSudEtiquette.setText(Date.getChMoisString(moisAffiche)) ;
         }
         else if (parEvt.getSource() == boutons[2]) {
-            // image suivante
-            this.setTextParRapportALImage('s') ;
             gestionnaire.next(this.panelCentre) ;
+            moisAffiche++ ;
+            pSudEtiquette.setText(Date.getChMoisString(moisAffiche)) ;
         }
         else {
-            // derniere image
-            this.setTextParRapportALImage('f') ;
             gestionnaire.last(this.panelCentre) ;
+            moisAffiche = 12 ;
+            pSudEtiquette.setText(Date.getChMoisString(moisAffiche)) ;
         }
     }
+
+
+
+	public void setCal(CalendrierDuMois cal) {
+		this.cal = cal;
+	}
+
+
+
+
+
+
+	public void enregistreEcouteur(Controleur controleur) {
+		// TODO Auto-generated method stub
+		
+	}
 }

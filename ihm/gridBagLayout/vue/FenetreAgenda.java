@@ -11,20 +11,20 @@ public class FenetreAgenda extends JFrame {
         super(parTitre) ;
         PanelAgenda contentPane = new PanelAgenda();
         setContentPane(contentPane) ;
-        contentPane.setBackground(new Color(200, 199, 163));
+        contentPane.setBackground(new Color(200, 200, 200));
         setDefaultCloseOperation(EXIT_ON_CLOSE) ;
-        setBackground(new Color(200, 199, 163)) ;
-        setSize(800, 1000);
+        setBackground(new Color(200, 200, 200)) ;
+        setSize(1200, 1000);
         setVisible(true);
         contentPane.panelF.getTextTitre().requestFocus();
     }
 
     public Insets getInsets() {
-        return new Insets(100, 100, 100, 100) ;
+        return new Insets(1, 1, 1, 1) ;
     }
 
     public static void main(String []args) {
-        new FenetreAgenda("IHM - TP3") ;
+        new FenetreAgenda("IHM - TP4 - TP5") ;
     }
 
 }
