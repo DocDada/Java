@@ -17,7 +17,9 @@ public class Evenement implements Comparable<Evenement>{
     }
     
     public Evenement(Date parDate, String parTitre, String parLieu, int parHD, int parHF, int parMD, int parMF) {
-        chDate = parDate ;
+        heureDebut = new Heure();
+        heureFin = new Heure();
+    	chDate = parDate ;
         chTitre = parTitre ;
         chLieu = parLieu ;
         heureDebut.setHeures(parHD);
