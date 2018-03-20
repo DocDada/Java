@@ -3,7 +3,7 @@ import java.util.GregorianCalendar ;
 import java.util.Calendar ;
 import java.util.StringTokenizer;
 
-public class Date
+public class Date implements Comparable<Date>
     {
     private int chJour ;
     private int chJourSemaine ;
@@ -24,13 +24,10 @@ public class Date
     
     public Date (int parJ, int parM, int parA)
         {
-    	// on gère les exceptions
-    	GregorianCalendar date = new GregorianCalendar(parA, parM, parJ);
-    	
         chJour = parJ ;// jour
         chMois = parM ;// mois
         chAnnee = parA ;// annee
-        chJourSemaine = date.get(Calendar.DAY_OF_WEEK);
+        chJourSemaine = getJourSemaine();
         }// Date
 
     // Question 1
@@ -38,7 +35,7 @@ public class Date
         {
     	String jours[] = {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"} ;
     	String mois[] = {"janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "novmebre", "octobre", "décembre"} ;
-        return jours[chJourSemaine-1]+" "+chJour+" "+mois[chMois-1]+" "+chAnnee;
+        return jours[chJourSemaine-1]+" "+chJour+" "+mois[chMois-1]/*+" "+chAnnee*/;
         }// toString
 
     public static boolean estBissextile(int parAnnee)
@@ -60,6 +57,11 @@ public class Date
                 return 30 ;
             }
         }// dernierJourDuMois
+    
+
+    
+    
+    
 
     // Question 3
     public boolean estValide()
@@ -113,9 +115,31 @@ public class Date
         return 1 ;
         }// compareTo
 
+/*
+   public int compareTo (Date parDate) {
+    if (annee < parDate.annee)
+		return -1;
+	if (annee > parDate.annee)
+		return 1;
+	// les annees sont =
+	if (mois < parDate.mois)
+		return -1;
+	if (mois > parDate.mois)
+		return 1;
+	// les mois sont =
+	if (jour < parDate.jour)
+		return -1;
+	if (jour > parDate.jour)
+		return 1;
+	return 0;	
+  }
+*/    
+    
+
+    
 
     // Question 10
-    public Date dateDuLendemain()
+    /*public Date dateDuLendemain()
         {
         int jour = dernierJourDuMois(this.chMois, this.chAnnee) ;
         if (this.chJour == jour)// si jour egal dernier jour du mois
@@ -132,10 +156,20 @@ public class Date
         else
             this.chJour++ ;// on passe au jour suivant
         return this ;
-        }// dateDuLendemain
+        }// dateDuLendemain*/
+
+    
+    public Date dateDuLendemain ()   {	
+     if (chJour < dernierJourDuMois(chMois,chAnnee))
+ 		     return  new Date (chJour+1,chMois,chAnnee);
+ 		else if (chMois < 12)
+ 				return new Date (1,chMois+1,chAnnee);
+ 			 else return new Date (1,1,chAnnee+1);	
+   }
+    
 
     // Question 11
-    public Date dateDeLaVeille()
+/*    public Date dateDeLaVeille()
         {
         if (this.chJour == 1)// si premier jour du mois
             {
@@ -150,7 +184,18 @@ public class Date
         else
             this.chJour-- ;
         return this ;
-        }// dateDeLaVeille
+        }// dateDeLaVeille*/
+
+   public Date dateDeLaVeille () {    
+	if (chJour > 1)
+			return  new Date (chJour-1,chMois,chAnnee);
+	else if (chMois > 1)
+			   return new Date (Date.dernierJourDuMois(chMois-1, chAnnee),chMois-1,chAnnee);
+		 else return  new Date (31,12,chAnnee-1);
+  }
+    
+    
+    
     
     public int getChAnnee() 
     	{
@@ -162,9 +207,36 @@ public class Date
     	return chMois ;
     	}
     
+    public static String getChMoisString(int chMois)
+		{
+    	String mois[] = {"janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "novmebre", "octobre", "décembre"} ;
+    	return mois[chMois - 1] ;
+		}
+    
     public int getChJour()
     	{
     	return chJour ;
     	}
+
+    // IHM - TP5 - Question 1
+	public int getJourSemaine() {
+		// TODO Auto-generated method stub
+		GregorianCalendar cal = new GregorianCalendar(chAnnee, chMois, chJour);
+		return cal.get(Calendar.DAY_OF_WEEK);
+	}
+	
+	public Date datePremierJourSemaine () {
+		Date datePrem = this;
+		while (datePrem.getJourSemaine()!=2) {
+			datePrem = datePrem.dateDeLaVeille();
+		}
+		return datePrem;
+	}
+
+	public boolean isToday() {
+		return new Date().compareTo(this) == 0;
+	}	
+	
+	
 
     }// Date
