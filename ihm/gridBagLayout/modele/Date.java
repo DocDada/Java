@@ -16,7 +16,7 @@ public class Date implements Comparable<Date>
     	// donne la date courante
     	GregorianCalendar aujourdhui = new GregorianCalendar() ;
     	chAnnee = aujourdhui.get(Calendar.YEAR) ;
-    	chMois = aujourdhui.get(Calendar.MONTH)+1;// les mois commencent Ã  0
+    	chMois = aujourdhui.get(Calendar.MONTH)+1;// les mois commencent à 0
     	chJour = aujourdhui.get(Calendar.DAY_OF_MONTH);
     	chJourSemaine = aujourdhui.get(Calendar.DAY_OF_WEEK);// dimanche = 1
     	}// Date()
@@ -34,7 +34,7 @@ public class Date implements Comparable<Date>
     public String toString()
         {
     	String jours[] = {"Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"} ;
-    	String mois[] = {"janvier", "fÃ©vrier", "mars", "avril", "mai", "juin", "juillet", "aoÃ»t", "septembre", "novmebre", "octobre", "dÃ©cembre"} ;
+    	String mois[] = {"janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "novmebre", "octobre", "décembre"} ;
         return jours[chJourSemaine-1]+" "+chJour+" "+mois[chMois-1]/*+" "+chAnnee*/;
         }// toString
 
@@ -47,7 +47,7 @@ public class Date implements Comparable<Date>
         {
         switch (parMois)// en fonction du mois
             {
-            case 2:// si c'est fÃ©vrier
+            case 2:// si c'est février
                 if (estBissextile(parAnnee))
                     return 29 ;
                 return 28 ;
@@ -86,8 +86,8 @@ public class Date implements Comparable<Date>
     	{
     	System.out.println("Entrez le jour, le mois puis l'annee (dd-mm-aaa)") ;
     	String dateStr = Clavier.lireString();//l'utilisateur entre la date
-    	int valeursDate[] = new int[3];// les valeurs seront rÃ©cupÃ©rÃ©es sÃ©parÃ©ment
-    	StringTokenizer st = new StringTokenizer(dateStr, "-");// le token est le tiret (l'espace: par dÃ©faut)
+    	int valeursDate[] = new int[3];// les valeurs seront récupérées séparément
+    	StringTokenizer st = new StringTokenizer(dateStr, "-");// le token est le tiret (l'espace: par défaut)
         for(int indice = 0 ; st.hasMoreTokens() ; indice++)// tant qu'il y a encore un token, on prend une valeur
             valeursDate[indice] = Integer.parseInt(st.nextToken());
     	return new Date(valeursDate[0],valeursDate[1],valeursDate[2]) ;
@@ -175,7 +175,7 @@ public class Date implements Comparable<Date>
             {
             if (this.chMois == 1)// si janvier
                 {
-                this.chMois = 13 ;// va etre decrementÃ©
+                this.chMois = 13 ;// va etre decrementé
                 this.chAnnee-- ;// on passe a l'annee precedente
                 }
             this.chMois-- ;
@@ -209,7 +209,7 @@ public class Date implements Comparable<Date>
     
     public static String getChMoisString(int chMois)
 		{
-    	String mois[] = {"janvier", "fÃ©vrier", "mars", "avril", "mai", "juin", "juillet", "aoÃ»t", "septembre", "novmebre", "octobre", "dÃ©cembre"} ;
+    	String mois[] = {"janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "novembre", "octobre", "décembre"} ;
     	return mois[chMois - 1] ;
 		}
     
