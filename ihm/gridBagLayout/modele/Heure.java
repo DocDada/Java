@@ -4,6 +4,11 @@ public class Heure {
 	private int heures ;
 	private int minutes ;
 	
+	public Heure() {
+		heures = 0;
+		minutes = 0 ;
+	}
+	
 	public Heure(int parH, int parM) {
 		heures = parH;
 		minutes = parM ;

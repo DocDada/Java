@@ -57,11 +57,7 @@ public class Date implements Comparable<Date>
                 return 30 ;
             }
         }// dernierJourDuMois
-    
 
-    
-    
-    
 
     // Question 3
     public boolean estValide()
@@ -74,13 +70,14 @@ public class Date implements Comparable<Date>
         }// estValide
 
     // Question 6
-    /*public static Date lireDate() throws ExceptionDate
+    /*
+    public static Date lireDate() throws ExceptionDate
         {
         System.out.println("Entrez le jour, le mois puis l'annee") ;
         return new Date(Clavier.lireInt(), Clavier.lireInt(), Clavier.lireInt()) ;
         }// lireDate
 	*/
-    
+
     // Question 7 tp4
     public static Date lireDate()
     	{
@@ -116,6 +113,7 @@ public class Date implements Comparable<Date>
         }// compareTo
 
 /*
+CORRECTION :
    public int compareTo (Date parDate) {
     if (annee < parDate.annee)
 		return -1;
@@ -158,15 +156,16 @@ public class Date implements Comparable<Date>
         return this ;
         }// dateDuLendemain*/
 
-    
-    public Date dateDuLendemain ()   {	
-     if (chJour < dernierJourDuMois(chMois,chAnnee))
- 		     return  new Date (chJour+1,chMois,chAnnee);
+    // CORRECTION
+    public Date dateDuLendemain() {	
+    	if (chJour < dernierJourDuMois(chMois, chAnnee))
+    		return  new Date(chJour+1, chMois, chAnnee);
  		else if (chMois < 12)
- 				return new Date (1,chMois+1,chAnnee);
- 			 else return new Date (1,1,chAnnee+1);	
-   }
-    
+ 			return new Date(1, chMois+1, chAnnee);
+ 		else
+ 			return new Date(1, 1, chAnnee+1);
+    }
+
 
     // Question 11
 /*    public Date dateDeLaVeille()
@@ -186,17 +185,16 @@ public class Date implements Comparable<Date>
         return this ;
         }// dateDeLaVeille*/
 
-   public Date dateDeLaVeille () {    
-	if (chJour > 1)
-			return  new Date (chJour-1,chMois,chAnnee);
-	else if (chMois > 1)
-			   return new Date (Date.dernierJourDuMois(chMois-1, chAnnee),chMois-1,chAnnee);
-		 else return  new Date (31,12,chAnnee-1);
-  }
-    
-    
-    
-    
+    // CORRECTION
+    public Date dateDeLaVeille () {    
+    	if (chJour > 1)
+    		return  new Date(chJour-1, chMois, chAnnee);
+    	else if (chMois > 1)
+    		return new Date(Date.dernierJourDuMois(chMois-1, chAnnee), chMois-1, chAnnee);
+		else
+			return new Date(31, 12, chAnnee-1);
+    }
+
     public int getChAnnee() 
     	{
     	return chAnnee ;
@@ -220,11 +218,10 @@ public class Date implements Comparable<Date>
 
     // IHM - TP5 - Question 1
 	public int getJourSemaine() {
-		// TODO Auto-generated method stub
 		GregorianCalendar cal = new GregorianCalendar(chAnnee, chMois, chJour);
 		return cal.get(Calendar.DAY_OF_WEEK);
 	}
-	
+
 	public Date datePremierJourSemaine () {
 		Date datePrem = this;
 		while (datePrem.getJourSemaine()!=2) {
@@ -236,7 +233,7 @@ public class Date implements Comparable<Date>
 	public boolean isToday() {
 		return new Date().compareTo(this) == 0;
 	}	
-	
-	
+
+
 
     }// Date
