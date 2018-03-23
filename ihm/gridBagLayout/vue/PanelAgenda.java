@@ -1,9 +1,6 @@
 package vue;
 
-import java.awt.BorderLayout;
-
 import javax.swing.JPanel ;
-
 import controleur.Controleur;
 import modele.AgendaV2;
 import modele.Date;
@@ -21,9 +18,9 @@ public class PanelAgenda extends JPanel {
         aged.ajout(new Evenement(new Date(1,1,1999), "controle", "g26"));
         aged.ajout(new Evenement(new Date(1,2,1999), "controle2", "g25"));
         
-        this.setLayout(new BorderLayout(0, 0)) ;
-        this.add(panelF, BorderLayout.EAST) ;// saisie a droite
-        this.add(panelC, BorderLayout.WEST) ;// caldendrier a gauche
+        this.add(panelC) ;// calendrier a gauche
+        this.add(panelF) ;// saisie a droite
+        
     }
 
 

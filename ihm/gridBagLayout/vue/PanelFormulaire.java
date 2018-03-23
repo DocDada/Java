@@ -2,116 +2,100 @@ package vue;
 import javax.swing.JComboBox;
 import javax.swing.JLabel ;
 import javax.swing.JPanel ;
+import javax.swing.JScrollPane;
 import javax.swing.JButton ;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import controleur.Controleur;
-
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout ;
+import java.awt.Insets;
 import java.util.GregorianCalendar ;
 import java.util.Calendar ;
-
+import controleur.Controleur;
 import modele.Date;
 import modele.AgendaV2 ;
 import modele.Evenement;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout ;
-import java.awt.Insets;
+
 
 public class PanelFormulaire extends JPanel {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	JButton ajoutDate = new JButton("+");
-	JTextField textTitre = new JTextField();
-	JTextField textLieu = new JTextField();
-    JTextArea textDescription = new JTextArea(10,20);
+
+	// CONSTANTE
+	static final long serialVersionUID = 1L;
+	static final String INTITULE_BOUTON = "+" ;
+	final static Font FONT_DATE = new Font("Verdana", Font.BOLD, 14);
+	final static Font FONT_LABEL = new Font("Verdana", Font.BOLD, 11);
+	// DECLENCHEUR
+	JButton ajoutDate = new JButton(INTITULE_BOUTON);
+	// SAISIE
+	JTextField textTitre = new JTextField(4);
+	JTextField textLieu = new JTextField(4);
+    JTextArea textDescription = new JTextArea(8,8);
+    // AFFICHAGE
     Date dateFormulaire = new Date() ;// la date courante
-    GregorianCalendar calendrier = new GregorianCalendar() ;
-	//JTextField textDescription ;
-	AgendaV2 agd ;
     JLabel afficheDate ;
-    
+    GregorianCalendar calendrier = new GregorianCalendar() ;
+    AgendaV2 agd ;
+    // HEURES + MINUTES (DEBUT + FIN)
     JComboBox<String> boxHeures ;
     JComboBox<String> boxMinutes ;
     JComboBox<String> boxHeuresF ;
     JComboBox<String> boxMinutesF ;
 
-	public PanelFormulaire() {
-		GridBagLayout gestionnaire = new GridBagLayout();
-		this.setLayout(gestionnaire);
+    public PanelFormulaire() {
+		this.setLayout(new GridBagLayout());
 		GridBagConstraints contraintes = new GridBagConstraints();
-		contraintes.fill = GridBagConstraints.BOTH ;
-		contraintes.insets = new Insets(10, 10, 10, 10) ;
-		
-		// 0 : texte
-		// 6 : objet (JTextField, JComboBox)
-		// 7 : ":" ou JButton "+"
-		// 8 : Autre JComboBox
-		
-		
-		//contraintes.anchor = GridBagConstraints.WEST ;
-		//contraintes.gridheight = 2 ;
-		afficheDate = new JLabel(dateFormulaire.toString());// on affiche l'Agenda
-		this.add(afficheDate, contraintes) ;
-
-        // ajout d'une Date à l'Agenda
-		//contraintes.anchor = GridBagConstraints.EAST ;
-		//contraintes.gridwidth = 1 ;
-		//contraintes.fill = GridBagConstraints.NONE ;// à modif
-		//contraintes.anchor = GridBagConstraints.EAST ;// à modif
-		contraintes.gridx = 7 ;// on place le boutton plus loin à droite
-		this.add(ajoutDate, contraintes) ;
-        //ajoutDate.addActionListener(this) ;// le bouton se met à l'écoute
-        ajoutDate.setActionCommand("+");
-
-		// étiquette "Titre"
-		//contraintes.fill = GridBagConstraints.BOTH ;
-		contraintes.gridx = 0 ;
-		contraintes.gridy = 2 ;
-		/*contraintes.gridheight = 1 ;
-		contraintes.gridwidth = 1 ;*/
-		contraintes.fill = GridBagConstraints.BOTH ;
+		contraintes.anchor = GridBagConstraints.WEST ;
+		contraintes.insets = new Insets(6, 6, 6, 6) ;
+		//LABEL
+		afficheDate = new JLabel(dateFormulaire.toString(), JLabel.LEFT);// date courante
 		JLabel labelTitre = new JLabel("Titre", JLabel.LEFT);
-		labelTitre.setDisplayedMnemonic('T');
-		labelTitre.setLabelFor(textTitre);
-		this.add(labelTitre, contraintes);
-
-        // saisie du Titre
-		contraintes.gridx = 6 ;
-		this.add(textTitre, contraintes) ;
-        textTitre.grabFocus() ;
-		
-		
-		// étiquette "Lieu"
-		contraintes.gridx = 0 ;
-		contraintes.gridy = 3 ;
 		JLabel labelLieu = new JLabel("Lieu", JLabel.LEFT);
-		labelLieu.setDisplayedMnemonic('L');
-		labelLieu.setLabelFor(textLieu);
-		this.add(labelLieu, contraintes);
-
-        // saisie du Lieu
-		contraintes.gridx = 6 ;
-		this.add(textLieu, contraintes) ;
-		
-		
-		// étiquette "Début"
-		contraintes.gridx = 0 ;
-		contraintes.gridy = 4 ;
 		JLabel labelDebut = new JLabel("Début", JLabel.LEFT);
-		labelDebut.setDisplayedMnemonic('D');
+		JLabel labelFin = new JLabel("Fin", JLabel.LEFT);
+		JLabel labelDescription = new JLabel("Description", JLabel.LEFT);
 		
+		// date d'aujourd'hui
+		contraintes.gridx = 0 ;
+		contraintes.gridy = 0 ;
+		contraintes.gridwidth = 4 ;
+		this.add(afficheDate, contraintes) ;
+		
+		// Bouton d'ajout des evenements
+		contraintes.gridx = 4 ;
+		contraintes.gridwidth = 1 ;
+		ajoutDate.setActionCommand(INTITULE_BOUTON);
+		this.add(ajoutDate, contraintes) ;
+		
+		// labelTitre + textTitre
+		contraintes.gridy++ ;
+		contraintes.gridx = 0 ;
+		this.add(labelTitre, contraintes);
+        contraintes.gridwidth = 4 ;
+        contraintes.gridx++ ;
+        contraintes.fill = GridBagConstraints.HORIZONTAL ;
+        this.add(textTitre, contraintes) ;
+		contraintes.fill = GridBagConstraints.NONE ;
+		
+		// labelLieu + textLieu
+		contraintes.gridy++ ;
+		contraintes.gridx = 0 ;
+		contraintes.gridwidth = 1 ;
+		this.add(labelLieu, contraintes);
+		contraintes.gridx++ ;
+		contraintes.gridwidth = 4 ;
+		contraintes.fill = GridBagConstraints.HORIZONTAL ;
+		this.add(textLieu, contraintes) ;
+		contraintes.fill = GridBagConstraints.NONE ;
+		
+		// heure de debut
+		contraintes.gridy++ ;
+		contraintes.gridx = 0 ;
+		contraintes.gridwidth = 1 ;
 		this.add(labelDebut, contraintes);
-
-		// JComboBox
-		//contraintes.insets = new Insets(0,10,0,10);
-		//contraintes.fill = GridBagConstraints.NONE ;
-		//contraintes.anchor = GridBagConstraints.WEST ;
-		contraintes.gridx = 6 ;
-		//contraintes.fill = GridBagConstraints.NONE ;
+		contraintes.gridx++ ;
 		String heures[] = new String[24];
 		for(int i = 0 ; i < 24 ; i++) {
 				heures[i] = ""+i ;
@@ -120,94 +104,86 @@ public class PanelFormulaire extends JPanel {
         boxHeures.setSelectedItem(String.valueOf(calendrier.get(Calendar.HOUR_OF_DAY))) ;
         // l'heure actuelle sera affichée/sélectionnée
 		this.add(boxHeures, contraintes);// ajout des heures
-
-		// ":"
-		contraintes.gridx = 7 ;
+		contraintes.gridx++ ;
 		this.add(new JLabel(":"), contraintes);
-
-		contraintes.gridx = 8 ;
+		contraintes.gridx++ ;
 		String[] minutes = new String[60];
+		// saisie de sminutes
 		for(int i = 0 ; i < 60 ; i++)
 			minutes[i] = ""+i ;
         boxMinutes = new JComboBox<String>(minutes) ;
         boxMinutes.setSelectedItem(String.valueOf(calendrier.get(Calendar.MINUTE))) ;
-        // la minute actuelle sera affichée/sélectionnée
+        // la minute actuelle sera affichee/selectionnee
 		this.add(boxMinutes, contraintes);// ajout des minutes
-
-
-		// étiquette "Fin"
-		//contraintes.insets = new Insets(10,10,10,10);
+		
+		// heure de fin
+		contraintes.gridy++ ;
 		contraintes.gridx = 0 ;
-		contraintes.gridy = 5 ;
-		JLabel labelFin = new JLabel("Fin", JLabel.LEFT);
-		labelFin.setDisplayedMnemonic('F');
 		this.add(labelFin, contraintes);
-
-        // saisie des heures (Fin)
-		//contraintes.insets = new Insets(0,10,0,10);
-		contraintes.gridx = 6 ;
+		contraintes.gridx++ ;
 		boxHeuresF = new JComboBox<String>(heures) ;
 		this.add(boxHeuresF, contraintes);
-
-        // ":"
-		contraintes.gridx = 7 ;
+		contraintes.gridx++ ;		
 		this.add(new JLabel(":"), contraintes);
-
-        // saisie des minutes (Fin)
-		contraintes.gridx = 8 ;
+		contraintes.gridx++ ;
+        // saisie des minutes
 		boxMinutesF = new JComboBox<String>(minutes) ;
 		this.add(boxMinutesF, contraintes);
-		// Fin JComboBox
 		
-		
-        // étiquette "Description"
-		//contraintes.insets = new Insets(10,10,10,10);
-		contraintes.fill = GridBagConstraints.BOTH ;
+		// labelDescription + textDescription
+		contraintes.gridy++ ;
 		contraintes.gridx = 0 ;
-		contraintes.gridy = 6 ;
-		JLabel labelDescription = new JLabel("Description");
+		contraintes.anchor = GridBagConstraints.NORTHWEST ;
+		this.add(labelDescription, contraintes);
+		contraintes.gridx++ ;
+		contraintes.gridwidth = 4 ;
+		contraintes.fill = GridBagConstraints.BOTH ;
+		this.add(new JScrollPane(textDescription), contraintes) ;
+		
+		afficheDate.setFont(FONT_DATE) ;
+		ajoutDate.setFont(FONT_DATE);
+		ajoutDate.setFocusPainted(false);
+		
+		labelTitre.setFont(FONT_LABEL);
+		labelTitre.setDisplayedMnemonic('T');
+		labelTitre.setLabelFor(textTitre);
+		
+		labelLieu.setFont(FONT_LABEL);
+		labelLieu.setDisplayedMnemonic('L');
+		labelLieu.setLabelFor(textLieu);
+		
+		labelDebut.setFont(FONT_LABEL);
+		labelDebut.setDisplayedMnemonic('D');
+		labelDebut.setLabelFor(boxHeures);
+		
+		labelFin.setFont(FONT_LABEL);
+		labelFin.setDisplayedMnemonic('F');
+
+		labelDescription.setFont(FONT_LABEL);
 		labelDescription.setDisplayedMnemonic('e');
 		labelDescription.setLabelFor(labelDescription);
-		this.add(labelDescription, contraintes);
+		
 
-        // zone de saisie (Dexcription)
-		contraintes.gridx = 6 ;
-		this.add(textDescription, contraintes) ;
+		reset() ;
 	}// PanelFormuaire()
 
     public void setDate(Date parDate) {
         this.dateFormulaire = parDate ;
     }// setDate
-
-    /*
-    public void actionPerformed(ActionEvent parEvt) {
-        if(parEvt.getSource()==this.ajoutDate) {
-            //agd.ajout(new Evenement(new Date(), this.textTitre.getText(), this.textLieu.getText()));
-        	int un = Integer.parseInt((String) boxHeures.getSelectedItem());
-        	int deux = Integer.parseInt((String) boxMinutes.getSelectedItem());
-        	int trois = Integer.parseInt((String) boxHeuresF.getSelectedItem());
-        	int quatre = Integer.parseInt((String) boxMinutesF.getSelectedItem());
-        	agd.ajout(new Evenement(new Date(), this.textTitre.getText(), this.textLieu.getText(), un, deux, trois, quatre));
-            System.out.println(agd);
-            
-            this.textTitre.setText("") ;
-            this.textLieu.setText("") ;
-            this.textDescription.setText("") ;
-            this.textTitre.requestFocus() ;// le champ "Titre" est sélectionné
-        }
-     // le nouvel événement date du jour même
-     // on prend le titre et le lieu entrés dans les cases par l'utilisateur
-    }// actionPerformed
-    */
     
     public JTextField getTextTitre() {
     	return this.textTitre ;
     }
 
-
-
 	public Evenement getEvenement() {
-		return new Evenement(this.getDateFormulaire(), textTitre.getText(), textLieu.getText());
+		/*
+		int h1 = Integer.parseInt((String) boxHeures.getSelectedItem());
+    	int m1 = Integer.parseInt((String) boxMinutes.getSelectedItem());
+    	int h2 = Integer.parseInt((String) boxHeuresF.getSelectedItem());
+    	int m2 = Integer.parseInt((String) boxMinutesF.getSelectedItem());
+    	return new Evenement(getDateFormulaire(), textTitre.getText(), textLieu.getText(), h1, m1, h2, m2) ;
+    	*/
+		return new Evenement(getDateFormulaire(), textTitre.getText(), textLieu.getText());
 	}
 
 	public Date getDateFormulaire() {
@@ -219,7 +195,6 @@ public class PanelFormulaire extends JPanel {
 	}
 
 	public void reset() {
-		// TODO Auto-generated method stub
 		this.textTitre.setText(new String()) ;
         this.textLieu.setText(new String()) ;
         this.textDescription.setText(new String()) ;
