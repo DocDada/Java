@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import modele.AgendaV2;
+import vue.BoutonDate;
 import vue.PanelCalendrier;
 import vue.PanelFormulaire;
 
@@ -29,6 +30,10 @@ public class Controleur implements ActionListener {
 			agenda.ajout(panelForm.getEvenement());
 			JOptionPane.showMessageDialog((JButton) e.getSource(), agenda.toString());
 			panelForm.reset() ;
+		}
+		else {
+			BoutonDate date = (BoutonDate) e.getSource();
+			panelForm.setDate(date.getDate());
 		}
 		
 	}
