@@ -98,7 +98,10 @@ public class PanelFormulaire extends JPanel {
 		contraintes.gridx++ ;
 		String heures[] = new String[24];
 		for(int i = 0 ; i < 24 ; i++) {
-				heures[i] = ""+i ;
+			if(i<10)
+				heures[i] = "0"+i ;
+			else
+				heures[i] = Integer.toString(i) ;
 		}
         boxHeures = new JComboBox<String>(heures) ;
         boxHeures.setSelectedItem(String.valueOf(calendrier.get(Calendar.HOUR_OF_DAY))) ;
@@ -109,8 +112,13 @@ public class PanelFormulaire extends JPanel {
 		contraintes.gridx++ ;
 		String[] minutes = new String[60];
 		// saisie de sminutes
-		for(int i = 0 ; i < 60 ; i++)
-			minutes[i] = ""+i ;
+		for(int i = 0 ; i < 60 ; i++) {
+			if(i<10)
+				minutes[i] = "0"+i ;
+			else
+				minutes[i] = Integer.toString(i) ;
+		}
+			
         boxMinutes = new JComboBox<String>(minutes) ;
         boxMinutes.setSelectedItem(String.valueOf(calendrier.get(Calendar.MINUTE))) ;
         // la minute actuelle sera affichee/selectionnee
@@ -169,6 +177,7 @@ public class PanelFormulaire extends JPanel {
 
     public void setDate(Date parDate) {
         this.dateFormulaire = parDate ;
+        this.afficheDate.setText(parDate.toString());
     }// setDate
     
     public JTextField getTextTitre() {
@@ -188,10 +197,6 @@ public class PanelFormulaire extends JPanel {
 
 	public Date getDateFormulaire() {
 		return dateFormulaire;
-	}
-
-	public void setAfficheDate(Date parD) {
-		this.afficheDate.setText(parD.toString());
 	}
 
 	public void reset() {

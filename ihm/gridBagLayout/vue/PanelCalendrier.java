@@ -9,10 +9,12 @@ import modele.Date;
 import javax.swing.JButton ;
 import java.awt.CardLayout ;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.BorderLayout ;
 
 
-public class PanelCalendrier extends JPanel {
+public class PanelCalendrier extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	final int NB_BOUTONS_PSUD = 4 ;
     final int NB_BOUTONS_PCENTRE = 45 ;
@@ -40,20 +42,20 @@ public class PanelCalendrier extends JPanel {
 
         
         // PANEL SUD //
-        moisAffiche = new Date().getChMois() ;
-        pSudEtiquette.setText(Date.getChMoisString(moisAffiche)) ;
+        moisAffiche = new Date().getChMois()-1 ;
+        pSudEtiquette.setText(Date.getChMoisString(moisAffiche+1)) ;
         panelSud.add(pSudEtiquette) ;
         this.add(panelSud, BorderLayout.SOUTH) ;
         // Boucle d'instantiation et d'addition a panelSud
         // bouton pour parcourir le cardLayout
         for (int bouton = 0 ; bouton < boutons.length ; bouton++) {
             boutons[bouton] = new JButton(intitulesBoutons[bouton]);
-            boutons[bouton].setActionCommand(intitulesBoutons[bouton]);
+            boutons[bouton].addActionListener(this);
             panelSud.add(boutons[bouton], intitulesBoutons[bouton]) ;
         }
 
         // PANEL CENTRE //
-        panelM = new PanelMois(moisAffiche) ;
+        panelM = new PanelMois(moisAffiche+1) ;
         panelCentre.add(panelM) ;
         panelM.setOpaque(true);
         panelM.setBackground(new Color(200,200,200));
@@ -61,7 +63,7 @@ public class PanelCalendrier extends JPanel {
     }
 
 
-    /*public void actionPerformed(ActionEvent parEvt) {
+    public void actionPerformed(ActionEvent parEvt) {
         if (parEvt.getSource() == boutons[0]) {
             gestionnaire.first(this.panelCentre) ;
             moisAffiche = 0 ;
@@ -95,7 +97,7 @@ public class PanelCalendrier extends JPanel {
             setCal(new CalendrierDuMois(moisAffiche, anneeAffiche));
             pSudEtiquette.setText(Date.getChMoisString(moisAffiche+1)) ;
         }
-    }*/
+    }
 
 
 
@@ -190,7 +192,7 @@ public class PanelCalendrier extends JPanel {
 
 	public void enregistreEcouteur(Controleur parC) {
 		for (int i = 0 ; i<boutons.length ; i++) {
-			boutons[i].addActionListener(parC) ;
+			this.panelM.getJoursIndice(i).addActionListener(parC) ;
 		}
 		
 	}
