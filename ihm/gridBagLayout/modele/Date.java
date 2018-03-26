@@ -16,7 +16,7 @@ public class Date implements Comparable<Date>
     	// donne la date courante
     	GregorianCalendar aujourdhui = new GregorianCalendar() ;
     	chAnnee = aujourdhui.get(Calendar.YEAR) ;
-    	chMois = aujourdhui.get(Calendar.MONTH)+1;// les mois commencent à 0
+    	chMois = aujourdhui.get(Calendar.MONTH)+1;// janvier = 0
     	chJour = aujourdhui.get(Calendar.DAY_OF_MONTH);
     	chJourSemaine = aujourdhui.get(Calendar.DAY_OF_WEEK);// dimanche = 1
     	}// Date()
@@ -217,23 +217,30 @@ CORRECTION :
     	}
 
     // IHM - TP5 - Question 1
-	public int getJourSemaine() {
-		GregorianCalendar cal = new GregorianCalendar(chAnnee, chMois, chJour);
+	public int getJourSemaine()
+		{
+		GregorianCalendar cal = new GregorianCalendar(chAnnee, chMois-1, chJour);
 		return cal.get(Calendar.DAY_OF_WEEK);
-	}
-
-	public Date datePremierJourSemaine () {
-		Date datePrem = this;
-		while (datePrem.getJourSemaine()!=2) {
-			datePrem = datePrem.dateDeLaVeille();
 		}
+
+	public Date datePremierJourSemaine ()
+		{
+		Date datePrem = this;
+		while (datePrem.getJourSemaine()!=2)
+			{
+			datePrem = datePrem.dateDeLaVeille();
+			}
 		return datePrem;
-	}
+		}
 
-	public boolean isToday() {
+	public boolean isToday()
+		{
 		return new Date().compareTo(this) == 0;
-	}	
+		}
 
-
+	public Date getChDate()
+		{
+		return this;
+		}	
 
     }// Date
