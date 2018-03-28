@@ -173,16 +173,23 @@ public class PanelFormulaire extends JPanel {
 		
 
 		reset() ;
-	}// PanelFormuaire()
+	}// PanelFormulaire()
+
+
+	////////////////
+	// ACCESSEURS //
+	//     ET     //
+	// MODIFIEURS //
+	////////////////
 
     public void setDate(Date parDate) {
         this.dateFormulaire = parDate ;
-        this.afficheDate.setText(parDate.toString());
-    }// setDate
+        this.afficheDate.setText(dateFormulaire.toString());
+    }// setDate()
     
     public JTextField getTextTitre() {
     	return this.textTitre ;
-    }
+    }// getTextTitre()
 
 	public Evenement getEvenement() {
 		/*
@@ -193,24 +200,23 @@ public class PanelFormulaire extends JPanel {
     	return new Evenement(getDateFormulaire(), textTitre.getText(), textLieu.getText(), h1, m1, h2, m2) ;
     	*/
 		return new Evenement(getDateFormulaire(), textTitre.getText(), textLieu.getText());
-	}
+	}// getEvenement()
 
 	public Date getDateFormulaire() {
 		return dateFormulaire;
-	}
+	}// getDateFormulaire()
 
 	public void reset() {
+		// reinitialisation du formulaire
 		this.textTitre.setText(new String()) ;
         this.textLieu.setText(new String()) ;
         this.textDescription.setText(new String()) ;
-        
         boxMinutes.setSelectedItem(String.valueOf(calendrier.get(Calendar.MINUTE))) ;
         boxHeures.setSelectedItem(String.valueOf(calendrier.get(Calendar.HOUR_OF_DAY))) ;
         this.textTitre.requestFocus() ;// le champ "Titre" est sélectionné
-	}
+	}// reset()
 
 	public void enregistreEcouteur(Controleur parC) {
 		ajoutDate.addActionListener(parC) ;
-	}
-
-}
+	}// enregistreEcouteur()
+}// PanelFormulaire

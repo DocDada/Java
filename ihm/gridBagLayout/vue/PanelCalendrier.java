@@ -15,15 +15,15 @@ import java.awt.BorderLayout ;
 
 
 public class PanelCalendrier extends JPanel implements ActionListener {
-	private static final long serialVersionUID = 1L;
-	final int NB_BOUTONS_PSUD = 4 ;
-    final int NB_BOUTONS_PCENTRE = 45 ;
 
+	private static final long serialVersionUID = 1L;
+	static final int NB_BOUTONS_PSUD = 4 ;
+    static final int NB_BOUTONS_PCENTRE = 45 ;
 
     JButton boutons[] = new JButton[NB_BOUTONS_PSUD] ;
     String intitulesBoutons[] = {"<<", "<", ">", ">>"} ;
     // Intitules des etiquettes
-	String mois[] = {"janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "novembre", "octobre", "décembre"} ;
+	String mois[] = {"janvier", "fevrier", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "novembre", "octobre", "decembre"} ;
     private int moisAffiche ;
     private int anneeAffiche;
     // Etiquettes
@@ -32,16 +32,18 @@ public class PanelCalendrier extends JPanel implements ActionListener {
     JPanel panelSud = new JPanel() ;// pour les boutons suivant, precedent etc.
     JLabel pSudEtiquette = new JLabel() ;// pour le mois
     JPanel panelCentre = new JPanel() ;// le calendrier
-    PanelMois panelM ;
+    PanelMois[] panelM = new PanelMois[12];
     CalendrierDuMois cal = new CalendrierDuMois(new Date().getChMois(), new Date().getChAnnee());
-	
     
     public PanelCalendrier() {
         this.setLayout(new BorderLayout(0, 0)) ;
         panelCentre.setLayout(gestionnaire) ;
 
-        
-        // PANEL SUD //
+
+        //////////////////
+        //  PANEL  SUD  //
+        //////////////////
+
         moisAffiche = new Date().getChMois()-1 ;
         pSudEtiquette.setText(Date.getChMoisString(moisAffiche+1)) ;
         panelSud.add(pSudEtiquette) ;
@@ -54,13 +56,22 @@ public class PanelCalendrier extends JPanel implements ActionListener {
             panelSud.add(boutons[bouton], intitulesBoutons[bouton]) ;
         }
 
+
+        //////////////////
         // PANEL CENTRE //
-        panelM = new PanelMois(moisAffiche+1) ;
-        panelCentre.add(panelM) ;
-        panelM.setOpaque(true);
-        panelM.setBackground(new Color(200,200,200));
+        //////////////////
+
+        // instantiation du tableau de PanelMois
+        // un PanelMois pour un mois
+        for(int i = 0 ; i < panelM.length ; i++) {
+        	panelM[i] = new PanelMois(i) ;
+        	panelM[i].setOpaque(true);
+        	panelM[i].setBackground(new Color(200,200,200));
+        }
+        // le panel mois qui s'affiche par defaut a pour parametre (moisAffiche+1)
+        panelCentre.add(panelM[moisAffiche+1]) ;
         add(panelCentre, BorderLayout.NORTH) ;
-    }
+    }// PanelCalendrier()
 
 
     public void actionPerformed(ActionEvent parEvt) {
@@ -97,103 +108,55 @@ public class PanelCalendrier extends JPanel implements ActionListener {
             setCal(new CalendrierDuMois(moisAffiche, anneeAffiche));
             pSudEtiquette.setText(Date.getChMoisString(moisAffiche+1)) ;
         }
-    }
+    }// actionPerformed()
 
 
+	////////////////
+	// ACCESSEURS //
+	//     ET     //
+	// MODIFIEURS //
+	////////////////
 
 	public void setCal(CalendrierDuMois cal) {
 		this.cal = cal;
 	}
 
-
-
-
-
-
 	public String[] getMois() {
 		return mois;
 	}
-
 
 	public void setMois(String[] mois) {
 		this.mois = mois;
 	}
 
-
 	public int getMoisAffiche() {
 		return moisAffiche;
 	}
-
 
 	public void setMoisAffiche(int moisAffiche) {
 		this.moisAffiche = moisAffiche;
 	}
 
-
 	public int getAnneeAffiche() {
 		return anneeAffiche;
 	}
-
 
 	public void setAnneeAffiche(int anneeAffiche) {
 		this.anneeAffiche = anneeAffiche;
 	}
 
-
-	public JPanel getPanelSud() {
-		return panelSud;
-	}
-
-
-	public void setPanelSud(JPanel panelSud) {
-		this.panelSud = panelSud;
-	}
-
-
 	public JLabel getpSudEtiquette() {
 		return pSudEtiquette;
 	}
-
 
 	public void setpSudEtiquette(JLabel pSudEtiquette) {
 		this.pSudEtiquette = pSudEtiquette;
 	}
 
-
-	public JPanel getPanelCentre() {
-		return panelCentre;
-	}
-
-
-	public void setPanelCentre(JPanel panelCentre) {
-		this.panelCentre = panelCentre;
-	}
-
-
-	public PanelMois getPanelM() {
-		return panelM;
-	}
-
-
-	public void setPanelM(PanelMois panelM) {
-		this.panelM = panelM;
-	}
-
-
-	public CalendrierDuMois getCal() {
-		return cal;
-	}
-
-
-	public CardLayout getGestionnaire() {
-		return gestionnaire;
-	}
-
-
 	public void enregistreEcouteur(Controleur parC) {
-		for (int i = 0 ; i<boutons.length ; i++) {
-			this.panelM.getJoursIndice(i).addActionListener(parC) ;
-		}
-		
-	}
-}
+		/*for(int i = 0 ; panelM[i] != null ; i++)
+			panelM[i].enregistreEcouteur(parC);
+		*/
+		panelM[moisAffiche+1].enregistreEcouteur(parC);
+	}// enregistreEcouteur()
+}// PanelCalendrier
