@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import modele.AgendaV2;
+import modele.Date;
 import vue.BoutonDate;
 import vue.PanelCalendrier;
 import vue.PanelFormulaire;
@@ -22,7 +23,7 @@ public class Controleur implements ActionListener {
 		panelCale = panelC ;
 		panelForm.enregistreEcouteur(this) ;//le panel de saisie se met a l'ecoute
 		panelCale.enregistreEcouteur(this) ;
-	}
+	}// Controleur()
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -31,12 +32,9 @@ public class Controleur implements ActionListener {
 			JOptionPane.showMessageDialog((JButton) e.getSource(), agenda.toString());
 			panelForm.reset() ;
 		}
-		else {
-			BoutonDate date = (BoutonDate) e.getSource();
-			panelForm.setDate(date.getDate());
+		else if (e.getSource().getClass().getSimpleName().equals("BoutonDate")) {
+			Date date = ((BoutonDate) e.getSource()).getDate();
+			panelForm.setDate(date);
 		}
-		
-	}
-	
-	
-}
+	}// actionPerformed()
+}// Controleur
