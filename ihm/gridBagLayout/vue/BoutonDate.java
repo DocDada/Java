@@ -15,6 +15,7 @@ public class BoutonDate extends JButton{
 	public BoutonDate(Date parDate) {
 		super(Integer.toString(parDate.getChJour())) ;
 		Date today = new Date();
+		date = parDate;
 		estDateCourante = (today.getChJour()==parDate.getChJour() && today.getChMois()==parDate.getChMois());
 		this.setCouleurs();
 	}// BoutonDate()
