@@ -29,9 +29,15 @@ TP de conception objet, d'interface Homme/Machine et de programmation orientée 
       <CardLayout>.next(<JPanel>);
       <CardLayout>.last(<JPanel>);_
      
-  - TP4
-    GridBagLayout, MVC
-    
+  - TP4 (fini)
+    GridBagLayout, JComboBox
+  
+  - TP5 (fini)
+    GridLayout
+  
+  - TP6 (fini)
+    MVC
+  
   - TP10
     JavaFX
   
@@ -40,4 +46,5 @@ TP de conception objet, d'interface Homme/Machine et de programmation orientée 
   - TP Evenement (fini)
   - TP Agenda (fini)
   - TP Exception (fini)
-  - TP Collection
+  - TP Collection (fini)
+  - TP Fichiers
