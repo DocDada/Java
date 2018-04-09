@@ -1,11 +1,13 @@
 package modele ;
 import java.util.GregorianCalendar ;
+import java.io.Serializable;
 import java.util.Calendar ;
 import java.util.StringTokenizer;
 
-public class Date implements Comparable<Date>
+public class Date implements Comparable<Date>, Serializable 
     {
-    private int chJour ;
+	private static final long serialVersionUID = -3310884560241853876L;
+	private int chJour ;
     private int chJourSemaine ;
     private int chMois ;
     private int chAnnee ;

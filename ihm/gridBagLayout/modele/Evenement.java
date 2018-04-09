@@ -1,8 +1,11 @@
 package modele ;
 
+import java.io.Serializable;
 
-public class Evenement implements Comparable<Evenement>{
-    private Date chDate ;
+public class Evenement implements Comparable<Evenement>, Serializable {
+
+	private static final long serialVersionUID = 6151493666774639688L;
+	private Date chDate ;
     private String chTitre ;
     private String chLieu ;
     private Heure heureDebut ;

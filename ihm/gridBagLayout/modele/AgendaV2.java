@@ -1,5 +1,6 @@
 package modele;
 
+import java.io.Serializable;
 import java.util.ArrayList ;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -8,7 +9,9 @@ import java.util.Iterator;
 import java.util.TreeSet ;
 
 
-public class AgendaV2 {
+public class AgendaV2 implements Serializable {
+
+	private static final long serialVersionUID = 8658028136381357587L;
 	private ArrayList<Evenement> listEvts ;
 	private TreeSet<Evenement> arbreEvts ;
 	private HashMap<Integer, TreeSet<Evenement>> mapEvts ;
