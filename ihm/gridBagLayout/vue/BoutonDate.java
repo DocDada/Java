@@ -36,8 +36,8 @@ public class BoutonDate extends JButton{
 
 	public void setCouleurs() {
 		if(estDateCourante)
-			this.setBackground(Color.RED);
-		else
-			this.setBackground(Color.WHITE);
+			this.setForeground(Color.RED);
+
+		this.setBackground(Color.WHITE);
 	}// setCouleurs()
 }// BoutonDate

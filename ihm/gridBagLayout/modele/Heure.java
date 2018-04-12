@@ -1,5 +1,7 @@
 package modele;
 
+
+
 public class Heure {
 	private int heures ;
 	private int minutes ;
@@ -29,4 +31,4 @@ public class Heure {
 	public void setMinutes(int minutes) {
 		this.minutes = minutes;
 	}
-}
+}// Heure

@@ -3,6 +3,7 @@ package modele;
 import java.io.Serializable;
 import java.util.ArrayList ;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -43,7 +44,7 @@ public class AgendaV2 implements Serializable {
 		//arbreEvts.add(parEvt);
 		
 		Date date = parEvt.getChDate();
-		GregorianCalendar calendar = new GregorianCalendar(date.getChAnnee(), date.getChMois(), date.getChJour());
+		GregorianCalendar calendar = new GregorianCalendar(date.getChAnnee(), date.getChMois()-1, date.getChJour());
 		int numSemaine = calendar.get(Calendar.WEEK_OF_YEAR);// numero de la semaine dans l'annee
 		if (mapEvts.containsKey(numSemaine))
 			mapEvts.get(numSemaine).add(parEvt);
@@ -65,8 +66,8 @@ public class AgendaV2 implements Serializable {
 				iter++ ;
 		return iter;
 	}// nbExpose()
-	
-	
+
+
 	// Question 4
 	public int nbEvtEnregistre(Date parDate) {
 		// retourne le nombre d'evenements qui ont
@@ -79,4 +80,15 @@ public class AgendaV2 implements Serializable {
 				nbEvts++ ;
 		return nbEvts ;
 	}// nbEvtEnregistre
-}
+
+	public TreeSet<Evenement> getEvenementsSemaine(Date parDate) {
+		System.out.println("C");
+		GregorianCalendar cal = new GregorianCalendar(parDate.getChAnnee(), parDate.getChMois()-1, parDate.getChJour());
+		
+		Integer semaine = cal.get(Calendar.WEEK_OF_YEAR);
+		TreeSet<Evenement> truc = mapEvts.get(semaine);
+		System.out.println("TAILLE :"+semaine+"\n"+truc);// debug
+		return truc;
+		// RENVOIE NULL
+	}// getEvenementsSemaine()
+}// AgendaV2

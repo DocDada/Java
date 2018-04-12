@@ -20,7 +20,7 @@ public class PanelMois extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private int mois ;
 	private ArrayList<BoutonDate> listeBoutons ;
-    private static final String labelJours[] = {"lu", "ma", "me", "je", "ve", "sa", "di"} ;
+    static final String labelJours[] = {"lu", "ma", "me", "je", "ve", "sa", "di"} ;
     private JLabel[] joursSemaine = new JLabel[7];
     private BoutonDate boutonSelect ;
 

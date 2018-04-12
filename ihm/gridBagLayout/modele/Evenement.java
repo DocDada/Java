@@ -98,21 +98,17 @@ public class Evenement implements Comparable<Evenement>, Serializable {
         this.chLieu = parLieu ;
     }
 
-
 	public Heure getHeureDebut() {
 		return heureDebut;
 	}
-
 
 	public void setHeureDebut(Heure heureDebut) {
 		this.heureDebut = heureDebut;
 	}
 
-
 	public Heure getHeureFin() {
 		return heureFin;
 	}
-
 
 	public void setHeureFin(Heure heureFin) {
 		this.heureFin = heureFin;
