@@ -1,75 +1,64 @@
+package tp10JavaFX;
+
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.scene.chart.LineChart ;
-import javafx.scene.chart.NumberAxis ;
-import javafx.scene.chart.CategoryAxis ;
-import javafx.scene.chart.XYChart ;
-//import java.util.ArrayList ;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.XYChart;
 
 public class ExempleDia extends Application {
     public void start(Stage stage) {
+        // TITRE
         stage.setTitle("IHM - TP10 - JavaFX - LineChart");
-        /*ArrayList maListe = new ArrayList();
-        maListe.add("Janv");
-        maListe.add("FÃ©vr");
-        maListe.add("Mars");
-        maListe.add("Avri");
-        maListe.add("Mai");
-        maListe.add("Juin");
-        maListe.add("Juil");
-        maListe.add("Aout");
-        maListe.add("Sept");
-        maListe.add("Nove");
-        maListe.add("Octo");
-        maListe.add("Dece");
-        final CategoryAxis xAxis = new CategoryAxis(maListe) ;
-        */
-        final CategoryAxis xAxis = new CategoryAxis() ;
-        final NumberAxis yAxis = new NumberAxis() ;
-        // NumberAxis utilisÃ© pour des donnÃ©es numÃ©riques (notes)
-        xAxis.setLabel("Mois") ;
-        // intitulÃ© de l'axe des abscisses
-        yAxis.setLabel("Notes/20") ;
-        // intitulÃ© de l'axe des ordonnÃ©es
-        final LineChart<String,Number> lineChart = new LineChart<String,Number>(xAxis, yAxis);
-        lineChart.setTitle("Notes d'un Ã©lÃ¨ve de DUT INFO");
+
+        final CategoryAxis xAxis = new CategoryAxis();
+        // CategoryAxis utilisé pour les mois : Janvier, Février ...
+        final NumberAxis yAxis = new NumberAxis();
+        // NumberAxis utilisé pour des données numériques (notes)
+
+        xAxis.setLabel("Mois");
+        // intitulé de l'axe des abscisses
+        yAxis.setLabel("Notes/20");
+        // intitulé de l'axe des ordonnées
+        final LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis, yAxis);
+        lineChart.setTitle("Notes d'un élève de DUT INFO");
         // titre du diagramme
-        XYChart.Series series = new XYChart.Series();
-        XYChart.Series series2 = new XYChart.Series();
-        // les diffÃ©rentes donnÃ©es/courbes
-        series.setName("Mes notes de l'annÃ©e 2017/2018");
-        series2.setName("Mes notes de l'annÃ©e 2016/2017");
-        // titres donnÃ©s aux courbes
-        series2.getData().add(new XYChart.Data("Janv",10));
-        series2.getData().add(new XYChart.Data("FÃ©vr",15));
-        series2.getData().add(new XYChart.Data("Mars",14));
-        series2.getData().add(new XYChart.Data("Avri",18));
-        series2.getData().add(new XYChart.Data("Mai",15));
-        series2.getData().add(new XYChart.Data("Juin",10));
-        series2.getData().add(new XYChart.Data("Juil",0));
-        series.getData().add(new XYChart.Data("Sept",12));
-        series.getData().add(new XYChart.Data("Octo",13));
-        series.getData().add(new XYChart.Data("Nove",16));
-        series.getData().add(new XYChart.Data("DÃ©ce",19));
-        // ajout de donnÃ©es
+
+        XYChart.Series<String, Number> series = new XYChart.Series<String, Number>();
+        XYChart.Series<String, Number> series2 = new XYChart.Series<String, Number>();
+        // les différentes données/courbes
+        series.setName("Mes notes de l'année 2017/2018");
+        series2.setName("Mes notes de l'année 2016/2017");
+        // titres donnés aux courbes
+
+        series2.getData().add(new XYChart.Data<String, Number>("Janv", 10));
+        series2.getData().add(new XYChart.Data<String, Number>("Févr", 15));
+        series2.getData().add(new XYChart.Data<String, Number>("Mars", 14));
+        series2.getData().add(new XYChart.Data<String, Number>("Avri", 18));
+        series2.getData().add(new XYChart.Data<String, Number>("Mai", 15));
+        series2.getData().add(new XYChart.Data<String, Number>("Juin", 10));
+        series2.getData().add(new XYChart.Data<String, Number>("Juil", 0));
+        series.getData().add(new XYChart.Data<String, Number>("Sept", 12));
+        series.getData().add(new XYChart.Data<String, Number>("Octo", 13));
+        series.getData().add(new XYChart.Data<String, Number>("Nove", 16));
+        series.getData().add(new XYChart.Data<String, Number>("Déce", 19));
+        // ajout de données aux deux courbes
+
         lineChart.setCreateSymbols(false);
-        // enlÃ¨ve les symboles du diagramme (true par dÃ©faut)
-        //xAxis.setSide(Side.TOP);
-        //met l'axe des abscisses en haut
+        // enlève les symboles du diagramme (true par défaut)
+        // xAxis.setSide(Side.TOP);
+        // met l'axe des abscisses en haut
         Scene scene = new Scene(lineChart, 800, 600);
         lineChart.getData().add(series2);
         lineChart.getData().add(series);
         // l'ordre d'addition est IMPORTANT par rapport
-        // Ã  l'axe des abscisses
+        // à l'axe des abscisses
         stage.setScene(scene);
         stage.show();
     }
+
     public static void main(String[] args) {
         launch(args);
     }
