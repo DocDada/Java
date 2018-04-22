@@ -19,8 +19,8 @@ public class PanelAgenda extends JPanel {
     public PanelAgenda() {
         // L'ORDRE EST TRES IMPORTANT
         // instantiation de l'agenda
-        // instantiation du panelAffichage
-        // instantiation du controleur
+        // instantiation du panelAffichage, agenda en parametre
+        // instantiation du controleur, panelAffichage et agenda en parametre
         if (fichier.length() != 0)
             aged = (AgendaV2) LectureEcriture.lecture(fichier);// lecture du fichier contenant l'agenda
         System.out.println(aged.toString());

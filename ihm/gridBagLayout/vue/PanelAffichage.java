@@ -16,23 +16,33 @@ public class PanelAffichage extends JPanel {
     private ModeleTable modele;
     private JTable tableSemaine;
     private AgendaV2 agenda;
-    private Date aujourdhui = new Date();
+    private Date date;
+    private JScrollPane scrollPane;
 
     public PanelAffichage(AgendaV2 parAgenda) {
         agenda = parAgenda;
-
-        setModele(new ModeleTable(aujourdhui, agenda));
+        date = new Date();
+        setModele(new ModeleTable(date, agenda));
         tableSemaine = new JTable(getModele());// tableSemaine.setModel(modele)
         tableSemaine.setRowHeight(60);// hauteur des lignes
         // scrollpane nécessaire pour visualiser l'en-tête
-        JScrollPane scrollPane = new JScrollPane(tableSemaine, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        JScrollPane scrollPane = new JScrollPane(tableSemaine, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setPreferredSize(new Dimension(600, 400));
         this.add(scrollPane);
     }// PanelAffichage()
 
-    public void setDate(Date parDate) {
-        setModele(new ModeleTable(parDate, agenda));
-        tableSemaine = new JTable(getModele());
+    public void setDate(Date parDate, AgendaV2 parAgenda) {
+        date = parDate;
+        /*
+         * setModele(new ModeleTable(parDate, parAgenda)); tableSemaine = new
+         * JTable(getModele()); tableSemaine.setRowHeight(60);// hauteur des lignes //
+         * scrollpane nécessaire pour visualiser l'en-tête
+         * 
+         * this.remove(scrollPane);// ne marche pas scrollPane = new
+         * JScrollPane(tableSemaine, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+         * ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED); this.add(scrollPane);
+         */
     }// setDate()
 
     public ModeleTable getModele() {
@@ -48,4 +58,19 @@ public class PanelAffichage extends JPanel {
         tableSemaine = new JTable(getModele());// tableSemaine.setModel(modele)
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public JScrollPane getScrollPane() {
+        return scrollPane;
+    }
+
+    public void setScrollPane(JScrollPane scrollPane) {
+        this.scrollPane = scrollPane;
+    }
 }// PanelAffichage

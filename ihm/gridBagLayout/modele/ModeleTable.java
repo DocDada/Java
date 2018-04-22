@@ -1,9 +1,5 @@
 package modele;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.TreeSet;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,14 +9,6 @@ public class ModeleTable extends DefaultTableModel {
     static final int nbrEvts = 15;
     static final String labelJours[] = { "lu ", "ma ", "me ", "je ", "ve ", "sa ", "di " };
     private AgendaV2 agenda;
-
-    public AgendaV2 getAgenda() {
-        return agenda;
-    }
-
-    public void setAgenda(AgendaV2 agenda) {
-        this.agenda = agenda;
-    }
 
     public ModeleTable(Date parDate, AgendaV2 parAgenda) {
         agenda = parAgenda;
@@ -36,7 +24,7 @@ public class ModeleTable extends DefaultTableModel {
         this.setColumnIdentifiers(labelJours);
 
         // récupère les événements de la semaine entière
-        TreeSet <Evenement> tableEvts = agenda.getEvenementsSemaine(parDate);
+        TreeSet<Evenement> tableEvts = agenda.getEvenementsSemaine(parDate);
 
         // on ajoute les événements à la JTable
         if (tableEvts != null)
@@ -48,14 +36,16 @@ public class ModeleTable extends DefaultTableModel {
     public void ajoutEvenement(Evenement evt) {
         // dimanche = 1 => colonne 6
         // lundi = 2 => colonne 0 (retranche 2)
-        int indiceCol ;
+        int indiceCol;
         if (evt.getChDate().getJourSemaine() == 1)
             indiceCol = 6;
         else
-            indiceCol = evt.getChDate().getJourSemaine()-2;
+            indiceCol = evt.getChDate().getJourSemaine() - 2;
 
         int indiceLig = 0;
         for (; indiceLig < ModeleTable.nbrEvts && getValueAt(indiceLig, indiceCol) != null; indiceLig++);
+        if (ModeleTable.nbrEvts <= indiceLig)// si la JTable ne peut afficher cette événement
+            return;
         setValueAt(evt.getChTitre(), indiceLig, indiceCol);
     }// ajoutEvenement()
 
@@ -66,4 +56,12 @@ public class ModeleTable extends DefaultTableModel {
     public Class getColumnClass(int parNum) {
         return Evenement.class;
     }// getColumnClass()
+
+    public AgendaV2 getAgenda() {
+        return agenda;
+    }
+
+    public void setAgenda(AgendaV2 agenda) {
+        this.agenda = agenda;
+    }
 }// ModeleTable
