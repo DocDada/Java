@@ -37,6 +37,7 @@ public class Controleur implements ActionListener {
         if (e.getActionCommand().equals("+")) {
             Evenement evt = panelForm.getEvenement() ;
             agenda.ajout(evt);
+            // mise à jour de la JTable d'événements
             panelAffi.ajoutEvenement(evt);
             // ecriture de l'agenda dans le fichier
             LectureEcriture.ecriture(fichier, agenda);
@@ -47,7 +48,7 @@ public class Controleur implements ActionListener {
         } else if (e.getSource().getClass().getSimpleName().equals("BoutonDate")) {
             Date date = ((BoutonDate) e.getSource()).getDate();
             panelForm.setDate(date);
-            //panelAffi.setDate(date);// attention si fichier vide
+            panelAffi.setDate(date);
         }
     }// actionPerformed()
 }// Controleur

@@ -45,6 +45,7 @@ public class PanelAffichage extends JPanel {
 
     public void ajoutEvenement(Evenement evenement) {
         modele.ajoutEvenement(evenement);
+        tableSemaine = new JTable(getModele());// tableSemaine.setModel(modele)
     }
 
 }// PanelAffichage

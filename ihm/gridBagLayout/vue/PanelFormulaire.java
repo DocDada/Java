@@ -175,7 +175,7 @@ public class PanelFormulaire extends JPanel {
 
     ////////////////
     // ACCESSEURS //
-    // ET //
+    // ET         //
     // MODIFIEURS //
     ////////////////
 
