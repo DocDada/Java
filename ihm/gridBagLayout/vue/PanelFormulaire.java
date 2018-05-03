@@ -43,6 +43,12 @@ public class PanelFormulaire extends JPanel {
     JComboBox<String> boxHeuresF;
     JComboBox<String> boxMinutesF;
 
+    ///////////////////////
+    //                   //
+    //   CONSTRUCTEURS   //
+    //                   //
+    ///////////////////////
+
     public PanelFormulaire() {
         this.setLayout(new GridBagLayout());
         GridBagConstraints contraintes = new GridBagConstraints();
@@ -173,11 +179,33 @@ public class PanelFormulaire extends JPanel {
         reset();
     }// PanelFormulaire()
 
-    ////////////////
-    // ACCESSEURS //
-    // ET         //
-    // MODIFIEURS //
-    ////////////////
+    //////////////////////
+    //                  //
+    //     METHODES     //
+    //                  //
+    //////////////////////
+
+    public void reset() {
+        // reinitialisation du formulaire
+        this.textTitre.setText(new String());
+        this.textLieu.setText(new String());
+        this.textDescription.setText(new String());
+        boxMinutes.setSelectedItem(String.valueOf(calendrier.get(Calendar.MINUTE)));
+        boxHeures.setSelectedItem(String.valueOf(calendrier.get(Calendar.HOUR_OF_DAY)));
+        this.textTitre.requestFocus();// le champ "Titre" est sélectionné
+    }// reset()
+
+    public void enregistreEcouteur(Controleur parC) {
+        ajoutDate.addActionListener(parC);
+    }// enregistreEcouteur()
+
+    //////////////////////
+    //                  //
+    //    ACCESSEURS    //
+    //        ET        //
+    //    MODIFIEURS    //
+    //                  //
+    //////////////////////
 
     public void setDate(Date parDate) {
         this.dateFormulaire = parDate;
@@ -203,18 +231,4 @@ public class PanelFormulaire extends JPanel {
     public Date getDateFormulaire() {
         return dateFormulaire;
     }// getDateFormulaire()
-
-    public void reset() {
-        // reinitialisation du formulaire
-        this.textTitre.setText(new String());
-        this.textLieu.setText(new String());
-        this.textDescription.setText(new String());
-        boxMinutes.setSelectedItem(String.valueOf(calendrier.get(Calendar.MINUTE)));
-        boxHeures.setSelectedItem(String.valueOf(calendrier.get(Calendar.HOUR_OF_DAY)));
-        this.textTitre.requestFocus();// le champ "Titre" est sélectionné
-    }// reset()
-
-    public void enregistreEcouteur(Controleur parC) {
-        ajoutDate.addActionListener(parC);
-    }// enregistreEcouteur()
 }// PanelFormulaire

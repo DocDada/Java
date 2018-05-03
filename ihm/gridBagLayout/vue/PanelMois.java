@@ -24,6 +24,12 @@ public class PanelMois extends JPanel implements ActionListener {
     private JLabel[] joursSemaine = new JLabel[7];
     private BoutonDate boutonSelect;
 
+    ///////////////////////
+    //                   //
+    //   CONSTRUCTEURS   //
+    //                   //
+    ///////////////////////
+
     public PanelMois(int mois) {
         this.mois = mois;
         Collection<Date> datesDuMois = new CalendrierDuMois(mois, new Date().getChAnnee()).getDates();
@@ -52,19 +58,11 @@ public class PanelMois extends JPanel implements ActionListener {
         boutonSelect = listeBoutons.get(0);
     }// PanelMois()
 
-    ////////////////
-    // ACCESSEURS //
-    // ET         //
-    // MODIFIEURS //
-    ////////////////
-
-    public int getMois() {
-        return mois;
-    }// getMois()
-
-    public void setMois(int mois) {
-        this.mois = mois;
-    }// setMois()
+    //////////////////////
+    //                  //
+    //     METHODES     //
+    //                  //
+    //////////////////////
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -80,4 +78,20 @@ public class PanelMois extends JPanel implements ActionListener {
         for (BoutonDate bouton : listeBoutons)
             bouton.addActionListener(parC);
     }// enregistreEcouteur()
+
+    //////////////////////
+    //                  //
+    //    ACCESSEURS    //
+    //        ET        //
+    //    MODIFIEURS    //
+    //                  //
+    //////////////////////
+
+    public int getMois() {
+        return mois;
+    }// getMois()
+
+    public void setMois(int mois) {
+        this.mois = mois;
+    }// setMois()
 }// PanelMois

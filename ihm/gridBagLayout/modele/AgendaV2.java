@@ -15,12 +15,24 @@ public class AgendaV2 implements Serializable {
     private TreeSet<Evenement> arbreEvts;
     private HashMap<Integer, TreeSet<Evenement>> mapEvts;
 
+    ///////////////////////
+    //                   //
+    //   CONSTRUCTEURS   //
+    //                   //
+    ///////////////////////
+
     // Question 1, 5
     public AgendaV2() {
         listEvts = new ArrayList<Evenement>();
         arbreEvts = new TreeSet<Evenement>();
         mapEvts = new HashMap<Integer, TreeSet<Evenement>>();
     }// AgendaV2()
+
+    //////////////////////
+    //                  //
+    //     METHODES     //
+    //                  //
+    //////////////////////
 
     // Question 7, 8
     public String toString() {

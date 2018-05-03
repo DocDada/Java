@@ -13,7 +13,7 @@ public class FenetreAgenda extends JFrame implements Serializable {
         setContentPane(contentPane);
         contentPane.setBackground(new Color(33, 63, 59));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setBackground(new Color(33, 63, 59));
+        setBackground(new Color(62, 58, 59));
         setSize(1500, 500);
         setVisible(true);
         contentPane.getPanelF().getTextTitre().requestFocus();

@@ -12,9 +12,15 @@ public class PanelAgenda extends JPanel {
     private AgendaV2 aged = new AgendaV2();
     private PanelCalendrier panelC = new PanelCalendrier();
     private PanelFormulaire panelF = new PanelFormulaire();
-    private PanelAffichage panelA ;
+    private PanelAffichage panelA;
     private Controleur ctrl;
     private File fichier = new File("FileAgenda" + File.separator + "agendas.ser");
+
+    ///////////////////////
+    //                   //
+    //   CONSTRUCTEURS   //
+    //                   //
+    ///////////////////////
 
     public PanelAgenda() {
         // L'ORDRE EST TRES IMPORTANT
@@ -24,12 +30,20 @@ public class PanelAgenda extends JPanel {
         if (fichier.length() != 0)
             aged = (AgendaV2) LectureEcriture.lecture(fichier);// lecture du fichier contenant l'agenda
         System.out.println(aged.toString());
-        panelA = new PanelAffichage(aged) ;// avant le controleur ! sinon null
+        panelA = new PanelAffichage(aged);// avant le controleur ! sinon null
         ctrl = new Controleur(aged, panelF, panelC, panelA);
         this.add(panelC);// calendrier a gauche
         this.add(panelF);// formulaire au milieu
         this.add(panelA);// table d'événements à droite
     }// PanelAgenda()
+
+    //////////////////////
+    //                  //
+    //    ACCESSEURS    //
+    //        ET        //
+    //    MODIFIEURS    //
+    //                  //
+    //////////////////////
 
     public PanelFormulaire getPanelF() {
         return panelF;

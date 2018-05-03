@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import modele.AgendaV2;
 import modele.Date;
 import modele.Evenement;
+import modele.ModeleTable;
 import outil.LectureEcriture;
 import vue.BoutonDate;
 import vue.PanelAffichage;
@@ -20,7 +21,13 @@ public class Controleur implements ActionListener {
     PanelFormulaire panelForm;
     PanelCalendrier panelCale;
     PanelAffichage panelAffi;
-    File fichier ;
+    File fichier;
+
+    ///////////////////////
+    //                   //
+    //   CONSTRUCTEURS   //
+    //                   //
+    ///////////////////////
 
     public Controleur(AgendaV2 agd, PanelFormulaire panelF, PanelCalendrier panelC, PanelAffichage panelA) {
         agenda = agd;
@@ -32,11 +39,19 @@ public class Controleur implements ActionListener {
         fichier = new File("FileAgenda" + File.separator + "agendas.ser");
     }// Controleur()
 
+    //////////////////////
+    //                  //
+    //    ACCESSEURS    //
+    //        ET        //
+    //    MODIFIEURS    //
+    //                  //
+    //////////////////////
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("+")) {
 
-            Evenement evt = panelForm.getEvenement() ;
+            Evenement evt = panelForm.getEvenement();
             agenda.ajout(evt);
             // mise à jour de la JTable d'événements
             panelAffi.ajoutEvenement(evt);
@@ -46,11 +61,12 @@ public class Controleur implements ActionListener {
             JOptionPane.showMessageDialog((JButton) e.getSource(), agenda.toString());
             // les champs du formulaires sonr ré-initialisés
             panelForm.reset();
-        } else if (e.getSource().getClass().getSimpleName().equals("BoutonDate")) {
+        }
+        else if (e.getSource().getClass().getSimpleName().equals("BoutonDate")) {
             Date date = ((BoutonDate) e.getSource()).getDate();
             panelForm.setDate(date);
             if (date.getSemaine() != panelAffi.getDate().getSemaine())
-                panelAffi.setDate(date, agenda);// ERREUR
+                panelAffi.setDate(new ModeleTable(date, agenda));
         }
     }// actionPerformed()
 }// Controleur

@@ -12,6 +12,12 @@ public class BoutonDate extends JButton {
     private Date date;
     private boolean estDateCourante;
 
+    ///////////////////////
+    //                   //
+    //   CONSTRUCTEURS   //
+    //                   //
+    ///////////////////////
+
     public BoutonDate(Date parDate) {
         super(Integer.toString(parDate.getChJour()));
         Date today = new Date();
@@ -20,11 +26,13 @@ public class BoutonDate extends JButton {
         this.setCouleurs();
     }// BoutonDate()
 
-    ////////////////
-    // ACCESSEURS //
-    // ET         //
-    // MODIFIEURS //
-    ////////////////
+    //////////////////////
+    //                  //
+    //    ACCESSEURS    //
+    //        ET        //
+    //    MODIFIEURS    //
+    //                  //
+    //////////////////////
 
     public void setDate(Date date) {
         this.date = date;
@@ -37,7 +45,6 @@ public class BoutonDate extends JButton {
     public void setCouleurs() {
         if (estDateCourante)
             this.setForeground(Color.RED);
-
         this.setBackground(Color.WHITE);
     }// setCouleurs()
 }// BoutonDate

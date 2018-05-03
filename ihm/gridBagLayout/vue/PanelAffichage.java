@@ -19,6 +19,12 @@ public class PanelAffichage extends JPanel {
     private Date date;
     private JScrollPane scrollPane;
 
+    ///////////////////////
+    //                   //
+    //   CONSTRUCTEURS   //
+    //                   //
+    ///////////////////////
+
     public PanelAffichage(AgendaV2 parAgenda) {
         agenda = parAgenda;
         date = new Date();
@@ -26,36 +32,41 @@ public class PanelAffichage extends JPanel {
         tableSemaine = new JTable(getModele());// tableSemaine.setModel(modele)
         tableSemaine.setRowHeight(60);// hauteur des lignes
         // scrollpane nécessaire pour visualiser l'en-tête
-        JScrollPane scrollPane = new JScrollPane(tableSemaine, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        JScrollPane scrollPane = new JScrollPane(tableSemaine, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setPreferredSize(new Dimension(600, 400));
         this.add(scrollPane);
     }// PanelAffichage()
 
-    public void setDate(Date parDate, AgendaV2 parAgenda) {
-        date = parDate;
-        /*
-         * setModele(new ModeleTable(parDate, parAgenda)); tableSemaine = new
-         * JTable(getModele()); tableSemaine.setRowHeight(60);// hauteur des lignes //
-         * scrollpane nécessaire pour visualiser l'en-tête
-         * 
-         * this.remove(scrollPane);// ne marche pas scrollPane = new
-         * JScrollPane(tableSemaine, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-         * ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED); this.add(scrollPane);
-         */
+    //////////////////////
+    //                  //
+    //     METHODES     //
+    //                  //
+    //////////////////////
+
+    public void ajoutEvenement(Evenement evenement) {
+        modele.ajoutEvenement(evenement);
+        tableSemaine = new JTable(getModele());// tableSemaine.setModel(modele)
+    }
+
+    //////////////////////
+    //                  //
+    //    ACCESSEURS    //
+    //        ET        //
+    //    MODIFIEURS    //
+    //                  //
+    //////////////////////
+
+    public void setDate(ModeleTable model) {
+        setModele(model);
+        tableSemaine.setModel(this.modele);
     }// setDate()
 
     public ModeleTable getModele() {
         return modele;
     }
 
-    public void setModele(ModeleTable modele) {
-        this.modele = modele;
-    }
-
-    public void ajoutEvenement(Evenement evenement) {
-        modele.ajoutEvenement(evenement);
-        tableSemaine = new JTable(getModele());// tableSemaine.setModel(modele)
+    public void setModele(ModeleTable model) {
+        this.modele = model;
     }
 
     public Date getDate() {

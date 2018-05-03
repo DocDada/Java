@@ -9,9 +9,15 @@ public class Date implements Comparable<Date>, Serializable {
     private static final long serialVersionUID = -3310884560241853876L;
     private int chJour;
     private int chJourSemaine;
-    private int chSemaine ;
+    private int chSemaine;
     private int chMois;
     private int chAnnee;
+
+    ///////////////////////
+    //                   //
+    //   CONSTRUCTEURS   //
+    //                   //
+    ///////////////////////
 
     // Question 4 tp4
     public Date() {
@@ -29,14 +35,19 @@ public class Date implements Comparable<Date>, Serializable {
         chMois = parM;// mois
         chAnnee = parA;// annee
         chJourSemaine = getJourSemaine();
-        chSemaine = getSemaine() ;
+        chSemaine = getSemaine();
     }// Date
+
+    //////////////////////
+    //                  //
+    //     METHODES     //
+    //                  //
+    //////////////////////
 
     // Question 1
     public String toString() {
         String jours[] = { "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" };
-        String mois[] = { "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre",
-                "novmebre", "octobre", "décembre" };
+        String mois[] = { "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "novmebre", "octobre", "décembre" };
         return jours[chJourSemaine - 1] + " " + chJour + " " + mois[chMois - 1]/* +" "+chAnnee */;
     }// toString
 
@@ -47,20 +58,20 @@ public class Date implements Comparable<Date>, Serializable {
     public static int dernierJourDuMois(int parMois, int parAnnee) {
         switch (parMois)// en fonction du mois
         {
-        case 2:// si c'est février
-            if (estBissextile(parAnnee))
-                return 29;
-            return 28;
-        case 1:
-        case 3:
-        case 5:
-        case 7:
-        case 8:
-        case 10:
-        case 12:
-            return 31;
-        default:// avril, juin, septembre, novembre
-            return 30;
+            case 2:// si c'est février
+                if (estBissextile(parAnnee))
+                    return 29;
+                return 28;
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                return 31;
+            default:// avril, juin, septembre, novembre
+                return 30;
         }
     }// dernierJourDuMois
 
@@ -68,8 +79,7 @@ public class Date implements Comparable<Date>, Serializable {
     public boolean estValide() {
         if (this.chAnnee < 1583)
             return false;
-        if (this.chMois > 0 && this.chMois <= 12 && this.chJour <= dernierJourDuMois(this.chMois, this.chAnnee)
-                && this.chJour > 0)
+        if (this.chMois > 0 && this.chMois <= 12 && this.chJour <= dernierJourDuMois(this.chMois, this.chAnnee) && this.chJour > 0)
             return true;
         return false;
     }// estValide
@@ -130,28 +140,9 @@ public class Date implements Comparable<Date>, Serializable {
             return new Date(31, 12, chAnnee - 1);
     }
 
-    public int getChAnnee() {
-        return chAnnee;
-    }
-
-    public int getChMois() {
-        return chMois;
-    }
-
     public static String getChMoisString(int chMois) {
-        String mois[] = { "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre",
-                "novembre", "octobre", "décembre" };
+        String mois[] = { "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "novembre", "octobre", "décembre" };
         return mois[chMois - 1];
-    }
-
-    public int getChJour() {
-        return chJour;
-    }
-
-    // IHM - TP5 - Question 1
-    public int getJourSemaine() {
-        GregorianCalendar cal = new GregorianCalendar(chAnnee, chMois - 1, chJour);
-        return cal.get(Calendar.DAY_OF_WEEK);
     }
 
     public Date datePremierJourSemaine() {
@@ -166,6 +157,32 @@ public class Date implements Comparable<Date>, Serializable {
         return new Date().compareTo(this) == 0;
     }
 
+    //////////////////////
+    //                  //
+    //    ACCESSEURS    //
+    //        ET        //
+    //    MODIFIEURS    //
+    //                  //
+    //////////////////////
+
+    public int getChAnnee() {
+        return chAnnee;
+    }
+
+    public int getChMois() {
+        return chMois;
+    }
+
+    public int getChJour() {
+        return chJour;
+    }
+
+    // IHM - TP5 - Question 1
+    public int getJourSemaine() {
+        GregorianCalendar cal = new GregorianCalendar(chAnnee, chMois - 1, chJour);
+        return cal.get(Calendar.DAY_OF_WEEK);
+    }
+
     public Date getChDate() {
         return this;
     }
@@ -174,5 +191,4 @@ public class Date implements Comparable<Date>, Serializable {
         GregorianCalendar calendar = new GregorianCalendar(chAnnee, chMois - 1, chJour);
         return calendar.get(Calendar.WEEK_OF_YEAR);// numero de la semaine dans l'annee
     }
-
 }// Date
