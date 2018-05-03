@@ -37,9 +37,10 @@ TP de conception objet, d'interface Homme/Machine et de programmation orientée 
   
   - TP6 (fini)
     MVC
-    
-  - TP Matrice
-  
+
+  - TP7 (fini)
+    JTable
+
   - TP10
     JavaFX
   
@@ -49,4 +50,5 @@ TP de conception objet, d'interface Homme/Machine et de programmation orientée 
   - TP Agenda (fini)
   - TP Exception (fini)
   - TP Collection (fini)
-  - TP Fichiers
+  - TP Fichiers (fini)
+  - TP Matrice
