@@ -37,6 +37,8 @@ TP de conception objet, d'interface Homme/Machine et de programmation orientée 
   
   - TP6 (fini)
     MVC
+    
+  - TP Matrice
   
   - TP10
     JavaFX
