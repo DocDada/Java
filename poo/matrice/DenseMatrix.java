@@ -80,15 +80,13 @@ public class DenseMatrix {
     public DenseMatrix mult(DenseMatrix B) throws ExceptionMatrix {
         if (nCol != B.getRowDimension())
             throw new ExceptionMatrix("Invalid dimensions");
-        DenseMatrix matrice = this;
+        DenseMatrix matrice = new DenseMatrix(this.nRow, this.nCol);
         for (int lig = 0; lig < nRow; lig++)
             for (int col2 = 0; col2 < B.getColDimension(); col2++) {
                 double aij = 0;
-                for (int col = 0; col < nCol; col++) {
-                    aij += matrice.vals[lig][col] * B.get(col, col2);
-                    if (col2 == B.getColDimension() - 1)
-                        matrice.vals[lig][col] = aij;
-                }
+                for (int col = 0; col < nCol; col++)
+                    aij += this.get(lig, col) * B.get(col, col2);
+                matrice.vals[lig][col2] = aij;
             }
         return matrice;
     }
