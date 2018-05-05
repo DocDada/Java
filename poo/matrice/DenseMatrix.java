@@ -95,7 +95,7 @@ public class DenseMatrix {
         DenseMatrix matrice = new DenseMatrix(this.nCol, this.nRow);
         for (int lig = 0; lig < nRow; lig++)
             for (int col = 0; col < nCol; col++)
-                matrice.vals[col][lig] = this.vals[col][lig];
+                matrice.vals[col][lig] = this.vals[lig][col];
         return matrice;
     }
 
