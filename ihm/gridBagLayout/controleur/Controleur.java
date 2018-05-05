@@ -65,8 +65,7 @@ public class Controleur implements ActionListener {
         else if (e.getSource().getClass().getSimpleName().equals("BoutonDate")) {
             Date date = ((BoutonDate) e.getSource()).getDate();
             panelForm.setDate(date);
-            if (date.getSemaine() != panelAffi.getDate().getSemaine())
-                panelAffi.setDate(new ModeleTable(date, agenda));
+            panelAffi.setDate(new ModeleTable(date, agenda));
         }
     }// actionPerformed()
 }// Controleur
