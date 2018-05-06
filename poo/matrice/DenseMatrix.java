@@ -165,14 +165,19 @@ public class DenseMatrix {
         if (iStart > iEnd || jStart > jEnd || jStart < 0 || iStart < 0 || iEnd > nRow || jEnd > nCol)
             throw new ExceptionMatrix("Wrong coordinates");
         DenseMatrix matrice = new DenseMatrix(iEnd - iStart + 1, jEnd - jStart + 1);
-        for (int lig = 0; iStart <= iEnd; iStart++, lig++)
-            for (int col = 0, jStart2 = jStart; jStart2 <= jEnd; jStart2++, col++)
-                matrice.vals[lig][col] = this.vals[iStart][jStart2];
+        for (; iStart <= iEnd; iStart++)
+            for (int jStart2 = jStart; jStart2 <= jEnd; jStart2++)
+                matrice.vals[iStart][jStart2] = this.vals[iStart][jStart2];
         return matrice;
     }// get()
 
-    public void set(DenseMatrix B, int iStart, int iEnd, int jStart, int jEnd) {
-
-    }
+    public void set(DenseMatrix B, int iStart, int iEnd, int jStart, int jEnd) throws ExceptionMatrix {
+        // i : row ; j : col
+        if (iStart > iEnd || jStart > jEnd || jStart < 0 || iStart < 0 || iEnd > nRow || jEnd > nCol)
+            throw new ExceptionMatrix("Wrong coordinates");
+        for (; iStart <= iEnd; iStart++)
+            for (int jStart2 = jStart; jStart2 <= jEnd; jStart2++)
+                this.vals[iStart][jStart2] = B.vals[iStart][jStart2];
+    }// set()
 
 }// DenseMatrix
