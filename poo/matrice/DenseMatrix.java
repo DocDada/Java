@@ -42,6 +42,10 @@ public class DenseMatrix {
         return B.getColDimension() == this.nCol && B.getRowDimension() == this.nRow;
     }
 
+    public boolean matriceCarre() {
+        return this.nRow == this.nCol;
+    }
+
     public void write() {
         DecimalFormat formatEnDecimales = new DecimalFormat("0.00");
         for (int lig = 0; lig < nRow; lig++)
@@ -99,6 +103,38 @@ public class DenseMatrix {
         return matrice;
     }
 
+    public DenseMatrix copy() {
+        // copie la matrice courante dans une nouvelle matrice de même type
+        DenseMatrix copie = new DenseMatrix(this.nRow, this.nCol);
+        for (int lig = 0; lig < nRow; lig++)
+            for (int col = 0; col < nCol; col++)
+                copie.vals[lig][col] = this.vals[lig][col];
+        return copie;
+    }
+
+    public void zeros() {
+        // met à zéros tous les coefficients de la matrice
+        for (int lig = 0; lig < nRow; lig++)
+            for (int col = 0; col < nCol; col++)
+                this.vals[lig][col] = 0;
+    }
+
+    public void identity() throws ExceptionMatrix {
+        if (this.matriceCarre())
+            throw new ExceptionMatrix("Identity must be a square matrix");
+        // affecte l'identité à la matrice courante
+        this.zeros();
+        for (int ligCol = 0; ligCol < nRow; ligCol++)
+            this.vals[ligCol][ligCol] = 1;
+    }
+
+    public void random() {
+        // affecte des valeurs générées aléatoirement
+        for (int lig = 0; lig < nRow; lig++)
+            for (int col = 0; col < nCol; col++)
+                this.vals[lig][col] = Math.random();
+    }
+
     //////////////////////
     //                  //
     //    ACCESSEURS    //
@@ -122,4 +158,19 @@ public class DenseMatrix {
     public void set(int i, int j, double aij) {
         vals[i][j] = aij;
     }
+
+    public DenseMatrix get(int iStart, int iEnd, int jStart, int jEnd) throws ExceptionMatrix {
+        if (iStart > iEnd || jStart > jEnd || jStart < 0 || iStart < 0 || iEnd > nRow || jEnd > nCol)
+            throw new ExceptionMatrix("Wrong coordinates");
+        DenseMatrix matrice = new DenseMatrix(jEnd - jStart + 1, iEnd - iStart + 1);
+        for (int lig = 0; iStart < iEnd; iStart++, lig++)
+            for (int col = 0, jStart2 = jStart; jStart2 < jEnd; jStart2++, col++)
+                matrice.vals[lig][col] = this.vals[iStart][jStart2];
+        return matrice;
+    }
+
+    public void set(DenseMatrix B, int iStart, int iEnd, int jStart, int jEnd) {
+
+    }
+
 }// DenseMatrix
