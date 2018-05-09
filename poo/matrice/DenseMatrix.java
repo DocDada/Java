@@ -50,13 +50,13 @@ public class DenseMatrix {
         DecimalFormat formatEnDecimales = new DecimalFormat("0.00");
         for (int lig = 0; lig < nRow; lig++)
             for (int col = 0; col < nCol; col++)
-                System.out.print((col == 0 ? "\n[" : "") + formatEnDecimales.format(get(lig, col)) + (col == nCol - 1 ? "]" : "|"));
+                System.out.print((col == 0 ? "\n[" : "") + formatEnDecimales.format(get(lig, col)) + (col == nCol - 1 ? "]" : ", "));
     }// write()
 
     public DenseMatrix sum(DenseMatrix B) throws ExceptionMatrix {
         if (!this.memeDimension(B))
             throw new ExceptionMatrix("Invalid dimension");
-        DenseMatrix matrice = this;
+        DenseMatrix matrice = this.copy();
         for (int lig = 0; lig < nRow; lig++)
             for (int col = 0; col < nCol; col++)
                 matrice.vals[lig][col] += B.get(lig, col);
@@ -66,7 +66,7 @@ public class DenseMatrix {
     public DenseMatrix minus(DenseMatrix B) throws ExceptionMatrix {
         if (!this.memeDimension(B))
             throw new ExceptionMatrix("Invalid dimension");
-        DenseMatrix matrice = this;
+        DenseMatrix matrice = this.copy();
         for (int lig = 0; lig < nRow; lig++)
             for (int col = 0; col < nCol; col++)
                 matrice.vals[lig][col] -= B.get(lig, col);
@@ -74,7 +74,7 @@ public class DenseMatrix {
     }// minus()
 
     public DenseMatrix mult(double s) {
-        DenseMatrix matrice = this;
+        DenseMatrix matrice = this.copy();
         for (int lig = 0; lig < nRow; lig++)
             for (int col = 0; col < nCol; col++)
                 matrice.vals[lig][col] *= s;
@@ -84,13 +84,14 @@ public class DenseMatrix {
     public DenseMatrix mult(DenseMatrix B) throws ExceptionMatrix {
         if (nCol != B.getRowDimension())
             throw new ExceptionMatrix("Invalid dimensions");
-        DenseMatrix matrice = new DenseMatrix(this.nRow, this.nCol);
+        DenseMatrix matrice = new DenseMatrix(this.nRow, B.nCol);
+        double aij = 0;
         for (int lig = 0; lig < nRow; lig++)
             for (int col2 = 0; col2 < B.getColDimension(); col2++) {
-                double aij = 0;
                 for (int col = 0; col < nCol; col++)
                     aij += this.get(lig, col) * B.get(col, col2);
                 matrice.vals[lig][col2] = aij;
+                aij = 0;
             }
         return matrice;
     }// mult()
@@ -162,12 +163,19 @@ public class DenseMatrix {
 
     public DenseMatrix get(int iStart, int iEnd, int jStart, int jEnd) throws ExceptionMatrix {
         // i : row ; j : col
-        if (iStart > iEnd || jStart > jEnd || jStart < 0 || iStart < 0 || iEnd > nRow || jEnd > nCol)
+        if (iStart > iEnd || jStart > jEnd || jStart < 0 || iStart < 0 || iEnd >= nRow || jEnd >= nCol)
             throw new ExceptionMatrix("Wrong coordinates");
         DenseMatrix matrice = new DenseMatrix(iEnd - iStart + 1, jEnd - jStart + 1);
-        for (; iStart <= iEnd; iStart++)
-            for (int jStart2 = jStart; jStart2 <= jEnd; jStart2++)
-                matrice.vals[iStart][jStart2] = this.vals[iStart][jStart2];
+        
+        for (int i=0; iStart <= iEnd; iStart++, i++)
+            for (int jStart2 = jStart, j=0; jStart2 <= jEnd; jStart2++, j++)
+                matrice.vals[i][j] = this.vals[jStart2][iStart];
+        
+        /*
+        for(int i=0;i<matrice.nRow;i++)
+            for(int j=0;j<matrice.nCol;j++)
+                matrice.set(i, j, this.get(j+jStart, i+iStart));
+                */
         return matrice;
     }// get()
 
