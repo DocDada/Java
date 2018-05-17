@@ -40,6 +40,9 @@ TP de conception objet, d'interface Homme/Machine et de programmation orientée 
 
   - TP7 (fini)
     JTable
+  
+  - TP8
+    JMenu
 
   - TP10
     JavaFX
@@ -51,4 +54,5 @@ TP de conception objet, d'interface Homme/Machine et de programmation orientée 
   - TP Exception (fini)
   - TP Collection (fini)
   - TP Fichiers (fini)
-  - TP Matrice
+  - TP Matrice (fini)
+  - TP Héritage
