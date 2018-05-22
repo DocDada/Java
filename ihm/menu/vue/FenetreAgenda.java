@@ -14,42 +14,40 @@ import java.io.Serializable;
 
 public class FenetreAgenda extends JFrame implements Serializable, ActionListener {
     private static final long serialVersionUID = 1L;
-
+    PanelAgendaV2 contentPane;
     public FenetreAgenda(String parTitre) {
         super(parTitre);
-        PanelAgendaV2 contentPane = new PanelAgendaV2();
+        contentPane = new PanelAgendaV2();
         // Calendrier, Evenement, Semaine, Fermer
-        String[] items = {"Calendrier", "Evenement", "Semaine", "Fermer"};
+        final String[] items = {"Calendrier", "Evenement", "Semaine", "Fermer"};
         JMenuBar menuBar = new JMenuBar();
         this.setJMenuBar(menuBar);
         JMenu menu = new JMenu("IHM");
-        menu.setMnemonic('D');
+        menu.setMnemonic('M');
         for(String item:items) {
             JMenuItem itemMenu = new JMenuItem(item, item.charAt(0));
             itemMenu.setAccelerator(KeyStroke.getKeyStroke(item.charAt(0), java.awt.Event.CTRL_MASK));
-            itemMenu.addActionListener((ActionListener) contentPane);
+            itemMenu.addActionListener(contentPane);
             itemMenu.setActionCommand(item);
             menu.add(itemMenu);
         }
         menuBar.add(menu);
 
         JScrollPane scroll = new JScrollPane(contentPane);
-        setContentPane(contentPane);
+        setContentPane(scroll);
         contentPane.setBackground(new Color(33, 63, 59));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setBackground(new Color(62, 58, 59));
-        setSize(1500, 500);
+        setSize(900, 490);
         setVisible(true);
         contentPane.getPanelF().getTextTitre().requestFocus();
     }
 
     public static void main(String[] args) {
-        new FenetreAgenda("IHM - TP4 - TP5 - TP6");
+        new FenetreAgenda("IHM - TP4 - TP5 - TP6 - TP7 - TP8");
     }// main()
 
-    @Override
     public void actionPerformed(ActionEvent e) {
-
     }
 
 }// FenetreAgenda

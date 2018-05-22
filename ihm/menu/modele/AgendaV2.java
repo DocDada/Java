@@ -43,7 +43,7 @@ public class AgendaV2 implements Serializable {
                 // si il y a un evenement avec x pour semaine
                 string += "Semaine " + x + " :\n";// alors on affiche les evenements
                 for (Evenement evt : mapEvts.get(x))
-                    string += ">>> " + evt.getChDate().toString() + "\n\t" + evt.getChTitre() + " à " + evt.getChLieu() + "\n";
+                    string += ">>> " + evt.getChDate().toString() + "\n\t" + evt+ "\n";
             }
         return string;
     }// toString()

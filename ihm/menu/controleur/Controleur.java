@@ -47,10 +47,8 @@ public class Controleur implements ActionListener {
     //                  //
     //////////////////////
 
-    @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("+")) {
-
             Evenement evt = panelForm.getEvenement();
             agenda.ajout(evt);
             // mise à jour de la JTable d'événements
@@ -67,11 +65,5 @@ public class Controleur implements ActionListener {
             panelForm.setDate(date);
             panelAffi.setDate(new ModeleTable(date, agenda));
         }
-        
-        else if (e.getActionCommand().equals("F")) {
-            System.exit(1);
-        }
-        
-        
     }// actionPerformed()
 }// Controleur

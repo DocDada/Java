@@ -4,6 +4,8 @@ import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import controleur.Controleur;
 import modele.AgendaV2;
@@ -36,12 +38,27 @@ public class PanelAgendaV2 extends JPanel implements ActionListener {
         System.out.println(aged.toString());
         panelA = new PanelAffichage(aged);// avant le controleur ! sinon null
         ctrl = new Controleur(aged, panelF, panelC, panelA);
-        panels = new CardLayout(5, 5);
-        this.setLayout(panels);
-        this.add(panelC, "panelC");// calendrier a gauche
-        this.add(panelF, "panelF");// formulaire au milieu
-        this.add(panelA, "panelA");// table d'événements à droite
+        setPanels(new CardLayout(5, 5));
+        this.setLayout(getPanels());
+        this.add(panelC, "Calendrier");// calendrier a gauche
+        this.add(panelF, "Evenement");// formulaire au milieu
+        this.add(panelA, "Semaine");// table d'événements à droite
     }// PanelAgenda()
+
+    //////////////////////
+    //                  //
+    //     METHODES     //
+    //                  //
+    //////////////////////
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("Fermer")) {
+            int choix = JOptionPane.showConfirmDialog(this, "Voulez-vous fermer l'application ?", "Confirmation", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (choix == JOptionPane.OK_OPTION)
+                System.exit(1);
+        }
+        getPanels().show(this, e.getActionCommand());
+    }
 
     //////////////////////
     //                  //
@@ -67,10 +84,11 @@ public class PanelAgendaV2 extends JPanel implements ActionListener {
         this.ctrl = ctrl;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("F"))
-            System.exit(1);
-        panels.show(this, e.getActionCommand());
+    public CardLayout getPanels() {
+        return panels;
+    }
+
+    public void setPanels(CardLayout panels) {
+        this.panels = panels;
     }
 }

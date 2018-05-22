@@ -10,6 +10,7 @@ public class Evenement implements Comparable<Evenement>, Serializable {
     private String chLieu;
     private Heure heureDebut;
     private Heure heureFin;
+    private String description;
     private static int chNbParametre = 0;
 
     ///////////////////////
@@ -25,7 +26,7 @@ public class Evenement implements Comparable<Evenement>, Serializable {
         chNbParametre++;
     }
 
-    public Evenement(Date parDate, String parTitre, String parLieu, int parHD, int parHF, int parMD, int parMF) {
+    public Evenement(Date parDate, String parTitre, String parLieu, int parHD, int parHF, int parMD, int parMF, String desc) {
         heureDebut = new Heure();
         heureFin = new Heure();
         chDate = parDate;
@@ -35,6 +36,7 @@ public class Evenement implements Comparable<Evenement>, Serializable {
         heureDebut.setMinutes(parMD);
         heureFin.setHeures(parHF);
         heureFin.setMinutes(parMF);
+        setDescription(desc);
         chNbParametre++;
     }
 
@@ -45,7 +47,7 @@ public class Evenement implements Comparable<Evenement>, Serializable {
     //////////////////////
 
     public String toString() {
-        return chTitre + ":" + chDate + ":" + chLieu;
+        return chTitre + ":" + chDate + ":" + chLieu+"\nde "+heureDebut+" à "+heureFin;
     }
 
     // Question 6
@@ -129,5 +131,13 @@ public class Evenement implements Comparable<Evenement>, Serializable {
 
     public void setHeureFin(Heure heureFin) {
         this.heureFin = heureFin;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

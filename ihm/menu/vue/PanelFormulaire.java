@@ -18,10 +18,11 @@ import controleur.Controleur;
 import modele.Date;
 import modele.AgendaV2;
 import modele.Evenement;
+import modele.Heure;
 
 public class PanelFormulaire extends JPanel {
 
-    // CONSTANTE
+    // CONSTANTES
     static final long serialVersionUID = 1L;
     static final String INTITULE_BOUTON = "+";
     final static Font FONT_DATE = new Font("Verdana", Font.BOLD, 14);
@@ -101,13 +102,8 @@ public class PanelFormulaire extends JPanel {
         contraintes.gridwidth = 1;
         this.add(labelDebut, contraintes);
         contraintes.gridx++;
-        String heures[] = new String[24];
-        for (int i = 0; i < 24; i++) {
-            if (i < 10)
-                heures[i] = "0" + i;
-            else
-                heures[i] = Integer.toString(i);
-        }
+        String heures[] = Heure.heureString(true);
+
         boxHeures = new JComboBox<String>(heures);
         boxHeures.setSelectedItem(String.valueOf(calendrier.get(Calendar.HOUR_OF_DAY)));
         // l'heure actuelle sera affichée/sélectionnée
@@ -115,14 +111,7 @@ public class PanelFormulaire extends JPanel {
         contraintes.gridx++;
         this.add(new JLabel(":"), contraintes);
         contraintes.gridx++;
-        String[] minutes = new String[60];
-        // saisie de sminutes
-        for (int i = 0; i < 60; i++) {
-            if (i < 10)
-                minutes[i] = "0" + i;
-            else
-                minutes[i] = Integer.toString(i);
-        }
+        String minutes[] = Heure.heureString(false);
 
         boxMinutes = new JComboBox<String>(minutes);
         boxMinutes.setSelectedItem(String.valueOf(calendrier.get(Calendar.MINUTE)));
@@ -199,6 +188,12 @@ public class PanelFormulaire extends JPanel {
         ajoutDate.addActionListener(parC);
     }// enregistreEcouteur()
 
+    public int toInteger(String parH) {
+        if (parH.charAt(0) == '0')
+            return parH.charAt(1);
+        return Integer.parseInt(parH);
+    }
+
     //////////////////////
     //                  //
     //    ACCESSEURS    //
@@ -217,15 +212,11 @@ public class PanelFormulaire extends JPanel {
     }// getTextTitre()
 
     public Evenement getEvenement() {
-        /*
-         * int h1 = Integer.parseInt((String) boxHeures.getSelectedItem()); int m1 =
-         * Integer.parseInt((String) boxMinutes.getSelectedItem()); int h2 =
-         * Integer.parseInt((String) boxHeuresF.getSelectedItem()); int m2 =
-         * Integer.parseInt((String) boxMinutesF.getSelectedItem()); return new
-         * Evenement(getDateFormulaire(), textTitre.getText(), textLieu.getText(), h1,
-         * m1, h2, m2) ;
-         */
-        return new Evenement(getDateFormulaire(), textTitre.getText(), textLieu.getText());
+        int hDebut = toInteger((String) boxHeures.getSelectedItem());
+        int mDebut = toInteger((String) boxMinutes.getSelectedItem());
+        int hFin = toInteger((String) boxHeuresF.getSelectedItem());
+        int mFin = toInteger((String) boxMinutesF.getSelectedItem());
+        return new Evenement(getDateFormulaire(), textTitre.getText(), textLieu.getText(), hDebut, hFin, mDebut, mFin, textDescription.getText());
     }// getEvenement()
 
     public Date getDateFormulaire() {

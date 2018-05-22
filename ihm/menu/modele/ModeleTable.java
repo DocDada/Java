@@ -42,7 +42,6 @@ public class ModeleTable extends DefaultTableModel {
     //                  //
     //////////////////////
 
-    // avant : private
     public void ajoutEvenement(Evenement evt) {
         // dimanche = 1 => colonne 6
         // lundi = 2 => colonne 0 (retranche 2)
@@ -56,7 +55,7 @@ public class ModeleTable extends DefaultTableModel {
         for (; indiceLig < ModeleTable.nbrEvts && getValueAt(indiceLig, indiceCol) != null; indiceLig++);
         if (ModeleTable.nbrEvts <= indiceLig)// si la JTable ne peut afficher cette événement
             return;
-        setValueAt(evt.getChTitre(), indiceLig, indiceCol);
+        setValueAt(evt.getDescription(), indiceLig, indiceCol);
     }// ajoutEvenement()
 
     public void entete(Date parDate) {
@@ -70,7 +69,7 @@ public class ModeleTable extends DefaultTableModel {
     }
 
     public boolean isCellEditable(int indiceLig, int indiceCol) {
-        return false;
+        return false;// ?
     }// isCellEditable()
 
     //////////////////////
