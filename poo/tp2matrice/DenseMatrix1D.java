@@ -1,5 +1,10 @@
 package tp2matrice;
 
+/**
+ * 
+ * @author prepain
+ *
+ */
 public class DenseMatrix1D extends Matrix {
 
     double vals[];
@@ -26,7 +31,7 @@ public class DenseMatrix1D extends Matrix {
     //                  //
     //////////////////////
 
-    public DenseMatrix1D mult(Matrix B) throws ExceptionMatrix {
+    public Matrix mult(Matrix B) throws ExceptionMatrix {
         if (nCol != B.getRowDimension())
             throw new ExceptionMatrix("Invalid dimensions");
         DenseMatrix1D matrice = new DenseMatrix1D(this.nRow, B.nCol);
@@ -41,7 +46,7 @@ public class DenseMatrix1D extends Matrix {
         return matrice;
     }
 
-    public DenseMatrix1D transpose() {
+    public Matrix transpose() {
         // retourne la transposée d'une matrice
         DenseMatrix1D matrice = new DenseMatrix1D(this.nCol, this.nRow);
         for (int lig = 0; lig < nRow; lig++)
@@ -50,7 +55,7 @@ public class DenseMatrix1D extends Matrix {
         return matrice;
     }
 
-    public DenseMatrix1D copy() {
+    public Matrix copy() {
         // copie la matrice courante dans une nouvelle matrice de même type
         DenseMatrix1D copie = new DenseMatrix1D(this.nRow, this.nCol);
         for (int lig = 0; lig < nRow; lig++)
@@ -71,10 +76,20 @@ public class DenseMatrix1D extends Matrix {
     //                  //
     //////////////////////
 
+    /** retourne un coefficient de la matrice aux coordonnées spécifiées
+     * @param i l'indice de la ligne
+     * @param j l'indice de la colonne
+     * @return la valeur à l'indice (i, j)
+     */
     public double get(int i, int j) {
         return this.vals[index(i, j)];
     }
 
+    /** modifieur qui modifie un coefficient de la matrice
+     * @param i l'indice de la ligne
+     * @param j l'indice de la colonne
+     * @param aij la valeur on souhaite placer à l'indice (i, j)
+     */
     public void set(int i, int j, double aij) {
         this.vals[index(i, j)] = aij;
     }
