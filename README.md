@@ -1,8 +1,6 @@
 # Java
 TP de conception objet, d'interface Homme/Machine et de programmation orientée objet
 
-## Conception objet
-  - TP Git
 
 ## Interface Homme/Machine
   - TP1 (fini)
@@ -41,12 +39,13 @@ TP de conception objet, d'interface Homme/Machine et de programmation orientée 
   - TP7 (fini)
     JTable
   
-  - TP8
-    JMenu
+  - TP8 (fini)
+    JMenu, JMenuBar, JMenuItem
 
   - TP10
     JavaFX
-  
+
+
 ## Programmation orientée objet
   - TP Date (fini)
   - TP Evenement (fini)
@@ -55,4 +54,4 @@ TP de conception objet, d'interface Homme/Machine et de programmation orientée 
   - TP Collection (fini)
   - TP Fichiers (fini)
   - TP Matrice (fini)
-  - TP Héritage
+  - TP Héritage (fini)
