@@ -96,4 +96,14 @@ public class DenseMatrix2D extends Matrix {
         return matrice;
     }// get()
 
+    public double get(int ij) {
+        int coord[] = indexInv(ij);
+        return this.vals[coord[0]][coord[1]];
+    }
+
+    public void set(int ij, double aij) {
+        int coord[] = indexInv(ij);
+        this.vals[coord[0]][coord[1]] = aij;
+    }
+
 }// DenseMatrix

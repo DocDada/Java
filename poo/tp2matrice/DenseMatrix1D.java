@@ -46,8 +46,22 @@ public class DenseMatrix1D extends Matrix {
         return matrice;
     }
 
+    /**
+     * Effectue la somme de la matrice courante et de la matrice passée en paramètre. Méthode plus rapide que sum.
+     * @param B Matrice qui sera ajouté à la matrice courante
+     * @return La somme de la matrice B et de la matrice courante
+     * @throws ExceptionMatrix les deux matrices doivent être de mêmes dimensions
+     */
+    public Matrix sum2(Matrix B) throws ExceptionMatrix {
+        if (!this.memeDimension(B))
+            throw new ExceptionMatrix("Invalid dimension");
+        DenseMatrix1D matrice = (DenseMatrix1D) this.copy();
+        for (int ij = 0; ij < this.vals.length; ij++)
+                matrice.vals[ij] = this.vals[ij] + B.get(ij/nCol, ij%nCol);
+        return matrice;
+    }// sum()
+
     public Matrix transpose() {
-        // retourne la transposée d'une matrice
         DenseMatrix1D matrice = new DenseMatrix1D(this.nCol, this.nRow);
         for (int lig = 0; lig < nRow; lig++)
             for (int col = 0; col < nCol; col++)
@@ -56,7 +70,6 @@ public class DenseMatrix1D extends Matrix {
     }
 
     public Matrix copy() {
-        // copie la matrice courante dans une nouvelle matrice de même type
         DenseMatrix1D copie = new DenseMatrix1D(this.nRow, this.nCol);
         for (int lig = 0; lig < nRow; lig++)
             for (int col = 0; col < nCol; col++)
@@ -64,9 +77,6 @@ public class DenseMatrix1D extends Matrix {
         return copie;
     }
 
-    public int index(int i, int j) {
-        return i * this.nCol + j;
-    }
 
     //////////////////////
     //                  //
@@ -76,22 +86,20 @@ public class DenseMatrix1D extends Matrix {
     //                  //
     //////////////////////
 
-    /** retourne un coefficient de la matrice aux coordonnées spécifiées
-     * @param i l'indice de la ligne
-     * @param j l'indice de la colonne
-     * @return la valeur à l'indice (i, j)
-     */
     public double get(int i, int j) {
         return this.vals[index(i, j)];
     }
 
-    /** modifieur qui modifie un coefficient de la matrice
-     * @param i l'indice de la ligne
-     * @param j l'indice de la colonne
-     * @param aij la valeur on souhaite placer à l'indice (i, j)
-     */
     public void set(int i, int j, double aij) {
         this.vals[index(i, j)] = aij;
+    }
+    
+    public double get(int ij) {
+        return this.vals[ij];
+    }
+    
+    public void set(int ij, double aij) {
+        this.vals[ij] = aij;
     }
 
     public DenseMatrix1D get(int iStart, int iEnd, int jStart, int jEnd) throws ExceptionMatrix {

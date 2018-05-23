@@ -105,7 +105,6 @@ public abstract class Matrix {
     }// mult()
 
     /**
-     * 
      * @param B Matrice qui sera multiplié à la matrice courante
      * @return le produit de la matrice courante et de la matrice B
      * @throws ExceptionMatrix La matrice courante doit avoir autant de colonnes que B a de lignes
@@ -160,6 +159,19 @@ public abstract class Matrix {
         return this.nRow == this.nCol;
     }// matriceCarre()
 
+    /**
+     * @param i Indice de la ligne
+     * @param j Indice de la colonne
+     * @return L'indice pour un tableau à une dimension
+     */
+    public int index(int i, int j) {
+        return i * this.nCol + j;
+    }
+    
+    public int[] indexInv(int ij) {
+        return new int[] {ij/nCol, ij%nCol};
+    }
+
     //////////////////////
     //                  //
     //    ACCESSEURS    //
@@ -208,7 +220,6 @@ public abstract class Matrix {
      * @exception ExceptionMatrix xEnd ne doit pas être inférieur à xStart; xStart ne doit pas être inférieur strictement à zéro; xEnd et jStart ne doivent pas être supérieurs aux dimensions de la matrice 
      */
     public void set(Matrix B, int iStart, int iEnd, int jStart, int jEnd) throws ExceptionMatrix {
-        // i : row ; j : col
         if (iStart > iEnd || jStart > jEnd || jStart < 0 || iStart < 0 || iEnd > nRow || jEnd > nCol)
             throw new ExceptionMatrix("Wrong coordinates");
         for (; iStart <= iEnd; iStart++)
@@ -216,10 +227,24 @@ public abstract class Matrix {
                 this.set(iStart, jStart2, B.get(iStart, jStart2));
     }// set()
 
+    /**
+     * @param i indice de la ligne
+     * @param j indice de la colonne
+     * @return La valeur se trouvant à l'indice (i, j)
+     */
     public abstract double get(int i, int j);
 
+    public abstract double get(int ij);
+    
+    /**
+     * @param i indice de la ligne
+     * @param j indice de la colonne
+     * @param aij La valeur à placer à l'indice (i, j)
+     */
     public abstract void set(int i, int j, double aij);
 
+    public abstract void set(int ij, double aij);
+    
     /** retourne une sous matrice telle que : soient A, B (de dimensions nRow et nCol; nRow et nCol étant réels), B = A(iStart : iEnd, jStart : jEnd)
      * @param iStart l'indice de la ligne (début du tronçon)
      * @param iEnd l'indice de la ligne (fin du tronçon)
