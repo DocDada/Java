@@ -15,15 +15,14 @@ public class CelluleRenderer extends JLabel implements TableCellRenderer {
         super();
         setOpaque(true);
         setHorizontalAlignment(JLabel.CENTER);
-        this.setForeground(new java.awt.Color(180, 100, 40));
-        
+        this.setFont(new Font("Calibri", Font.ITALIC, 30));
+        //this.setForeground(new java.awt.Color(10, 10, 40));
     }
 
-    @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         setToolTipText((String) value);
         setFont(new Font("Calibri", Font.BOLD, 17));
-        
+        this.setForeground(new java.awt.Color(100, 10, 40));
         return this;
     }
 

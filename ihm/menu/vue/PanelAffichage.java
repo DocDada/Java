@@ -51,7 +51,7 @@ public class PanelAffichage extends JPanel {
         });
         
         // association du renderer à la table
-        tableSemaine.setDefaultRenderer(String.class, new CelluleRenderer());
+        tableSemaine.setDefaultRenderer(modele.getColumnClass(0), new CelluleRenderer());
         
         // scrollpane nécessaire pour visualiser l'en-tête
         JScrollPane scrollPane = new JScrollPane(tableSemaine, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
