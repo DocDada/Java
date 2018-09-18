@@ -13,7 +13,7 @@ public abstract class InstrumentSpec {
         this.backWood = backWood;
         this.topWood = topWood;
     }
-    
+
     public boolean matches(InstrumentSpec g) {
         if (builder != g.builder && type != g.type && backWood != g.backWood && topWood != g.topWood)
             return false;
