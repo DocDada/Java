@@ -2,9 +2,9 @@ package tp3;
 
 public abstract class Instrument {
 
-    private String serialNumber;
-    private double price;
-    private InstrumentSpec instrSpec;
+    protected String serialNumber;
+    protected double price;
+    protected InstrumentSpec instrSpec;
 
     public Instrument(String serialNumber, double price, InstrumentSpec instrSpec) {
         this.serialNumber = serialNumber;
