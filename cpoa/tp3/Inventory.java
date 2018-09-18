@@ -12,10 +12,10 @@ public class Inventory {
     }
 
     public void display(Instrument g) {
-        List<Guitar> matchingGuitars = this.search(g);
+        List<Instrument> matchingGuitars = this.search(g.getInstrumentSpec());
         if (!matchingGuitars.isEmpty()) {
             System.out.println("Erin, you might like these guitars:");
-            for (Iterator<Guitar> i = matchingGuitars.iterator(); i.hasNext();) {
+            for (Iterator<Instrument> i = matchingGuitars.iterator(); i.hasNext();) {
                 Guitar guitar = (Guitar) i.next();
                 GuitarSpec gs = (GuitarSpec) guitar.getInstrumentSpec();
                 System.out.println("  We have a " + gs.getBuilder() + " " + gs.getModel() + " " + gs.getType() + " guitar:\n     " + gs.getBackWood() + " back and sides,\n     " + gs.getTopWood() + " top.\n  You can have it for only $" + guitar.getPrice() + "!\n  ----");
@@ -45,16 +45,16 @@ public class Inventory {
         return null;
     }
 
-    public List<Guitar> search(Instrument searchInstr) {
-        List<Guitar> matchingGuitars = new LinkedList<Guitar>();
+    public List<Instrument> search(InstrumentSpec searchInstr) {
+        List<Instrument> matchingInstruments = new LinkedList<Instrument>();
         for (Iterator<Instrument> i = instruments.iterator(); i.hasNext();) {
-            Guitar guitar = (Guitar) i.next();
+            Instrument instrument = i.next();
             // Ignore serial number since that's unique
             // Ignore price since that's unique
-            if (!searchInstr.getInstrumentSpec().matches(guitar.getInstrumentSpec()))
+            if (!searchInstr.matches(instrument.getInstrumentSpec()))
                 continue;
-            matchingGuitars.add(guitar);
+            matchingInstruments.add(instrument);
         }
-        return matchingGuitars;
+        return matchingInstruments;
     }
 }
