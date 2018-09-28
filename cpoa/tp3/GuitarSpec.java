@@ -9,9 +9,9 @@ public class GuitarSpec extends InstrumentSpec {
         this.numString = numString;
     }
 
-    public boolean matches(GuitarSpec g) {
+    public boolean matches(InstrumentSpec g) {
         if (super.matches(g)) {
-            if (this.numString == g.numString) {
+            if (this.numString == ((GuitarSpec)g).numString) {
                 return true;
             }
         }

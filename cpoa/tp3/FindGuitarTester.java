@@ -7,11 +7,11 @@ public class FindGuitarTester {
         Inventory inventory = new Inventory();
         initializeInventory(inventory);
 
-        Guitar whatErinLikes = new Guitar("", 0, new GuitarSpec(Builder.FENDER, "Stratocastor", 4, Type.ELECTRIC, Wood.ALDER, Wood.ALDER));
+        Guitar whatErinLikes = new Guitar("11277", 3999.95, new GuitarSpec(Builder.COLLINGS, "CJ", 3, Type.ACOUSTIC, Wood.INDIAN_ROSEWOOD, Wood.SITKA));
         inventory.display(whatErinLikes);
     }
 
-    private static void initializeInventory(Inventory inventory) {
+    public static void initializeInventory(Inventory inventory) {
         inventory.addInstrument("11277", 3999.95, new GuitarSpec(Builder.COLLINGS, "CJ", 3, Type.ACOUSTIC, Wood.INDIAN_ROSEWOOD, Wood.SITKA));
         inventory.addInstrument("V95693", 1499.95, new GuitarSpec(Builder.FENDER, "Stratocastor", 5, Type.ELECTRIC, Wood.ALDER, Wood.ALDER));
         inventory.addInstrument("V9512", 1549.95, new GuitarSpec(Builder.FENDER, "Stratocastor", 7, Type.ELECTRIC, Wood.ALDER, Wood.ALDER));

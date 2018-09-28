@@ -9,9 +9,9 @@ public class MandolinSpec extends InstrumentSpec {
         this.style = style;
     }
 
-    public boolean matches(MandolinSpec m) {
+    public boolean matches(InstrumentSpec m) {
         if (super.matches(m)) {
-            if (this.style == m.style) {
+            if (this.style == ((MandolinSpec)m).style) {
                 return true;
             }
         }

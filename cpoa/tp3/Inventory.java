@@ -35,16 +35,17 @@ public class Inventory {
         }
     }
 
-    public Guitar getGuitar(String serialNumber) {
+    public Instrument getInstrument(String serialNumber) {
         for (Iterator<Instrument> i = instruments.iterator(); i.hasNext();) {
-            Guitar guitar = (Guitar) i.next();
-            if (guitar.getSerialNumber().equals(serialNumber)) {
-                return guitar;
+            Guitar instr = (Guitar) i.next();
+            if (instr.getSerialNumber().equals(serialNumber)) {
+                return instr;
             }
         }
         return null;
     }
 
+    /*
     public List<Instrument> search(InstrumentSpec searchInstr) {
         List<Instrument> matchingInstruments = new LinkedList<Instrument>();
         for (Iterator<Instrument> i = instruments.iterator(); i.hasNext();) {
@@ -57,4 +58,17 @@ public class Inventory {
         }
         return matchingInstruments;
     }
+    */
+    
+    public List<Instrument> search(InstrumentSpec instrSpec) {
+    	List<Instrument> matchingList = new LinkedList<Instrument>();
+    	for (Iterator<Instrument> i = instruments.iterator();i.hasNext();) {
+    		Instrument instrument = (Instrument) i.next();
+    		if (instrument.getInstrumentSpec().matches(instrSpec))
+    			matchingList.add(instrument);
+    	}
+    	return matchingList;
+    }
+    
+    
 }
