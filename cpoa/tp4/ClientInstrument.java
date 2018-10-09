@@ -3,8 +3,17 @@ package tp4;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Le main pour faire des tests, initialiser un inventaire
+ * @author prepain
+ *
+ */
 public class ClientInstrument {
 
+	/**
+	 * Le main
+	 * @param args
+	 */
     public static void main(String[] args) {
         // Set up Rick's guitar inventory
         Inventory inventory = new Inventory();
@@ -22,7 +31,20 @@ public class ClientInstrument {
         inventory.display(whatErinLikes);
     }
 
+    /**
+     * Initialise un inventaire
+     * @param inventory un inventaire
+     */
     public static void initializeInventory(Inventory inventory) {
+    	HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("IntrumentType", InstrumentType.GUITAR);
+        map.put("Builder", Builder.COLLINGS);
+        map.put("Model", "CJ");
+        map.put("numString", 3);
+        map.put("Type", Type.ACOUSTIC);
+        map.put("TopWood", Wood.INDIAN_ROSEWOOD);
+        map.put("BackWood", Wood.SITKA);
+        inventory.addInstrument("V95693", 1499.95, new InstrumentSpec(map));
         /*inventory.addInstrument("11277", 3999.95, new InstrumentSpec(InstrumentType.GUITAR, Builder.COLLINGS, "CJ", 3, Type.ACOUSTIC, Wood.INDIAN_ROSEWOOD, Wood.SITKA));
         inventory.addInstrument("V95693", 1499.95, new GuitarSpec(Builder.FENDER, "Stratocastor", 5, Type.ELECTRIC, Wood.ALDER, Wood.ALDER));
         inventory.addInstrument("V9512", 1549.95, new GuitarSpec(Builder.FENDER, "Stratocastor", 7, Type.ELECTRIC, Wood.ALDER, Wood.ALDER));

@@ -1,9 +1,17 @@
 package tp4;
 
+/**
+ * Type de bois
+ * @author prepain
+ *
+ */
 public enum Wood {
 
     INDIAN_ROSEWOOD, BRAZILIAN_ROSEWOOD, MAHOGANY, MAPLE, COCOBOLO, CEDAR, ADIRONDACK, ALDER, SITKA;
 
+    /**
+     * Renvoie un string du type de bois
+     */
     public String toString() {
         switch (this) {
             case INDIAN_ROSEWOOD:

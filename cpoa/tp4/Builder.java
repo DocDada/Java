@@ -1,9 +1,17 @@
 package tp4;
 
+/**
+ * Désigne le constructeur de l'instrument
+ * @author prepain
+ *
+ */
 public enum Builder {
 
     FENDER, MARTIN, GIBSON, COLLINGS, OLSON, RYAN, PRS, ANY;
 
+    /**
+     * Renvoie un string du nom du constructeur
+     */
     public String toString() {
         switch (this) {
             case FENDER:
