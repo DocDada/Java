@@ -4,7 +4,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class InstrumentSpec {
-	private Map properties;
+	private Map<String, Object> properties;
+	
 
 	public boolean matches(InstrumentSpec otherSpec) {
 		for (Iterator<String> i = otherSpec.getProperties().keySet().iterator(); i

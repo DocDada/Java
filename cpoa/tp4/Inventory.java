@@ -11,21 +11,21 @@ public class Inventory {
         instruments = new LinkedList<Instrument>();
     }
 
-    /*public void display(Instrument g) {
+    public void display(Instrument g) {
         List<Instrument> matchingGuitars = this.search(g.getInstrumentSpec());
         if (!matchingGuitars.isEmpty()) {
             System.out.println("Erin, you might like these guitars:");
             for (Iterator<Instrument> i = matchingGuitars.iterator(); i.hasNext();) {
             	Instrument guitar = i.next();
             	InstrumentSpec gs = guitar.getInstrumentSpec();
-                System.out.println("  We have a " + gs.getBuilder() + " " + gs.getModel() + " " + gs.getType() + " guitar:\n     " + gs.getBackWood() + " back and sides,\n     " + gs.getTopWood() + " top.\n  You can have it for only $" + guitar.getPrice() + "!\n  ----");
+                System.out.println("  We have a " + gs.getProperties().get("Builder") + " " + gs.getProperties().get("Model") + " " + gs.getProperties().get("Type") + " guitar:\n     " + gs.getProperties().get("BackWood") + " back and sides,\n     " + gs.getProperties().get("TopWood") + " top.\n  You can have it for only $" + guitar.getPrice() + "!\n  ----");
             }
         }
         else {
             System.out.println("Sorry, Erin, we have nothing for you.");
         }
     }
-    */
+    
 
     public void addInstrument(String serialNumber, double price, InstrumentSpec instrSpec) {
         instruments.add(new Instrument(serialNumber, price, instrSpec));

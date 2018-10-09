@@ -29,7 +29,7 @@ public class Instrument {
 		this.serialNumber = serialNumber;
 	}
 
-	public void setGuitarSpec(InstrumentSpec instrumentSpec) {
+	public void setInstrumentSpec(InstrumentSpec instrumentSpec) {
 		this.instrumentSpec = instrumentSpec;
 	}
 
