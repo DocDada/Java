@@ -6,7 +6,9 @@ public class Test {
 		Voilier a = new Monocoque("A", new Alizes());
 		Voilier b = new Multicoque("B", new Orthodromie());
 		
+		a.appliqueSuivreRoute();
 		a.setSuivreRoute(new Orthodromie());
+		a.appliqueSuivreRoute();
 	}
 
 }
