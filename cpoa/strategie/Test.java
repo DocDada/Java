@@ -3,8 +3,10 @@ package strategie;
 public class Test {
 
 	public static void main(String[] args) {
-		Voilier a = Monocoque("A", new Alizes());
-		Voilier b = Monocoque("B", new Orthodromie());
+		Voilier a = new Monocoque("A", new Alizes());
+		Voilier b = new Multicoque("B", new Orthodromie());
+		
+		a.setSuivreRoute(new Orthodromie());
 	}
 
 }
