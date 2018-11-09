@@ -10,6 +10,10 @@ public abstract class Voilier {
 		this.suivreRoute = suivreRoute;
 	}
 	
+	public Voilier() {
+		
+	}
+	
 	public String toString() {
 		return nom;
 	}
