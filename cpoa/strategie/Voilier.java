@@ -9,11 +9,11 @@ public abstract class Voilier {
 		this.nom = nom;
 		this.suivreRoute = suivreRoute;
 	}
-	
+
 	public Voilier() {
-		
+
 	}
-	
+
 	public String toString() {
 		return nom;
 	}
@@ -23,6 +23,12 @@ public abstract class Voilier {
 	}
 
 	public void appliqueSuivreRoute() {
-		suivreRoute.suivreRoute();
+		if (suivreRoute != null)
+			suivreRoute.suivreRoute();
+		else
+			this.get().suivreRoute.suivreRoute();
+	}
+	public Voilier get(){
+		return this;
 	}
 }
