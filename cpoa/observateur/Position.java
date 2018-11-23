@@ -66,8 +66,7 @@ public class Position implements Comparable<Position> {
     public int compareTo(Position pos) {
         if (this.getDateEtHeure().compareTo(pos.getDateEtHeure()) < 0) {
             return -1;
-        }
-        else if (this.getDateEtHeure().compareTo(pos.getDateEtHeure()) > 0) {
+        } else if (this.getDateEtHeure().compareTo(pos.getDateEtHeure()) > 0) {
             return 1;
         }
         return 0;

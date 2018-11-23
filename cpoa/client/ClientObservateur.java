@@ -27,7 +27,7 @@ public class ClientObservateur {
             classements.ajoutClassement(setPosition);
             //System.out.println(setPosition);
             //System.out.println(abandons.count());
-            System.out.println(arrivees.count());
+            System.out.println(arrivees);
         }
         System.out.println(abandons);
     }

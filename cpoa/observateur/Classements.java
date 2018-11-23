@@ -8,7 +8,7 @@ public class Classements implements Observable {
 
     private List<Set<Position>> classements;
     private List<Observateur> listeObservateurs;
-    
+
     public Classements() {
         classements = new ArrayList<Set<Position>>();
         listeObservateurs = new ArrayList<Observateur>();
@@ -41,7 +41,7 @@ public class Classements implements Observable {
     public void setListeObservateurs(List<Observateur> listeObservateurs) {
         this.listeObservateurs = listeObservateurs;
     }
-    
+
     public Set<Position> getDernierClassement() {
         return this.classements.get(this.classements.size() - 1);
     }
