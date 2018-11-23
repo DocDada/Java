@@ -3,16 +3,32 @@ package client;
 import java.io.File;
 import java.util.Set;
 
+import observateur.Abandons;
+import observateur.Arrivees;
+import observateur.Classements;
+import observateur.Position;
 import outils.LectureFichierXML;
 
 public class ClientObservateur {
-	public static void main(String[] args) {
-		File fileXML = new File("data_2018"+File.separator+"leaderboard-12.xml");
-		Set setPosition = LectureFichierXML.lecture(fileXML);
-		
-		
-		
-		System.out.println(setPosition.size());
-		System.out.println(setPosition);
-	}
+    public static void main(String[] args) {
+
+        Set<Position> setPosition;
+        Classements classements = new Classements();
+        Abandons abandons = new Abandons();
+        Arrivees arrivees = new Arrivees();
+
+        classements.enregistreObservateur(abandons);
+        classements.enregistreObservateur(arrivees);
+
+        // reading of all xml files; display
+        File[] files = new File("data_2018").listFiles();
+        for (File aFile : files) {
+            setPosition = LectureFichierXML.lecture(aFile);
+            classements.ajoutClassement(setPosition);
+            //System.out.println(setPosition);
+            //System.out.println(abandons.count());
+            System.out.println(arrivees.count());
+        }
+        System.out.println(abandons);
+    }
 }
