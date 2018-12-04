@@ -29,6 +29,7 @@ public class ClientObservateur {
             //System.out.println(abandons.count());
             System.out.println(arrivees);
         }
-        System.out.println(abandons);
+        System.out.println(abandons.count());
+        System.out.println(arrivees.count());
     }
 }

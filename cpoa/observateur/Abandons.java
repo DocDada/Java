@@ -1,15 +1,14 @@
 package observateur;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Abandons implements Observateur {
 
-    private List<String> listeAbandons;
+    private HashSet<String> listeAbandons;
 
     public Abandons() {
-        listeAbandons = new ArrayList<String>();
+        listeAbandons = new HashSet<String>();
     }
 
     public String toString() {
@@ -21,10 +20,8 @@ public class Abandons implements Observateur {
         for (Position pos : ensemble) {
             // we check if the skipper has given up
             if (pos.isAbandon()) {
-                // we check if the list already contains the skipper
-                if (!listeAbandons.contains(pos.getNom())) {
-                    listeAbandons.add(pos.getNom());
-                }
+                // no use to check if the list already contains the skipper, it is a hashset
+                listeAbandons.add(pos.getNom());
             }
         }
     }
