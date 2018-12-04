@@ -1,6 +1,8 @@
 package client;
 
 import java.io.File;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import observateur.Abandons;
@@ -8,6 +10,7 @@ import observateur.Arrivees;
 import observateur.Classements;
 import observateur.Position;
 import outils.LectureFichierXML;
+import strategie.Voilier;
 
 public class ClientObservateur {
     public static void main(String[] args) {
@@ -23,7 +26,7 @@ public class ClientObservateur {
         // reading of all xml files; display
         File[] files = new File("data_2018").listFiles();
         for (File aFile : files) {
-            setPosition = LectureFichierXML.lecture(aFile);
+            setPosition = LectureFichierXML.lecturePositions(aFile);
             classements.ajoutClassement(setPosition);
             //System.out.println(setPosition);
             //System.out.println(abandons.count());
@@ -31,5 +34,15 @@ public class ClientObservateur {
         }
         System.out.println(abandons.count());
         System.out.println(arrivees.count());
+        
+        //
+        Voilier yoda;
+        File file = new File("voiliers_2018" + File.separator + "voiliers.xml");
+        List list = LectureFichierXML.lectureVoiliers(file);
+        Iterator i = list.iterator();
+        while (i.hasNext()) {
+            System.out.println(i.next());
+        }
+        
     }
 }
