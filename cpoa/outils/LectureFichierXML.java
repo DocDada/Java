@@ -19,6 +19,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import fabriques.ClasseRhum;
+import fabriques.FabriqueSimple;
 import observateur.Position;
 import strategie.Monocoque;
 import strategie.Multicoque;
@@ -45,11 +46,14 @@ public class LectureFichierXML {
 	        	 ClasseRhum classe = ClasseRhum.values()[numeroClasse];
 	     
 	        	 NodeList listeElementPosition = courant.getElementsByTagName("position");
+	        	 // We instantiate the class FabriqueSimple to build sailboats
+	        	 FabriqueSimple fabriqueSimple = new FabriqueSimple();
 	        	 for (int j=0 ; j < listeElementPosition.getLength() ; j++) {
 	        	     Element courantPosition =  (Element) listeElementPosition.item(j);
 	                 String nom  = courantPosition.getAttribute("nom");
 	                 if ( ! nom.isEmpty()) {
 	                     Voilier jesus = null;
+	                     /*
 	                     switch (classe) {
 	                         case ULTIME: case MULTI50: case RHUMMULTI:
 	                             jesus = new Multicoque(nom, classe);
@@ -58,7 +62,9 @@ public class LectureFichierXML {
 	                             jesus= new Monocoque(nom, classe);
 	                             break;
 	                     }
-	                    listeVoiliers.add(jesus);
+	                     */
+	                     jesus = fabriqueSimple.creerVoilier(nom, classe);
+	                     listeVoiliers.add(jesus);
 	                 }
 		          }
                  
