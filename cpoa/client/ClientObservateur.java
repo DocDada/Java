@@ -10,7 +10,6 @@ import observateur.Arrivees;
 import observateur.Classements;
 import observateur.Position;
 import outils.LectureFichierXML;
-import strategie.Voilier;
 
 public class ClientObservateur {
     public static void main(String[] args) {
@@ -36,7 +35,6 @@ public class ClientObservateur {
         System.out.println(arrivees.count());
         
         //
-        Voilier yoda;
         File file = new File("voiliers_2018" + File.separator + "voiliers.xml");
         List list = LectureFichierXML.lectureVoiliers(file);
         Iterator i = list.iterator();
