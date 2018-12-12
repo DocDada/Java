@@ -16,6 +16,10 @@ public abstract class Voilier {
         this.nom = nom;
     }
 
+    public Voilier(String nom) {
+        this.nom = nom;
+    }
+
     public Voilier() {
 
     }

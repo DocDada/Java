@@ -12,6 +12,10 @@ public class Multicoque extends Voilier {
         super(nom, classe);
     }
 
+    public Multicoque(String nom) {
+        super(nom);
+    }
+
     public String toString() {
         return "Multicoque : " + this.nom;
     }

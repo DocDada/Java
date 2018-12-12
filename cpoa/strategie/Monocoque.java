@@ -12,6 +12,10 @@ public class Monocoque extends Voilier {
         super(nom, classe);
     }
 
+    public Monocoque(String nom) {
+        super(nom);
+    }
+
     public String toString() {
         return "Monocoque : " + this.nom;
     }

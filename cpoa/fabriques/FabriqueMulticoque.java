@@ -14,6 +14,15 @@ public class FabriqueMulticoque implements FabriqueVoilier {
     }
     
     public Voilier factoryMethod(String nom, ClasseRhum classe) {
-        return new Multicoque(nom, classe);
+        switch (classe) {
+            case ULTIME:
+                return new Ultime(nom);
+            case MULTI50:
+                return new Multi50(nom);
+            case RHUMMULTI:
+                return new RhumMulti(nom);
+            default:
+                return new RhumMulti(nom);
+        }
     }
 }
