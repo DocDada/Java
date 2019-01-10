@@ -3,9 +3,9 @@ TP de conception objet, d'interface Homme/Machine et de programmation orientée 
 
 
 ## Interface Homme/Machine
-  - TP1 (fini)
+  - TP1
   
-  - TP2 (fini)
+  - TP2
     borderLayout; application permettant l'entrée des composantes d'une couleur, et l'affichage de la couleur correspondante ;
     
     + Méthodes à retenir
@@ -16,7 +16,7 @@ TP de conception objet, d'interface Homme/Machine et de programmation orientée 
       <JLabel>.setPreferredSize(<Dimension>);
       <JLabel>.setMaximumSize(<Dimension>);_
     
-  - TP3 (fini)
+  - TP3
     cardLayout; images
     
     + Méthodes à retenir :
@@ -27,19 +27,19 @@ TP de conception objet, d'interface Homme/Machine et de programmation orientée 
       <CardLayout>.next(<JPanel>);
       <CardLayout>.last(<JPanel>);_
      
-  - TP4 (fini)
+  - TP4
     GridBagLayout, JComboBox
   
-  - TP5 (fini)
+  - TP5
     GridLayout
   
-  - TP6 (fini)
+  - TP6
     MVC
 
-  - TP7 (fini)
+  - TP7
     JTable
   
-  - TP8 (fini)
+  - TP8
     JMenu, JMenuBar, JMenuItem
 
   - TP10
@@ -47,11 +47,23 @@ TP de conception objet, d'interface Homme/Machine et de programmation orientée 
 
 
 ## Programmation orientée objet
-  - TP Date (fini)
-  - TP Evenement (fini)
-  - TP Agenda (fini)
-  - TP Exception (fini)
-  - TP Collection (fini)
-  - TP Fichiers (fini)
-  - TP Matrice (fini)
-  - TP Héritage (fini)
+  - TP Date
+  - TP Evenement
+  - TP Agenda
+  - TP Exception
+  - TP Collection
+  - TP Fichiers
+  - TP Matrice
+  - TP Héritage
+
+
+## Conception et programmation objet avancées
+  - TP 1
+  - TP 2
+  - TP 3
+  - TP 4
+  - TP Stratégie
+  - TP Décorateur
+  - TP Observateur
+  - TP Factory
+  
