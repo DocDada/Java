@@ -1,5 +1,5 @@
 # Java
-TP de conception objet, d'interface Homme/Machine et de programmation orientée objet
+TP de conception objet, d'interface Homme/Machine, de programmation orientée objet et de conception et programmation objet avancées
 
 
 ## Interface Homme/Machine
